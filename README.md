@@ -25,7 +25,7 @@ IMPORTANT: No committing to master directly, please. I have set up a branch prot
 
 ## Authors
 
-[CODEOWNERS](https://github.com/Semiahmoo-Robotics/6458SemiRobotics-DeepSpace2019/codeowners) have the right to approve pull requests.
+[CODEOWNERS](https://github.com/Semiahmoo-Robotics/6458SemiRobotics-DeepSpace2019/doc/codeowners) have the right to approve pull requests.
 
 See the list of [contributors](https://github.com/Semiahmoo-Robotics/6458SemiRobotics-DeepSpace2019/contributors) who participated in this project.
 
