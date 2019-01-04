@@ -13,14 +13,24 @@ package frc.robot;
  * the wiring easier and significantly reduces the number of magic numbers
  * floating around.
  */
-public class RobotMap {
-  // For example to map the left and right motors, you could define the
-  // following variables to use with your drivetrain subsystem.
-  // public static int leftMotor = 1;
-  // public static int rightMotor = 2;
 
-  // If you are using multiple modules, make sure to define both the port
-  // number and the module. For example you with a rangefinder:
-  // public static int rangefinderPort = 1;
-  // public static int rangefinderModule = 1;
+ //TODO Later finalize robotmap ports.
+
+public class RobotMap {
+
+  //Motor Ports on ROBOrio
+  public static final int LEFT_DRIVE_PORT = 1;
+  public static final int RIGHT_DRIVE_PORT = 2;
+  public static final int GYRO_PORT = 0;
+
+  public static final int R_ENCODER_PORT_CHA = 0;
+  public static final int R_ENCODER_PORT_CHB = 1;
+  public static final int L_ENCODER_PORT_CHA = 2;
+  public static final int L_ENCODER_PORT_CHB = 3;
+
+
+  //Controller ports
+  public static final int XBOX_PORT = 0;
+  public static final int LOGITECH_PORT = 1;
+
 }
