@@ -25,6 +25,10 @@ import frc.robot.subsystems.ExampleSubsystem;
 public class Robot extends TimedRobot {
   public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
   public static OI m_oi;
+  //ArcadeDrive form Zhan
+  private DifferentialDrive m_myRobot;
+  private Joystick m_xSpeed;
+  private Joystick m_zRotation;
 
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -35,6 +39,10 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
+    //ArcadeDrive from Zhan
+    m_myRobot = new DifferentialDrive(new Spark(0), new Spark(1));
+    m_xSpeed = new Joystick(0);
+    m_zRotation = new Joystick(1);
     m_oi = new OI();
     m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     // chooser.addOption("My Auto", new MyAutoCommand());
@@ -119,6 +127,8 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
+    //ArcadeDrive from Zhan
+    m_myRobot.arcadeDrive(m_xSpeed.getY(), m_zRotation.getX());
     Scheduler.getInstance().run();
   }
 
