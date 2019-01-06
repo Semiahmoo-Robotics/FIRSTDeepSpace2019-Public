@@ -9,6 +9,7 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
+
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Spark;
@@ -19,13 +20,13 @@ import frc.robot.RobotMap;
 import frc.robot.commands.TankDrive;
 
 /**
- * Drivebase chassis subsystem code.
+ * DriveTrain chassis subsystem code.
  * Differential drive with 6 wheels, 2 OR 4 motors
  */
 
-public class Drivetrain extends Subsystem {
+public class DriveTrain extends Subsystem {
 
-  //TODO after kickoff, check if drivetrain has 2 or 4 motors for drivebase. Currently assuming 2 motors
+  //TODO after kickoff, check if drivetrain has 2 or 4 motors for DriveTrain. Currently assuming 2 motors
   private final Spark m_LeftDrive = new Spark(RobotMap.LEFT_DRIVE_PORT);
   private final Spark m_RightDrive = new Spark(RobotMap.RIGHT_DRIVE_PORT);
 
@@ -37,9 +38,9 @@ public class Drivetrain extends Subsystem {
 
 
   /**
-   * Constructor - Create a new drivebase class.
+   * Constructor - Create a new DriveTrain class.
    */
-  public Drivetrain() {
+  public DriveTrain() {
       
     //TODO is motor inversed or not?
     //m_RightDrive.setInverted(true);
@@ -51,6 +52,9 @@ public class Drivetrain extends Subsystem {
 
     //TODO For now, reduce max output for safety. Change to 1 later.
     m_Chassis.setMaxOutput(0.1);
+
+    initializeEncoder(m_LEncoder);
+    initializeEncoder(m_REncoder);
 
   }
 
@@ -69,7 +73,7 @@ public class Drivetrain extends Subsystem {
    * @param left Left joystick/drive value
    * @param right Right joystick/drive value
    */
-  public void TankDriveSet(Double left, Double right){
+  public void DriveSet(Double left, Double right){
     m_Chassis.tankDrive(left, right);
   }
 
@@ -78,8 +82,38 @@ public class Drivetrain extends Subsystem {
    * 
    * @param controller xBoxController to use as input.
    */
-  public void TankDriveSet(XboxController controller){
+  public void DriveSet(XboxController controller){
     m_Chassis.tankDrive(controller.getY(Hand.kLeft), controller.getY(Hand.kRight));
+  }
+
+  public AnalogGyro getGyro(){
+    return m_Gyro;
+  }
+
+  public Encoder getLEncoder(){
+    return m_LEncoder;
+  }
+
+  public Encoder getREncoder(){
+    return m_REncoder;
+  }
+
+  /** 
+   * Curvature Drive using two values
+   * 
+   * @param speed desired speed of robot
+   * @param rotation desired rotation rate of robot
+  */
+  public void CurvatureDriveSet(double speed, double rotation) {
+    m_Chassis.curvatureDrive(speed, rotation, false);
+  }
+
+  private void initializeEncoder(Encoder encoder) {
+    encoder.setMaxPeriod(.1);
+    encoder.setMinRate(10);
+    encoder.setDistancePerPulse(5);
+    encoder.setReverseDirection(true);
+    encoder.setSamplesToAverage(7);
   }
 
   /**
