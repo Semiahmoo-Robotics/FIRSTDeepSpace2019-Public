@@ -17,7 +17,7 @@ public class TankDrive extends Command {
 
   @Override
   protected void execute() {
-    Robot.driveTrain.DriveSet(Robot.oi.GetXboxController());
+    Robot.driveTrain.TankDriveSet(Robot.oi.GetXboxController());
   }
 
   @Override
