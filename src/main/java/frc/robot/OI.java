@@ -15,6 +15,12 @@ import edu.wpi.first.wpilibj.XboxController;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
+	public static Joystick m_Joystick = new Joystick(RobotMap.JOYSTICK_PORT);
+	
+	public Joystick GetJoystick() {
+		return m_Joystick;
+
+	}
 
   public static XboxController m_XBoxController = new XboxController(RobotMap.XBOX_PORT);
   //maybe use logitech stick? lol

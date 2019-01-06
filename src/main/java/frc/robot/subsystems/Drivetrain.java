@@ -17,6 +17,8 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import frc.robot.RobotMap;
 import frc.robot.commands.TankDrive;
+import edu.wpi.first.wpilibj.Joystick;
+import frc.robot.commands.ArcadeDrive;
 
 /**
  * Drivebase chassis subsystem code.
@@ -72,6 +74,23 @@ public class Drivetrain extends Subsystem {
   public void TankDriveSet(Double left, Double right){
     m_Chassis.tankDrive(left, right);
   }
+/**
+   * Arcade drive using two values individualy
+   * 
+   * @param x x joystick/drive value
+   * @param z z joystick/drive value
+   */
+  public void ArcadeDriveSet(Double x, Double z){
+    m_Chassis.arcadeDrive(x, z);
+  }
+  /**
+   * Arcade drive using joystick instance
+   * 
+   * @param joystick joystick to use as input.
+   */
+  public void ArcadeDriveSet(Joystick joystick){ 
+    m_Chassis.arcadeDrive(joystick.getX(), joystick.getZ());
+  }
 
   /**
    * Tank drive using xBoxController instance
@@ -82,11 +101,14 @@ public class Drivetrain extends Subsystem {
     m_Chassis.tankDrive(controller.getY(Hand.kLeft), controller.getY(Hand.kRight));
   }
 
+
+  
   /**
    * Stop the drivetrain from moving.
    */
   public void stop(){
     m_Chassis.tankDrive(0, 0);
+    m_Chassis.arcadeDrive(0, 0);
   }
 
 }

@@ -32,5 +32,6 @@ public class RobotMap {
   //Controller ports
   public static final int XBOX_PORT = 0;
   public static final int LOGITECH_PORT = 1;
+  public static final int JOYSTICK_PORT = 2;
 
 }
