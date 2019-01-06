@@ -73,7 +73,7 @@ public class DriveTrain extends Subsystem {
    * @param left Left joystick/drive value
    * @param right Right joystick/drive value
    */
-  public void DriveSet(Double left, Double right){
+  public void TankDriveSet(Double left, Double right){
     m_Chassis.tankDrive(left, right);
   }
 
@@ -82,7 +82,7 @@ public class DriveTrain extends Subsystem {
    * 
    * @param controller xBoxController to use as input.
    */
-  public void DriveSet(XboxController controller){
+  public void TankDriveSet(XboxController controller){
     m_Chassis.tankDrive(controller.getY(Hand.kLeft), controller.getY(Hand.kRight));
   }
 
