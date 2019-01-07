@@ -12,12 +12,12 @@ import frc.robot.Robot;
 
 public class TankDrive extends Command {
   public TankDrive() {
-    requires(Robot.driveTrain);
+    requires(Robot.drivetrain);
   }
 
   @Override
   protected void execute() {
-    Robot.driveTrain.TankDriveSet(Robot.oi.GetXboxController());
+    Robot.drivetrain.TankDriveSet(Robot.oi.GetXboxController());
   }
 
   @Override
@@ -27,6 +27,6 @@ public class TankDrive extends Command {
 
   @Override
   protected void end() {
-    Robot.driveTrain.stop();
+    Robot.drivetrain.stop();
   }
 }

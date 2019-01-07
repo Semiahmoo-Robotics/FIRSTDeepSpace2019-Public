@@ -15,7 +15,7 @@ public class DriveForward extends Command {
   double distance, speed, sc;
 
   public DriveForward(double distance, double speed) {
-    requires(Robot.driveTrain);
+    requires(Robot.drivetrain);
     this.distance = distance;
     this.speed = speed;
     this.sc = 0.25;
@@ -24,23 +24,23 @@ public class DriveForward extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.driveTrain.getGyro().reset();
-    Robot.driveTrain.getLEncoder().reset();
-    Robot.driveTrain.getREncoder().reset();
+    Robot.drivetrain.getGyro().reset();
+    Robot.drivetrain.getLEncoder().reset();
+    Robot.drivetrain.getREncoder().reset();
     setTimeout(distance);
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    double heading = Robot.driveTrain.getGyro().getAngle();
-    Robot.driveTrain.CurvatureDriveSet(speed, -sc*heading);
+    double heading = Robot.drivetrain.getGyro().getAngle();
+    Robot.drivetrain.CurvatureDriveSet(speed, -sc*heading);
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    if(Robot.driveTrain.getREncoder().get() >= distance || Robot.driveTrain.getLEncoder().get() >= distance || isTimedOut()) {
+    if(Robot.drivetrain.getREncoder().get() >= distance || Robot.drivetrain.getLEncoder().get() >= distance || isTimedOut()) {
       return true;
     } else {
       return false;
@@ -50,6 +50,6 @@ public class DriveForward extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.driveTrain.stop();
+    Robot.drivetrain.stop();
   }
 }

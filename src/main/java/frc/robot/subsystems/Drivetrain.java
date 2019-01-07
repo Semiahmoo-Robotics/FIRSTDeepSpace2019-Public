@@ -24,7 +24,7 @@ import frc.robot.commands.TankDrive;
  * Differential drive with 6 wheels, 2 OR 4 motors
  */
 
-public class DriveTrain extends Subsystem {
+public class Drivetrain extends Subsystem {
 
   //TODO after kickoff, check if drivetrain has 2 or 4 motors for DriveTrain. Currently assuming 2 motors
   private final Spark m_LeftDrive = new Spark(RobotMap.LEFT_DRIVE_PORT);
