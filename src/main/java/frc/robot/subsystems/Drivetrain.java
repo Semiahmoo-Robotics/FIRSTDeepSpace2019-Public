@@ -109,7 +109,7 @@ public class Drivetrain extends Subsystem {
   }
 
   private void initializeEncoder(Encoder encoder) {
-    encoder.setMaxPeriod(.1);
+    encoder.setMaxPeriod(0.1);
     encoder.setMinRate(10);
     encoder.setDistancePerPulse(5);
     encoder.setReverseDirection(true);

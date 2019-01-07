@@ -18,7 +18,7 @@ public class DriveForward extends Command {
     requires(Robot.drivetrain);
     this.distance = distance;
     this.speed = speed;
-    this.sc = 0.25;
+    this.sc = 0.0275;
   }
 
   // Called just before this Command runs the first time
@@ -40,7 +40,7 @@ public class DriveForward extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    if(Robot.drivetrain.getREncoder().get() >= distance || Robot.drivetrain.getLEncoder().get() >= distance || isTimedOut()) {
+    if(distanceRemaining() <= 0 || isTimedOut()) {
       return true;
     } else {
       return false;
@@ -51,5 +51,9 @@ public class DriveForward extends Command {
   @Override
   protected void end() {
     Robot.drivetrain.stop();
+  }
+
+  private double distanceRemaining() {
+    return distance - ((Robot.driveTrain.getLEncoder().getDistance() + Robot.driveTrain.getREncoder().getDistance()) / 2); // distance - average encoder distance
   }
 }
