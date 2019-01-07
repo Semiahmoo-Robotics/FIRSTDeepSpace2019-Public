@@ -111,7 +111,18 @@ public class Drivetrain extends Subsystem {
   private void initializeEncoder(Encoder encoder) {
     encoder.setMaxPeriod(.1);
     encoder.setMinRate(10);
-    encoder.setDistancePerPulse(5);
+
+    //TODO Check if correct. lAST YEAR'S DATA
+    //The gearbox ratio for the motors these CIMcoders are mounted on is 10.71:1.
+    //(The motor spins 10.71 times for every 1 rotation of the wheels.)
+    //The wheels have a diameter of 15.24 cm (6").
+    //20 pulses per revolution for CIMcoders
+
+    //Distance = circumference * Wheel rotation
+    //Distance = (diameter * PI) * 20 pulses
+    //Distance per pulse = 20 * diameter * PI
+    //@param distance per pulse
+    encoder.setDistancePerPulse(/* circumference in in */(6.0 * Math.PI) * 20);
     encoder.setReverseDirection(true);
     encoder.setSamplesToAverage(7);
   }

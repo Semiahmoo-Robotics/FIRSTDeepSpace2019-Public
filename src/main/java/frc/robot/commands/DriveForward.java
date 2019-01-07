@@ -12,13 +12,14 @@ import frc.robot.Robot;
 
 public class DriveForward extends Command {
 
-  double distance, speed, sc;
+  private final double distance, speed, timeout;
+  private static final double sc = 0.25;
 
-  public DriveForward(double distance, double speed) {
+  public DriveForward(double distance, double speed, double timeout) {
     requires(Robot.drivetrain);
     this.distance = distance;
     this.speed = speed;
-    this.sc = 0.25;
+    this.timeout = timeout;
   }
 
   // Called just before this Command runs the first time
@@ -27,7 +28,7 @@ public class DriveForward extends Command {
     Robot.drivetrain.getGyro().reset();
     Robot.drivetrain.getLEncoder().reset();
     Robot.drivetrain.getREncoder().reset();
-    setTimeout(distance);
+    setTimeout(timeout);
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -40,7 +41,7 @@ public class DriveForward extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    if(Robot.drivetrain.getREncoder().get() >= distance || Robot.drivetrain.getLEncoder().get() >= distance || isTimedOut()) {
+    if(Robot.drivetrain.getREncoder().getDistance() >= distance || Robot.drivetrain.getLEncoder().getDistance() >= distance || isTimedOut()) {
       return true;
     } else {
       return false;
