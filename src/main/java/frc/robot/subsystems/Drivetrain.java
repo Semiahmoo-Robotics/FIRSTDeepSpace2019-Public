@@ -40,7 +40,7 @@ public class Drivetrain extends Subsystem {
   /**
    * Constructor - Create a new DriveTrain class.
    */
-  public DriveTrain() {
+  public Drivetrain() {
       
     //TODO is motor inversed or not?
     //m_RightDrive.setInverted(true);
