@@ -17,7 +17,7 @@ public class ArcadeDrive extends Command {
 
   @Override
   protected void execute() {
-    Robot.driveTrain.ArcadeDriveSet(Robot.oi.GetJoystick());
+    Robot.driveTrain.ArcadeDriveSet(Robot.oi.getJoystick());
   }
 
   @Override

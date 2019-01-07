@@ -17,7 +17,7 @@ import edu.wpi.first.wpilibj.XboxController;
 public class OI {
 	public static Joystick m_Joystick = new Joystick(RobotMap.JOYSTICK_PORT);
 	
-	public Joystick GetJoystick() {
+	public Joystick getJoystick() {
 		return m_Joystick;
 
 	}
