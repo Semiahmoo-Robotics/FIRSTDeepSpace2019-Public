@@ -12,12 +12,12 @@ import frc.robot.Robot;
 
 public class ArcadeDrive extends Command {
   public ArcadeDrive() {
-    requires(Robot.driveTrain);
+    requires(Robot.drivetrain);
   }
 
   @Override
   protected void execute() {
-    Robot.driveTrain.ArcadeDriveSet(Robot.oi.GetXboxController());
+    Robot.drivetrain.ArcadeDriveSet(Robot.oi.GetXboxController());
   }
 
   @Override
@@ -27,6 +27,6 @@ public class ArcadeDrive extends Command {
 
   @Override
   protected void end() {
-    Robot.driveTrain.stop();
+    Robot.drivetrain.stop();
   }
 }
