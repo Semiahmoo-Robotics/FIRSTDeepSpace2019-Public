@@ -26,7 +26,7 @@ public class DriveForward extends Command {
   public DriveForward(double distance, double speed, double timeout) {
     requires(Robot.drivetrain);
 
-    if (speed > 1.0 || speed < 0) {
+    if (speed > 1.0 || speed < -1.0) {
       throw new IllegalArgumentException("Speed value must be between 0 and 1");
     }
 
