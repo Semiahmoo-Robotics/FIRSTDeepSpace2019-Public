@@ -13,6 +13,7 @@ import frc.robot.Robot;
 public class DriveForward extends Command {
 
   private final double distance, speed, timeout;
+  //For gyro to correct direction without resetting the gyro
   private double initialHeading;
 
   /**
@@ -69,5 +70,9 @@ public class DriveForward extends Command {
   @Override
   protected void end() {
     Robot.drivetrain.stop();
+  }
+
+  private double distanceRemaining() {
+    return distance - ((Robot.driveTrain.getLEncoder().getDistance() + Robot.driveTrain.getREncoder().getDistance()) / 2); // distance - average encoder distance
   }
 }
