@@ -88,8 +88,8 @@ public class Drivetrain extends Subsystem {
    * 
    * @param joystick joystick to use as input.
    */
-  public void ArcadeDriveSet(Joystick joystick){ 
-    m_Chassis.arcadeDrive(joystick.getX(), joystick.getZ());
+  public void ArcadeDriveSet(XboxController joystick){ 
+    m_Chassis.arcadeDrive(joystick.getY(), joystick.getX());
   }
 
   /**
