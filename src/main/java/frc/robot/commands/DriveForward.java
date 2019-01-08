@@ -12,22 +12,23 @@ import frc.robot.Robot;
 
 public class DriveForward extends Command {
 
-  double distance, speed, sc;
+  double distance, speed, sc, timeout;
 
-  public DriveForward(double distance, double speed) {
-    requires(Robot.drivetrain);
+  public DriveForward(double distance, double speed, double timeout) {
+    requires(Robot.driveTrain);
     this.distance = distance;
     this.speed = speed;
     this.sc = 0.0275;
+    this.timeout = timeout;
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.drivetrain.getGyro().reset();
-    Robot.drivetrain.getLEncoder().reset();
-    Robot.drivetrain.getREncoder().reset();
-    setTimeout(distance);
+    Robot.driveTrain.getGyro().reset();
+    Robot.driveTrain.getLEncoder().reset();
+    Robot.driveTrain.getREncoder().reset();
+    setTimeout(timeout);
   }
 
   // Called repeatedly when this Command is scheduled to run
