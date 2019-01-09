@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
 import frc.robot.commands.TankDrive;
 
@@ -92,6 +93,14 @@ public class Drivetrain extends Subsystem {
    */
   public void ArcadeDriveSet(XboxController joystick){ 
     m_Chassis.arcadeDrive(joystick.getY(), joystick.getX());
+    SmartDashboard.putNumber("Current Gyro Heading", m_Gyro.getAngle());
+    SmartDashboard.putNumber("Joystick Y Value", joystick.getY());
+    SmartDashboard.putNumber("Joystick X Value", joystick.getX());
+    SmartDashboard.putNumber("Left Motor Speed", m_LeftDrive.getSpeed());
+    SmartDashboard.putNumber("Right Motor Speed", m_RightDrive.getSpeed());
+    SmartDashboard.putNumber("Left Encoder Distance", m_LEncoder.getDistance());
+    SmartDashboard.putNumber("Right Encoder Distance", m_REncoder.getDistance());
+    SmartDashboard.putNumber("Average Encoder Distance", (m_LEncoder.getDistance() + m_REncoder.getDistance()) / 2);
   }
 
   /**
@@ -101,6 +110,14 @@ public class Drivetrain extends Subsystem {
    */
   public void TankDriveSet(XboxController controller){
     m_Chassis.tankDrive(controller.getY(Hand.kLeft), controller.getY(Hand.kRight));
+    SmartDashboard.putNumber("Current Gyro Heading", m_Gyro.getAngle());
+    SmartDashboard.putNumber("Left Input Value", controller.getY(Hand.kLeft));
+    SmartDashboard.putNumber("Right Input Value", controller.getY(Hand.kRight));
+    SmartDashboard.putNumber("Left Motor Speed", m_LeftDrive.getSpeed());
+    SmartDashboard.putNumber("Right Motor Speed", m_RightDrive.getSpeed());
+    SmartDashboard.putNumber("Left Encoder Distance", m_LEncoder.getDistance());
+    SmartDashboard.putNumber("Right Encoder Distance", m_REncoder.getDistance());
+    SmartDashboard.putNumber("Average Encoder Distance", (m_LEncoder.getDistance() + m_REncoder.getDistance()) / 2);
   }
 
   public AnalogGyro getGyro(){
@@ -123,7 +140,16 @@ public class Drivetrain extends Subsystem {
   */
   public void CurvatureDriveSet(double speed, double rotation) {
     m_Chassis.curvatureDrive(speed, rotation, false);
+    SmartDashboard.putNumber("Current Gyro Heading", m_Gyro.getAngle());
+    SmartDashboard.putNumber("Input Speed", speed);
+    SmartDashboard.putNumber("Rotation", rotation);
+    SmartDashboard.putNumber("Left Motor Speed", m_LeftDrive.getSpeed());
+    SmartDashboard.putNumber("Right Motor Speed", m_RightDrive.getSpeed());
+    SmartDashboard.putNumber("Left Encoder Distance", m_LEncoder.getDistance());
+    SmartDashboard.putNumber("Right Encoder Distance", m_REncoder.getDistance());
+    SmartDashboard.putNumber("Average Encoder Distance", (m_LEncoder.getDistance() + m_REncoder.getDistance()) / 2);
   }
+  
 
   private void initializeEncoder(Encoder encoder) {
     encoder.setMaxPeriod(0.1); //0.1 sec
