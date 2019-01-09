@@ -71,8 +71,9 @@ public class DriveForward extends Command {
   protected void end() {
     Robot.drivetrain.stop();
   }
-
+/*
   private double distanceRemaining() {
     return distance - ((Robot.drivetrain.getLEncoder().getDistance() + Robot.drivetrain.getREncoder().getDistance()) / 2); // distance - average encoder distance
   }
+*/
 }
