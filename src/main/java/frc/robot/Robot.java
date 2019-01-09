@@ -7,6 +7,9 @@
 
 package frc.robot;
 
+import edu.wpi.cscore.CvSource;
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -45,6 +48,8 @@ public class Robot extends TimedRobot {
     m_autoPeriodChooser = new SendableChooser<>();
     //m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     //chooser.addOption("My Auto", new MyAutoCommand());
+
+    CameraServer.getInstance().startAutomaticCapture();
   }
 
   /**
