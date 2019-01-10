@@ -71,6 +71,13 @@ public class DriveForward extends Command {
   protected void end() {
     Robot.drivetrain.stop();
   }
+  
+  
+  /**
+     * Measure the distance remaing by subtracting the wanted robot's distance
+     * by the average current distance recorded on the encoder
+     * @return distanceRemaining
+     */
 /*
   private double distanceRemaining() {
     return distance - ((Robot.drivetrain.getLEncoder().getDistance() + Robot.drivetrain.getREncoder().getDistance()) / 2); // distance - average encoder distance
