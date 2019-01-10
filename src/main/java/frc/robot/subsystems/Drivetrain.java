@@ -75,10 +75,6 @@ public class Drivetrain extends Subsystem {
 
   //Method used for controlling motors when using an autonomous command
 
-  public void setRaw(double leftValue, double rightValue) {
-      m_LeftDrive.set(leftValue);
-      m_RightDrive.set(rightValue);
-  }
 
   /**
    * Tank drive using xBoxController instance
