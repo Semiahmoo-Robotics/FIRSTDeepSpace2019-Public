@@ -14,7 +14,6 @@ package frc.robot;
  * floating around.
  */
 
- //TODO Later finalize robotmap ports.
 
 public class RobotMap {
 
@@ -23,10 +22,11 @@ public class RobotMap {
   public static final int RIGHT_DRIVE_PORT = 0;
   public static final int GYRO_PORT = 0;
 
-  public static final int R_ENCODER_PORT_CHA = 0;
-  public static final int R_ENCODER_PORT_CHB = 1;
-  public static final int L_ENCODER_PORT_CHA = 2;
-  public static final int L_ENCODER_PORT_CHB = 3;
+   //TODO Later finalize robotmap ports
+  public static final int R_ENCODER_PORT_CHA = 2;
+  public static final int R_ENCODER_PORT_CHB = 3;
+  public static final int L_ENCODER_PORT_CHA = 4;
+  public static final int L_ENCODER_PORT_CHB = 5;
 
 
   //Controller ports

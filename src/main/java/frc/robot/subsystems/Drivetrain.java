@@ -26,32 +26,38 @@ import frc.robot.commands.TankDrive;
 
 public class Drivetrain extends Subsystem {
 
-  //TODO after kickoff, check if drivetrain has 2 or 4 motors for DriveTrain. Currently assuming 2 motors
-  private final Spark m_LeftDrive = new Spark(RobotMap.LEFT_DRIVE_PORT);
-  private final Spark m_RightDrive = new Spark(RobotMap.RIGHT_DRIVE_PORT);
+  private final Spark m_LeftDrive;
+  private final Spark m_RightDrive;
 
   private final DifferentialDrive m_Chassis;
 
-  private final Encoder m_REncoder = new Encoder(RobotMap.R_ENCODER_PORT_CHA, RobotMap.R_ENCODER_PORT_CHB, false, EncodingType.k4X);
-  private final Encoder m_LEncoder = new Encoder(RobotMap.L_ENCODER_PORT_CHA, RobotMap.L_ENCODER_PORT_CHB, false, EncodingType.k4X);
-  private final AnalogGyro m_Gyro = new AnalogGyro(RobotMap.GYRO_PORT);
+  private final Encoder m_REncoder;
+  private final Encoder m_LEncoder;
+  private final AnalogGyro m_Gyro;
 
 
   /**
    * Constructor - Create a new DriveTrain class.
    */
   public Drivetrain() {
-      
+    
+    //initialize objects
+    m_LeftDrive = new Spark(RobotMap.LEFT_DRIVE_PORT);
+    m_RightDrive = new Spark(RobotMap.RIGHT_DRIVE_PORT);
+    m_Chassis = new DifferentialDrive(m_LeftDrive, m_RightDrive);
     //TODO is motor inversed or not?
     //m_RightDrive.setInverted(true);
 
-    m_Chassis = new DifferentialDrive(m_LeftDrive, m_RightDrive);
+    m_REncoder = new Encoder(RobotMap.R_ENCODER_PORT_CHA, RobotMap.R_ENCODER_PORT_CHB, false, EncodingType.k4X);
+    m_LEncoder = new Encoder(RobotMap.L_ENCODER_PORT_CHA, RobotMap.L_ENCODER_PORT_CHB, false, EncodingType.k4X);
+    m_Gyro = new AnalogGyro(RobotMap.GYRO_PORT);
+
 
     //Stops motor if the robot loses connection to the driver station.
     m_Chassis.setSafetyEnabled(true);
 
-    //TODO For now, reduce max output for safety. Change to 1 later.
-    m_Chassis.setMaxOutput(0.1);
+    //For now, reduce max output for safety. Change to 1 later.
+    //m_Chassis.setMaxOutput(0.5);
 
     initializeEncoder(m_LEncoder);
     initializeEncoder(m_REncoder);
