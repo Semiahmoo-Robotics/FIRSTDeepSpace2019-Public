@@ -7,10 +7,8 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.AnalogGyro;
+
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.interfaces.Gyro;
-import frc.robot.OI;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.subsystems.Drivetrain;
@@ -28,20 +26,25 @@ public class TurnRightLeft extends Command {
   public TurnRightLeft(double angle) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(Robot.driveTrain);
+    requires(Robot.drivetrain);
     wantAngle = angle;
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    initialAngle = Robot.driveTrain.getGyro().getAngle();
-    
+    initialAngle = Robot.drivetrain.getGyro().getAngle();
+    if(wantAngle > 0) {
+      turnRight = true;
+    } else turnRight = false;
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    if(turnRight) {
+      Robot.drivetrain.TankDriveSet(0.3, -0.3);
+    } else Robot.drivetrain.TankDriveSet(-0.3, 0.3);
     
 
   }
@@ -49,12 +52,15 @@ public class TurnRightLeft extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    if(currentAngle == wantAngle) {
+      return true;
+    }else return false;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    Robot.drivetrain.stop();
   }
 
   // Called when another command which requires one or more of the same
