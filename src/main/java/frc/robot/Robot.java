@@ -23,7 +23,7 @@ public class Robot extends TimedRobot {
   
   //Declare Subsystem (Initialization)
   public static OI oi;
-  public static Drivetrain driveTrain;
+  public static Drivetrain drivetrain;
 
   SendableChooser<Command> m_autoPeriodChooser;
 
@@ -35,11 +35,11 @@ public class Robot extends TimedRobot {
     
     //Create Subsystem Objects (Initialization)
     oi = new OI();
-    driveTrain = new Drivetrain();
+    drivetrain = new Drivetrain();
     
     //put data to smartdashboard
     SmartDashboard.putData("Auto mode", m_autoPeriodChooser);
-    SmartDashboard.putData("DriveTrain", driveTrain);
+    SmartDashboard.putData("Drivetrain", drivetrain);
 
     //TODO Set Default Auto
     m_autoPeriodChooser = new SendableChooser<>();

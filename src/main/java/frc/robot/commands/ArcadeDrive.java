@@ -10,14 +10,14 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class TankDrive extends Command {
-  public TankDrive() {
+public class ArcadeDrive extends Command {
+  public ArcadeDrive() {
     requires(Robot.drivetrain);
   }
 
   @Override
   protected void execute() {
-    Robot.drivetrain.TankDriveSet(Robot.oi.GetXboxController());
+    Robot.drivetrain.ArcadeDriveSet(Robot.oi.GetXboxController());
   }
 
   @Override

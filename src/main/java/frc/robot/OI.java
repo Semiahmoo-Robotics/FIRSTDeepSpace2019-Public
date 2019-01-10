@@ -16,11 +16,14 @@ import edu.wpi.first.wpilibj.XboxController;
  */
 public class OI {
 
-  public static XboxController m_XBoxController = new XboxController(RobotMap.XBOX_PORT);
+  public static XboxController m_XBoxController;
   //maybe use logitech stick? lol
   public static Joystick SupportStick;
 
 	public OI() {
+
+		m_XBoxController = new XboxController(RobotMap.XBOX_PORT);
+
 		//TODO write commands here
 	}
 	
