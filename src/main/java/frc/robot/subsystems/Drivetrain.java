@@ -19,6 +19,7 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
 import frc.robot.commands.TankDrive;
+import frc.robot.utils.DashboardKeys;
 
 /**
  * DriveTrain chassis subsystem code.
@@ -93,14 +94,14 @@ public class Drivetrain extends Subsystem {
    */
   public void ArcadeDriveSet(XboxController joystick){ 
     m_Chassis.arcadeDrive(joystick.getY(), joystick.getX());
-    SmartDashboard.putNumber("Current Gyro Heading", m_Gyro.getAngle());
-    SmartDashboard.putNumber("Joystick Y Value", joystick.getY());
-    SmartDashboard.putNumber("Joystick X Value", joystick.getX());
-    SmartDashboard.putNumber("Left Motor Speed", m_LeftDrive.getSpeed());
-    SmartDashboard.putNumber("Right Motor Speed", m_RightDrive.getSpeed());
-    SmartDashboard.putNumber("Left Encoder Distance", m_LEncoder.getDistance());
-    SmartDashboard.putNumber("Right Encoder Distance", m_REncoder.getDistance());
-    SmartDashboard.putNumber("Average Encoder Distance", (m_LEncoder.getDistance() + m_REncoder.getDistance()) / 2);
+    SmartDashboard.putNumber(DashboardKeys.CURRENT_HEADING, m_Gyro.getAngle());
+    SmartDashboard.putNumber(DashboardKeys.Y_INPUT, joystick.getY());
+    SmartDashboard.putNumber(DashboardKeys.X_INPUT, joystick.getX());
+    SmartDashboard.putNumber(DashboardKeys.L_MOTOR_SPEED, m_LeftDrive.getSpeed());
+    SmartDashboard.putNumber(DashboardKeys.R_MOTOR_SPEED, m_RightDrive.getSpeed());
+    SmartDashboard.putNumber(DashboardKeys.L_ENCODER_DISTANCE, m_LEncoder.getDistance());
+    SmartDashboard.putNumber(DashboardKeys.R_ENCODER_DISTANCE, m_REncoder.getDistance());
+    SmartDashboard.putNumber(DashboardKeys.GENERIC_ENCODER_DISTANCE, (m_LEncoder.getDistance() + m_REncoder.getDistance()) / 2);
   }
 
   /**
@@ -110,14 +111,14 @@ public class Drivetrain extends Subsystem {
    */
   public void TankDriveSet(XboxController controller){
     m_Chassis.tankDrive(controller.getY(Hand.kLeft), controller.getY(Hand.kRight));
-    SmartDashboard.putNumber("Current Gyro Heading", m_Gyro.getAngle());
-    SmartDashboard.putNumber("Left Input Value", controller.getY(Hand.kLeft));
-    SmartDashboard.putNumber("Right Input Value", controller.getY(Hand.kRight));
-    SmartDashboard.putNumber("Left Motor Speed", m_LeftDrive.getSpeed());
-    SmartDashboard.putNumber("Right Motor Speed", m_RightDrive.getSpeed());
-    SmartDashboard.putNumber("Left Encoder Distance", m_LEncoder.getDistance());
-    SmartDashboard.putNumber("Right Encoder Distance", m_REncoder.getDistance());
-    SmartDashboard.putNumber("Average Encoder Distance", (m_LEncoder.getDistance() + m_REncoder.getDistance()) / 2);
+    SmartDashboard.putNumber(DashboardKeys.CURRENT_HEADING, m_Gyro.getAngle());
+    SmartDashboard.putNumber(DashboardKeys.L_INPUT, controller.getY(Hand.kLeft));
+    SmartDashboard.putNumber(DashboardKeys.R_INPUT, controller.getY(Hand.kRight));
+    SmartDashboard.putNumber(DashboardKeys.L_MOTOR_SPEED, m_LeftDrive.getSpeed());
+    SmartDashboard.putNumber(DashboardKeys.R_MOTOR_SPEED, m_RightDrive.getSpeed());
+    SmartDashboard.putNumber(DashboardKeys.L_ENCODER_DISTANCE, m_LEncoder.getDistance());
+    SmartDashboard.putNumber(DashboardKeys.R_ENCODER_DISTANCE, m_REncoder.getDistance());
+    SmartDashboard.putNumber(DashboardKeys.GENERIC_ENCODER_DISTANCE, (m_LEncoder.getDistance() + m_REncoder.getDistance()) / 2);
   }
 
   public AnalogGyro getGyro(){
@@ -140,14 +141,14 @@ public class Drivetrain extends Subsystem {
   */
   public void CurvatureDriveSet(double speed, double rotation) {
     m_Chassis.curvatureDrive(speed, rotation, false);
-    SmartDashboard.putNumber("Current Gyro Heading", m_Gyro.getAngle());
-    SmartDashboard.putNumber("Input Speed", speed);
-    SmartDashboard.putNumber("Rotation", rotation);
-    SmartDashboard.putNumber("Left Motor Speed", m_LeftDrive.getSpeed());
-    SmartDashboard.putNumber("Right Motor Speed", m_RightDrive.getSpeed());
-    SmartDashboard.putNumber("Left Encoder Distance", m_LEncoder.getDistance());
-    SmartDashboard.putNumber("Right Encoder Distance", m_REncoder.getDistance());
-    SmartDashboard.putNumber("Average Encoder Distance", (m_LEncoder.getDistance() + m_REncoder.getDistance()) / 2);
+    SmartDashboard.putNumber(DashboardKeys.CURRENT_HEADING, m_Gyro.getAngle());
+    SmartDashboard.putNumber(DashboardKeys.GENERIC_INPUT, speed);
+    SmartDashboard.putNumber(DashboardKeys.ROTATION, rotation);
+    SmartDashboard.putNumber(DashboardKeys.L_MOTOR_SPEED, m_LeftDrive.getSpeed());
+    SmartDashboard.putNumber(DashboardKeys.R_MOTOR_SPEED, m_RightDrive.getSpeed());
+    SmartDashboard.putNumber(DashboardKeys.L_ENCODER_DISTANCE, m_LEncoder.getDistance());
+    SmartDashboard.putNumber(DashboardKeys.R_ENCODER_DISTANCE, m_REncoder.getDistance());
+    SmartDashboard.putNumber(DashboardKeys.GENERIC_ENCODER_DISTANCE, (m_LEncoder.getDistance() + m_REncoder.getDistance()) / 2);
   }
   
 

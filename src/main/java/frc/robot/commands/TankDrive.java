@@ -10,6 +10,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
+import frc.robot.utils.DashboardKeys;
 
 public class TankDrive extends Command {
   public TankDrive() {
@@ -21,7 +22,7 @@ public class TankDrive extends Command {
 
     Robot.drivetrain.getLEncoder().reset();
     Robot.drivetrain.getREncoder().reset();
-    SmartDashboard.putNumber("Initial Gyro Heading", Robot.drivetrain.getGyro().getAngle());
+    SmartDashboard.putNumber(DashboardKeys.INIT_HEADING, Robot.drivetrain.getGyro().getAngle());
   }
 
   @Override

@@ -8,7 +8,9 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
+import frc.robot.utils.DashboardKeys;
 
 public class DriveForward extends Command {
 
@@ -43,6 +45,7 @@ public class DriveForward extends Command {
     Robot.drivetrain.getLEncoder().reset();
     Robot.drivetrain.getREncoder().reset();
     initialHeading = Robot.drivetrain.getGyro().getAngle();
+    SmartDashboard.putNumber(DashboardKeys.INIT_HEADING, initialHeading);
     setTimeout(timeout);
   }
 
