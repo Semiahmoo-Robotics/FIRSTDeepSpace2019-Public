@@ -73,6 +73,13 @@ public class Drivetrain extends Subsystem {
     m_Chassis.tankDrive(left, right);
   }
 
+  //Method used for controlling motors when using an autonomous command
+
+  public void setRaw(double leftValue, double rightValue) {
+      m_LeftDrive.set(leftValue);
+      m_RightDrive.set(rightValue);
+  }
+
   /**
    * Tank drive using xBoxController instance
    * 
@@ -81,6 +88,8 @@ public class Drivetrain extends Subsystem {
   public void DriveSet(XboxController controller){
     m_Chassis.tankDrive(controller.getY(Hand.kLeft), controller.getY(Hand.kRight));
   }
+
+
 
   /**
    * Stop the drivetrain from moving.
