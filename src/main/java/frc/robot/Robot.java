@@ -38,8 +38,8 @@ public class Robot extends TimedRobot {
     drivetrain = new Drivetrain();
     
     //put data to smartdashboard
-    SmartDashboard.putData("Auto mode", m_autoPeriodChooser);
-    SmartDashboard.putData("Drivetrain", drivetrain);
+    //SmartDashboard.putData("Auto mode", m_autoPeriodChooser);
+    //SmartDashboard.putData("Drivetrain", drivetrain);
 
     //TODO Set Default Auto
     m_autoPeriodChooser = new SendableChooser<>();

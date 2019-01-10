@@ -82,7 +82,17 @@ public class Drivetrain extends Subsystem {
   public void TankDriveSet(Double left, Double right){
     m_Chassis.tankDrive(left, right);
   }
-/**
+
+    /**
+   * Tank drive using xBoxController instance.
+   * 
+   * @param controller xBoxController to use as input.
+   */
+  public void TankDriveSet(XboxController controller){
+    m_Chassis.tankDrive(controller.getY(Hand.kLeft), controller.getY(Hand.kRight));
+  }
+
+  /**
    * Arcade drive using two values individualy
    * 
    * @param x x joystick/drive value
@@ -91,6 +101,7 @@ public class Drivetrain extends Subsystem {
   public void ArcadeDriveSet(Double x, Double z){
     m_Chassis.arcadeDrive(x, z);
   }
+
   /**
    * Arcade drive using joystick instance
    * 
@@ -98,15 +109,6 @@ public class Drivetrain extends Subsystem {
    */
   public void ArcadeDriveSet(XboxController joystick){ 
     m_Chassis.arcadeDrive(joystick.getY(), joystick.getX());
-  }
-
-  /**
-   * Tank drive using xBoxController instance
-   * 
-   * @param controller xBoxController to use as input.
-   */
-  public void TankDriveSet(XboxController controller){
-    m_Chassis.tankDrive(controller.getY(Hand.kLeft), controller.getY(Hand.kRight));
   }
 
   public AnalogGyro getGyro(){
