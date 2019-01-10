@@ -7,15 +7,13 @@
 
 package frc.robot;
 
-import edu.wpi.cscore.CvSource;
-import edu.wpi.cscore.UsbCamera;
-import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.Drivetrain;
+import frc.robot.utils.CameraSetup;
 
 /**
  * Robot java source code for Team 6458 Semiahmoo Robotics
@@ -49,7 +47,7 @@ public class Robot extends TimedRobot {
     //m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     //chooser.addOption("My Auto", new MyAutoCommand());
 
-    CameraServer.getInstance().startAutomaticCapture();
+    CameraSetup.setupDefaultCamera();
   }
 
   /**
