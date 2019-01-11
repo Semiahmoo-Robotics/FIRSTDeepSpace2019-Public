@@ -43,10 +43,10 @@ public class Drivetrain extends Subsystem {
     
     //initialize objects
     m_LeftDrive = new Spark(RobotMap.LEFT_DRIVE_PORT);
+    m_LeftDrive.setInverted(true);
     m_RightDrive = new Spark(RobotMap.RIGHT_DRIVE_PORT);
+    m_RightDrive.setInverted(true);
     m_Chassis = new DifferentialDrive(m_LeftDrive, m_RightDrive);
-    //TODO is motor inversed or not?
-    //m_RightDrive.setInverted(true);
 
     m_REncoder = new Encoder(RobotMap.R_ENCODER_PORT_CHA, RobotMap.R_ENCODER_PORT_CHB, false, EncodingType.k4X);
     m_LEncoder = new Encoder(RobotMap.L_ENCODER_PORT_CHA, RobotMap.L_ENCODER_PORT_CHB, false, EncodingType.k4X);
@@ -82,7 +82,17 @@ public class Drivetrain extends Subsystem {
   public void TankDriveSet(Double left, Double right){
     m_Chassis.tankDrive(left, right);
   }
-/**
+
+    /**
+   * Tank drive using xBoxController instance.
+   * 
+   * @param controller xBoxController to use as input.
+   */
+  public void TankDriveSet(XboxController controller){
+    m_Chassis.tankDrive(controller.getY(Hand.kLeft), controller.getY(Hand.kRight));
+  }
+
+  /**
    * Arcade drive using two values individualy
    * 
    * @param x x joystick/drive value
@@ -91,6 +101,7 @@ public class Drivetrain extends Subsystem {
   public void ArcadeDriveSet(Double x, Double z){
     m_Chassis.arcadeDrive(x, z);
   }
+
   /**
    * Arcade drive using joystick instance
    * 
@@ -99,20 +110,6 @@ public class Drivetrain extends Subsystem {
   public void ArcadeDriveSet(XboxController joystick){ 
     m_Chassis.arcadeDrive(joystick.getY(), joystick.getX());
   }
-
-  //Method used for controlling motors when using an autonomous command
-
-
-  /**
-   * Tank drive using xBoxController instance
-   * 
-   * @param controller xBoxController to use as input.
-   */
-  public void TankDriveSet(XboxController controller){
-    m_Chassis.tankDrive(controller.getY(Hand.kLeft), controller.getY(Hand.kRight));
-  }
-
-
 
   public AnalogGyro getGyro(){
     return m_Gyro;
