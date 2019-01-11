@@ -17,16 +17,18 @@ public class TurnRightLeft extends Command {
   private double currentAngle;
   private double finalAngle;
 
+  private double speed;
 
   private boolean turnRight;
   private static final double GYRO_CONNECTION = 0.0275;
 
 
-  public TurnRightLeft(double angle) {
+  public TurnRightLeft(double angle, double speed) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     requires(Robot.drivetrain);
     difAngle = angle;
+    this.speed = speed;
   }
 
   // Called just before this Command runs the first time
@@ -46,8 +48,8 @@ public class TurnRightLeft extends Command {
     currentAngle = Robot.drivetrain.getGyro().getAngle();
 
     if(turnRight) {
-      Robot.drivetrain.TankDriveSet(0.3, -0.3);
-    } else Robot.drivetrain.TankDriveSet(-0.3, 0.3);
+      Robot.drivetrain.TankDriveSet(speed, -speed);
+    } else Robot.drivetrain.TankDriveSet(-speed, speed);
     
 
   }
@@ -56,20 +58,19 @@ public class TurnRightLeft extends Command {
   @Override
   protected boolean isFinished() {
 
-    boolean u = false;
+    boolean finished = false;
 
     if(turnRight) {
-
       if(currentAngle >= finalAngle ) {
-        u = true;
-      }else u = false;
-  } 
+        finished = true;
+      }else finished = false;
+    }
     if(!turnRight) {
       if(currentAngle <= finalAngle) {
-        u = true;
-      }else u = false;
+        finished = true;
+      }else finished = false;
     }
-    return u;
+    return finished;
     
   }
 
