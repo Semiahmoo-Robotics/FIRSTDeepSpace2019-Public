@@ -1,4 +1,4 @@
-package frc.robot;
+package frc.robot.utils;
 
 /**
  * A generic utility class with a collection of public static methods.
