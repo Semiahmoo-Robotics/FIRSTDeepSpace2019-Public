@@ -12,7 +12,9 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.commands.DriveForward;
 import frc.robot.subsystems.Drivetrain;
+import frc.robot.utils.CameraSetup;
 
 /**
  * Robot java source code for Team 6458 Semiahmoo Robotics
@@ -34,20 +36,26 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     
     //Create Subsystem Objects (Initialization)
-    oi = new OI();
     drivetrain = new Drivetrain();
+    
+    oi = new OI();
+    
     
     //put data to smartdashboard
     SmartDashboard.putData(drivetrain);
 
     //TODO Set Default Auto
     autoChooser = new SendableChooser<>();
-    //autoChooser.setDefaultOption("Default Auto", new ExampleCommand());
+
+    autoChooser.setDefaultOption("Default - Drive forward", new DriveForward(10, 0.5, 5));
     //autoChooser.addOption("My Auto", new MyAutoCommand());
     //SmartDashboard.putData("Auto mode", autoChooser);
 
     //Tank or Arcade chooser in smartdashboard / shuffleboard
     RobotMap.DefaultArcadeDrive = SmartDashboard.getBoolean("Use Arcade Drive?", false);
+    
+    CameraSetup.setupDefaultCamera();
+
   }
 
   /**
