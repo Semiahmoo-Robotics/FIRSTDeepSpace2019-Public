@@ -25,7 +25,7 @@ public class Robot extends TimedRobot {
   public static OI oi;
   public static Drivetrain drivetrain;
 
-  SendableChooser<Command> m_autoPeriodChooser;
+  SendableChooser<Command> autoChooser;
 
   /**
    * Called once when robot is first started up
@@ -38,13 +38,13 @@ public class Robot extends TimedRobot {
     drivetrain = new Drivetrain();
     
     //put data to smartdashboard
-    //SmartDashboard.putData("Auto mode", m_autoPeriodChooser);
-    //SmartDashboard.putData("Drivetrain", drivetrain);
+    SmartDashboard.putData(drivetrain);
 
     //TODO Set Default Auto
-    m_autoPeriodChooser = new SendableChooser<>();
-    //m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
-    //chooser.addOption("My Auto", new MyAutoCommand());
+    autoChooser = new SendableChooser<>();
+    //autoChooser.setDefaultOption("Default Auto", new ExampleCommand());
+    //autoChooser.addOption("My Auto", new MyAutoCommand());
+    //SmartDashboard.putData("Auto mode", autoChooser);
   }
 
   /**
@@ -74,7 +74,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    m_autonomousCommand = m_autoPeriodChooser.getSelected();
+    m_autonomousCommand = autoChooser.getSelected();
     m_autonomousCommand.start();
   }
 
@@ -110,4 +110,14 @@ public class Robot extends TimedRobot {
     //DriveForward MoveTest = new DriveForward();
     //MoveTest 
   }
+
+  /**
+   * Log interesting values to SmartDashboard / Shuffleboard
+   */
+  public void log() {
+    SmartDashboard.putNumber("Gyro value", drivetrain.getGyro().getAngle());
+    SmartDashboard.putNumber("Left Encoder Value", drivetrain.getLEncoder().getDistance());
+    SmartDashboard.putNumber("Right Encoder Value", drivetrain.getREncoder().getDistance());
+  }
+
 }
