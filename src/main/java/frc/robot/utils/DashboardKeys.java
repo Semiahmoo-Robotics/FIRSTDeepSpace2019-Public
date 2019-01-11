@@ -1,5 +1,8 @@
 package frc.robot.utils;
 
+/**
+ * A utility class that holds string IDs for writing values to the SmartDashboard.
+ */
 public final class DashboardKeys {
     public static final String INIT_HEADING = "Initial Gyro Heading";
     public static final String CURRENT_HEADING = "Current Heading";
