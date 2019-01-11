@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.Intake;
 
 /**
  * Robot java source code for Team 6458 Semiahmoo Robotics
@@ -24,6 +25,7 @@ public class Robot extends TimedRobot {
   //Declare Subsystem (Initialization)
   public static OI oi;
   public static Drivetrain drivetrain;
+  public static Intake intake;
 
   SendableChooser<Command> autoChooser;
 
@@ -36,6 +38,7 @@ public class Robot extends TimedRobot {
     //Create Subsystem Objects (Initialization)
     oi = new OI();
     drivetrain = new Drivetrain();
+    intake = new Intake();
     
     //put data to smartdashboard
     SmartDashboard.putData(drivetrain);
@@ -47,7 +50,7 @@ public class Robot extends TimedRobot {
     //SmartDashboard.putData("Auto mode", autoChooser);
 
     //Tank or Arcade chooser in smartdashboard / shuffleboard
-    RobotMap.DefaultArcadeDrive = SmartDashboard.getBoolean("Use Arcade Drive?", false);
+    RobotMap.DefaultArcadeDrive = SmartDashboard.putBoolean("Use Arcade Drive?", SmartDashboard.getBoolean("Use Arcade Drive?", false));
   }
 
   /**
@@ -91,6 +94,9 @@ public class Robot extends TimedRobot {
     log();
   }
 
+    /**
+   * Called once before teleop, aka driver control.
+   */
   @Override
   public void teleopInit() {
     // This makes sure that the autonomous stops running when teleop starts running.

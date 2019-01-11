@@ -9,6 +9,9 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.GenericHID.Hand;
+import frc.robot.commands.PullInBox;
+import frc.robot.commands.PullOutBox;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -25,6 +28,15 @@ public class OI {
 		m_XBoxController = new XboxController(RobotMap.XBOX_PORT);
 
 		//TODO write commands here
+
+		if (m_XBoxController.getBumper(Hand.kRight)) {
+			new PullInBox();
+		}
+
+		if (m_XBoxController.getBumper(Hand.kLeft)) {
+			new PullOutBox();
+		}
+
 	}
 	
 

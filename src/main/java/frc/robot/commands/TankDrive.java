@@ -26,7 +26,7 @@ public class TankDrive extends Command {
   @Override
   protected void execute() {
     
-    if (Robot.oi.GetXboxController().getTriggerAxis(Hand.kLeft) >= 0.7){
+    if (Robot.oi.GetXboxController().getTriggerAxis(Hand.kRight) >= 0.7){
       boostEngaged = false;
 
       Robot.drivetrain.TankDriveSet(Robot.oi.GetXboxController());
