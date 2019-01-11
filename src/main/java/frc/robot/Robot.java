@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.commands.DriveForward;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.utils.CameraSetup;
 
@@ -26,7 +27,7 @@ public class Robot extends TimedRobot {
   public static OI oi;
   public static Drivetrain drivetrain;
 
-  SendableChooser<Command> m_autoPeriodChooser;
+  SendableChooser<Command> autoChooser;
 
   /**
    * Called once when robot is first started up
@@ -35,17 +36,19 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     
     //Create Subsystem Objects (Initialization)
-    oi = new OI();
     drivetrain = new Drivetrain();
+    
+    oi = new OI();
+    
     
     //put data to smartdashboard
     //SmartDashboard.putData("Auto mode", m_autoPeriodChooser);
     //SmartDashboard.putData("Drivetrain", drivetrain);
 
     //TODO Set Default Auto
-    m_autoPeriodChooser = new SendableChooser<>();
-    //m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
-    //chooser.addOption("My Auto", new MyAutoCommand());
+    autoChooser = new SendableChooser<>();
+    autoChooser.setDefaultOption("Default - Drive forward", new DriveForward(10, 0.5, 5));
+    //autoChooser.addOption("My Auto", new MyAutoCommand());
 
     CameraSetup.setupDefaultCamera();
   }
@@ -77,7 +80,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    m_autonomousCommand = m_autoPeriodChooser.getSelected();
+    m_autonomousCommand = autoChooser.getSelected();
     m_autonomousCommand.start();
   }
 
