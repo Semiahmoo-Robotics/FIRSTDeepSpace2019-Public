@@ -28,32 +28,38 @@ import frc.robot.utils.DashboardKeys;
 
 public class Drivetrain extends Subsystem {
 
-  //TODO after kickoff, check if drivetrain has 2 or 4 motors for DriveTrain. Currently assuming 2 motors
-  private final Spark m_LeftDrive = new Spark(RobotMap.LEFT_DRIVE_PORT);
-  private final Spark m_RightDrive = new Spark(RobotMap.RIGHT_DRIVE_PORT);
+  private final Spark m_LeftDrive;
+  private final Spark m_RightDrive;
 
   private final DifferentialDrive m_Chassis;
 
-  private final Encoder m_REncoder = new Encoder(RobotMap.R_ENCODER_PORT_CHA, RobotMap.R_ENCODER_PORT_CHB, false, EncodingType.k4X);
-  private final Encoder m_LEncoder = new Encoder(RobotMap.L_ENCODER_PORT_CHA, RobotMap.L_ENCODER_PORT_CHB, false, EncodingType.k4X);
-  private final AnalogGyro m_Gyro = new AnalogGyro(RobotMap.GYRO_PORT);
+  private final Encoder m_REncoder;
+  private final Encoder m_LEncoder;
+  private final AnalogGyro m_Gyro;
 
 
   /**
    * Constructor - Create a new DriveTrain class.
    */
   public Drivetrain() {
-      
-    //TODO is motor inversed or not?
-    //m_RightDrive.setInverted(true);
-
+    
+    //initialize objects
+    m_LeftDrive = new Spark(RobotMap.LEFT_DRIVE_PORT);
+    m_LeftDrive.setInverted(true);
+    m_RightDrive = new Spark(RobotMap.RIGHT_DRIVE_PORT);
+    m_RightDrive.setInverted(true);
     m_Chassis = new DifferentialDrive(m_LeftDrive, m_RightDrive);
+
+    m_REncoder = new Encoder(RobotMap.R_ENCODER_PORT_CHA, RobotMap.R_ENCODER_PORT_CHB, false, EncodingType.k4X);
+    m_LEncoder = new Encoder(RobotMap.L_ENCODER_PORT_CHA, RobotMap.L_ENCODER_PORT_CHB, false, EncodingType.k4X);
+    m_Gyro = new AnalogGyro(RobotMap.GYRO_PORT);
+
 
     //Stops motor if the robot loses connection to the driver station.
     m_Chassis.setSafetyEnabled(true);
 
-    //TODO For now, reduce max output for safety. Change to 1 later.
-    m_Chassis.setMaxOutput(0.1);
+    //For now, reduce max output for safety. Change to 1 later.
+    //m_Chassis.setMaxOutput(0.5);
 
     initializeEncoder(m_LEncoder);
     initializeEncoder(m_REncoder);
@@ -78,31 +84,6 @@ public class Drivetrain extends Subsystem {
   public void TankDriveSet(Double left, Double right){
     m_Chassis.tankDrive(left, right);
   }
-/**
-   * Arcade drive using two values individualy
-   * 
-   * @param x x joystick/drive value
-   * @param z z joystick/drive value
-   */
-  public void ArcadeDriveSet(Double x, Double z){
-    m_Chassis.arcadeDrive(x, z);
-  }
-  /**
-   * Arcade drive using joystick instance
-   * 
-   * @param joystick joystick to use as input.
-   */
-  public void ArcadeDriveSet(XboxController joystick){ 
-    m_Chassis.arcadeDrive(joystick.getY(), joystick.getX());
-    SmartDashboard.putNumber(DashboardKeys.CURRENT_HEADING, m_Gyro.getAngle());
-    SmartDashboard.putNumber(DashboardKeys.Y_INPUT, joystick.getY());
-    SmartDashboard.putNumber(DashboardKeys.X_INPUT, joystick.getX());
-    SmartDashboard.putNumber(DashboardKeys.L_MOTOR_SPEED, m_LeftDrive.getSpeed());
-    SmartDashboard.putNumber(DashboardKeys.R_MOTOR_SPEED, m_RightDrive.getSpeed());
-    SmartDashboard.putNumber(DashboardKeys.L_ENCODER_DISTANCE, m_LEncoder.getDistance());
-    SmartDashboard.putNumber(DashboardKeys.R_ENCODER_DISTANCE, m_REncoder.getDistance());
-    SmartDashboard.putNumber(DashboardKeys.GENERIC_ENCODER_DISTANCE, (m_LEncoder.getDistance() + m_REncoder.getDistance()) / 2);
-  }
 
   /**
    * Tank drive using xBoxController instance
@@ -114,6 +95,33 @@ public class Drivetrain extends Subsystem {
     SmartDashboard.putNumber(DashboardKeys.CURRENT_HEADING, m_Gyro.getAngle());
     SmartDashboard.putNumber(DashboardKeys.L_INPUT, controller.getY(Hand.kLeft));
     SmartDashboard.putNumber(DashboardKeys.R_INPUT, controller.getY(Hand.kRight));
+    SmartDashboard.putNumber(DashboardKeys.L_MOTOR_SPEED, m_LeftDrive.getSpeed());
+    SmartDashboard.putNumber(DashboardKeys.R_MOTOR_SPEED, m_RightDrive.getSpeed());
+    SmartDashboard.putNumber(DashboardKeys.L_ENCODER_DISTANCE, m_LEncoder.getDistance());
+    SmartDashboard.putNumber(DashboardKeys.R_ENCODER_DISTANCE, m_REncoder.getDistance());
+    SmartDashboard.putNumber(DashboardKeys.GENERIC_ENCODER_DISTANCE, (m_LEncoder.getDistance() + m_REncoder.getDistance()) / 2);
+  }
+
+  /**
+   * Arcade drive using two values individualy
+   * 
+   * @param x x joystick/drive value
+   * @param z z joystick/drive value
+   */
+  public void ArcadeDriveSet(Double x, Double z){
+    m_Chassis.arcadeDrive(x, z);
+  }
+
+  /**
+   * Arcade drive using joystick instance
+   * 
+   * @param joystick joystick to use as input.
+   */
+  public void ArcadeDriveSet(XboxController joystick){ 
+    m_Chassis.arcadeDrive(joystick.getY(), joystick.getX());
+    SmartDashboard.putNumber(DashboardKeys.CURRENT_HEADING, m_Gyro.getAngle());
+    SmartDashboard.putNumber(DashboardKeys.Y_INPUT, joystick.getY());
+    SmartDashboard.putNumber(DashboardKeys.X_INPUT, joystick.getX());
     SmartDashboard.putNumber(DashboardKeys.L_MOTOR_SPEED, m_LeftDrive.getSpeed());
     SmartDashboard.putNumber(DashboardKeys.R_MOTOR_SPEED, m_RightDrive.getSpeed());
     SmartDashboard.putNumber(DashboardKeys.L_ENCODER_DISTANCE, m_LEncoder.getDistance());
