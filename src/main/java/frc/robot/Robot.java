@@ -45,6 +45,9 @@ public class Robot extends TimedRobot {
     //autoChooser.setDefaultOption("Default Auto", new ExampleCommand());
     //autoChooser.addOption("My Auto", new MyAutoCommand());
     //SmartDashboard.putData("Auto mode", autoChooser);
+
+    //Tank or Arcade chooser in smartdashboard / shuffleboard
+    RobotMap.DefaultArcadeDrive = SmartDashboard.getBoolean("Use Arcade Drive?", false);
   }
 
   /**
@@ -121,6 +124,8 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("Gyro value", drivetrain.getGyro().getAngle());
     SmartDashboard.putNumber("Left Encoder Value", drivetrain.getLEncoder().getDistance());
     SmartDashboard.putNumber("Right Encoder Value", drivetrain.getREncoder().getDistance());
+    SmartDashboard.putNumber("Left Motor Speed", drivetrain.getLSpark().getSpeed());
+    SmartDashboard.putNumber("Right Motor Speed", drivetrain.getRSpark().getSpeed());
   }
 
 }
