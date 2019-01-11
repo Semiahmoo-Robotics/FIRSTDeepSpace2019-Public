@@ -42,15 +42,20 @@ public class Robot extends TimedRobot {
     
     
     //put data to smartdashboard
-    //SmartDashboard.putData("Auto mode", m_autoPeriodChooser);
-    //SmartDashboard.putData("Drivetrain", drivetrain);
+    SmartDashboard.putData(drivetrain);
 
     //TODO Set Default Auto
     autoChooser = new SendableChooser<>();
+
     autoChooser.setDefaultOption("Default - Drive forward", new DriveForward(10, 0.5, 5));
     //autoChooser.addOption("My Auto", new MyAutoCommand());
+    //SmartDashboard.putData("Auto mode", autoChooser);
 
+    //Tank or Arcade chooser in smartdashboard / shuffleboard
+    RobotMap.DefaultArcadeDrive = SmartDashboard.getBoolean("Use Arcade Drive?", false);
+    
     CameraSetup.setupDefaultCamera();
+
   }
 
   /**
@@ -73,6 +78,7 @@ public class Robot extends TimedRobot {
   @Override
   public void disabledPeriodic() {
     Scheduler.getInstance().run();
+    log();
   }
 
   /**
@@ -90,6 +96,7 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousPeriodic() {
     Scheduler.getInstance().run();
+    log();
   }
 
   @Override
@@ -106,6 +113,7 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
+    log();
   }
 
   /**
@@ -116,4 +124,16 @@ public class Robot extends TimedRobot {
     //DriveForward MoveTest = new DriveForward();
     //MoveTest 
   }
+
+  /**
+   * Log interesting values to SmartDashboard / Shuffleboard
+   */
+  public void log() {
+    SmartDashboard.putNumber("Gyro value", drivetrain.getGyro().getAngle());
+    SmartDashboard.putNumber("Left Encoder Value", drivetrain.getLEncoder().getDistance());
+    SmartDashboard.putNumber("Right Encoder Value", drivetrain.getREncoder().getDistance());
+    SmartDashboard.putNumber("Left Motor Speed", drivetrain.getLSpark().getSpeed());
+    SmartDashboard.putNumber("Right Motor Speed", drivetrain.getRSpark().getSpeed());
+  }
+
 }
