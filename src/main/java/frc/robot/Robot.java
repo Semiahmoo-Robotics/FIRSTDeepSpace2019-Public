@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.Drivetrain;
+import frc.robot.utils.CameraSetup;
 
 /**
  * Robot java source code for Team 6458 Semiahmoo Robotics
@@ -45,6 +46,8 @@ public class Robot extends TimedRobot {
     m_autoPeriodChooser = new SendableChooser<>();
     //m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     //chooser.addOption("My Auto", new MyAutoCommand());
+
+    CameraSetup.setupDefaultCamera();
   }
 
   /**
