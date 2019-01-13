@@ -14,8 +14,6 @@ import frc.robot.RobotMap;
 
 public class TankDrive extends Command {
 
-  //when boost is Engaged, max output is occured. otherwise, the multiplyer takes effect
-  private static final double MULTIPLYER = 0.6;
   private double left;
   private double right;
 
@@ -27,15 +25,15 @@ public class TankDrive extends Command {
   protected void execute() {
     
     if (Robot.oi.GetXboxController().getTriggerAxis(Hand.kRight) >= 0.7){
-      RobotMap.boostEngaged = false;
+      Robot.drivetrain.setBoostEngaged(true);
 
       Robot.drivetrain.TankDriveSet(Robot.oi.GetXboxController());
 
     } else {
-      RobotMap.boostEngaged = true;
+      Robot.drivetrain.setBoostEngaged(false);
 
-      left = Robot.oi.GetXboxController().getY(Hand.kLeft) * MULTIPLYER;
-      right = Robot.oi.GetXboxController().getY(Hand.kRight) * MULTIPLYER;
+      left = Robot.oi.GetXboxController().getY(Hand.kLeft) * RobotMap.MULTIPLYER;
+      right = Robot.oi.GetXboxController().getY(Hand.kRight) * RobotMap.MULTIPLYER;
       Robot.drivetrain.TankDriveSet(left, right);
     }
 

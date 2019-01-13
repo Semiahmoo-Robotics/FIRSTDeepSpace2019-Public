@@ -138,6 +138,14 @@ public class Drivetrain extends Subsystem {
     return m_RightDrive;
   }
 
+  public void setBoostEngaged(boolean boostEngaged){
+    this.boostEngaged = boostEngaged;
+  }
+
+  public boolean getBoostEngaged(){
+    return boostEngaged;
+  }
+
   /** 
    * Curvature Drive using two values
    * 
