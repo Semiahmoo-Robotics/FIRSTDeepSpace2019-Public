@@ -10,11 +10,11 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 
 public class TankDrive extends Command {
 
   //when boost is Engaged, max output is occured. otherwise, the multiplyer takes effect
-  private boolean boostEngaged = false;
   private static final double MULTIPLYER = 0.6;
   private double left;
   private double right;
@@ -27,12 +27,12 @@ public class TankDrive extends Command {
   protected void execute() {
     
     if (Robot.oi.GetXboxController().getTriggerAxis(Hand.kRight) >= 0.7){
-      boostEngaged = false;
+      RobotMap.boostEngaged = false;
 
       Robot.drivetrain.TankDriveSet(Robot.oi.GetXboxController());
 
     } else {
-      boostEngaged = true;
+      RobotMap.boostEngaged = true;
 
       left = Robot.oi.GetXboxController().getY(Hand.kLeft) * MULTIPLYER;
       right = Robot.oi.GetXboxController().getY(Hand.kRight) * MULTIPLYER;

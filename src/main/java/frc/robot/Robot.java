@@ -132,6 +132,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("Right Encoder Value", drivetrain.getREncoder().getDistance());
     SmartDashboard.putNumber("Left Motor Speed", drivetrain.getLSpark().getSpeed());
     SmartDashboard.putNumber("Right Motor Speed", drivetrain.getRSpark().getSpeed());
+    SmartDashboard.putBoolean("Boost Engaged", drivetrain.boostEngaged);
   }
 
 }

@@ -36,6 +36,8 @@ public class Drivetrain extends Subsystem {
   private final Encoder m_LEncoder;
   private final AnalogGyro m_Gyro;
 
+    //boost mode
+  public boolean boostEngaged = false;
 
   /**
    * Constructor - Create a new DriveTrain class.
