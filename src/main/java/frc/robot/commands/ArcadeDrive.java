@@ -15,7 +15,6 @@ import frc.robot.RobotMap;
 import frc.robot.utils.DashboardKeys;
 
 public class ArcadeDrive extends Command {
-  private static final double MULTIPLYER = 0.6;
   private double xForward;
   private double zRotation;
   
@@ -32,7 +31,7 @@ public class ArcadeDrive extends Command {
   protected void execute() {
     Robot.drivetrain.ArcadeDriveSet(Robot.oi.GetXboxController());
 
-    if (Robot.oi.GetXboxController().getTriggerAxis(Hand.kLeft) >= 0.7){
+    if (Robot.oi.GetXboxController().getTriggerAxis(Hand.kRight) >= 0.7){
       Robot.drivetrain.setBoostEngaged(true);
 
       Robot.drivetrain.ArcadeDriveSet(Robot.oi.GetXboxController());
