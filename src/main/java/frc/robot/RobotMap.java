@@ -22,7 +22,6 @@ public class RobotMap {
   public static final int RIGHT_DRIVE_PORT = 0;
   public static final int LEFT_INTAKE_PORT = 2;
   public static final int RIGHT_INTAKE_PORT = 3;
-  public static final int GYRO_PORT = 0;
 
    //TODO Later finalize robotmap ports
   public static final int R_ENCODER_PORT_CHA = 2;

@@ -7,11 +7,10 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
-import edu.wpi.first.wpilibj.GenericHID.Hand;
-
-import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -36,7 +35,7 @@ public class Drivetrain extends Subsystem {
 
   private final Encoder m_REncoder;
   private final Encoder m_LEncoder;
-  private final AnalogGyro m_Gyro;
+  private final ADXRS450_Gyro m_Gyro;
 
     //boost mode
   public boolean boostEngaged = false;
@@ -55,7 +54,7 @@ public class Drivetrain extends Subsystem {
 
     m_REncoder = new Encoder(RobotMap.R_ENCODER_PORT_CHA, RobotMap.R_ENCODER_PORT_CHB, false, EncodingType.k4X);
     m_LEncoder = new Encoder(RobotMap.L_ENCODER_PORT_CHA, RobotMap.L_ENCODER_PORT_CHB, false, EncodingType.k4X);
-    m_Gyro = new AnalogGyro(RobotMap.GYRO_PORT);
+    m_Gyro = new ADXRS450_Gyro(/* No port. This default constructor uses the built-in port where the gyro sits. */);
 
 
     //Stops motor if the robot loses connection to the driver station.
@@ -136,7 +135,7 @@ public class Drivetrain extends Subsystem {
     SmartDashboard.putNumber(DashboardKeys.GENERIC_ENCODER_DISTANCE, (m_LEncoder.getDistance() + m_REncoder.getDistance()) / 2);
   }
 
-  public AnalogGyro getGyro(){
+  public ADXRS450_Gyro getGyro(){
     return m_Gyro;
   }
 
