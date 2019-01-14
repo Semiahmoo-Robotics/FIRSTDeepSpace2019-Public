@@ -15,7 +15,6 @@ import frc.robot.RobotMap;
 import frc.robot.utils.DashboardKeys;
 
 public class ArcadeDrive extends Command {
-  private static final double MULTIPLYER = 0.6;
   private double xForward;
   private double zRotation;
   
