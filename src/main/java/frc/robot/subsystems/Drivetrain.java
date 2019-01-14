@@ -38,6 +38,8 @@ public class Drivetrain extends Subsystem {
   private final Encoder m_LEncoder;
   private final AnalogGyro m_Gyro;
 
+    //boost mode
+  public boolean boostEngaged = false;
 
   /**
    * Constructor - Create a new DriveTrain class.
@@ -152,6 +154,14 @@ public class Drivetrain extends Subsystem {
 
   public Spark getRSpark(){
     return m_RightDrive;
+  }
+
+  public void setBoostEngaged(boolean boostEngaged){
+    this.boostEngaged = boostEngaged;
+  }
+
+  public boolean getBoostEngaged(){
+    return boostEngaged;
   }
 
   /** 

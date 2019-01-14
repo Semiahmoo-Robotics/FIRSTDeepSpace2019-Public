@@ -11,13 +11,11 @@ import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 import frc.robot.utils.DashboardKeys;
 
 public class TankDrive extends Command {
 
-  //when boost is Engaged, max output is occured. otherwise, the multiplyer takes effect
-  private boolean boostEngaged = false;
-  private static final double MULTIPLYER = 0.6;
   private double left;
   private double right;
 
@@ -36,16 +34,16 @@ public class TankDrive extends Command {
   @Override
   protected void execute() {
     
-    if (Robot.oi.GetXboxController().getTriggerAxis(Hand.kLeft) >= 0.7){
-      boostEngaged = false;
+    if (Robot.oi.GetXboxController().getTriggerAxis(Hand.kRight) >= 0.7){
+      Robot.drivetrain.setBoostEngaged(true);
 
       Robot.drivetrain.TankDriveSet(Robot.oi.GetXboxController());
 
     } else {
-      boostEngaged = true;
+      Robot.drivetrain.setBoostEngaged(false);
 
-      left = Robot.oi.GetXboxController().getY(Hand.kLeft) * MULTIPLYER;
-      right = Robot.oi.GetXboxController().getY(Hand.kRight) * MULTIPLYER;
+      left = Robot.oi.GetXboxController().getY(Hand.kLeft) * RobotMap.MULTIPLYER;
+      right = Robot.oi.GetXboxController().getY(Hand.kRight) * RobotMap.MULTIPLYER;
       Robot.drivetrain.TankDriveSet(left, right);
     }
 

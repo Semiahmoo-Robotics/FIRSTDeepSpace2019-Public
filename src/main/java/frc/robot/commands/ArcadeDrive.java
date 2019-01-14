@@ -11,10 +11,10 @@ import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 import frc.robot.utils.DashboardKeys;
 
 public class ArcadeDrive extends Command {
-  private boolean boostEngaged = false;
   private static final double MULTIPLYER = 0.6;
   private double xForward;
   private double zRotation;
@@ -33,15 +33,15 @@ public class ArcadeDrive extends Command {
     Robot.drivetrain.ArcadeDriveSet(Robot.oi.GetXboxController());
 
     if (Robot.oi.GetXboxController().getTriggerAxis(Hand.kLeft) >= 0.7){
-      boostEngaged = false;
+      Robot.drivetrain.setBoostEngaged(true);
 
       Robot.drivetrain.ArcadeDriveSet(Robot.oi.GetXboxController());
 
     } else {
-      boostEngaged = true;
+      Robot.drivetrain.setBoostEngaged(false);
 
-      xForward = Robot.oi.GetXboxController().getY() * MULTIPLYER;
-      zRotation = Robot.oi.GetXboxController().getX() * MULTIPLYER;
+      xForward = Robot.oi.GetXboxController().getY() * RobotMap.MULTIPLYER;
+      zRotation = Robot.oi.GetXboxController().getX() * RobotMap.MULTIPLYER;
       Robot.drivetrain.TankDriveSet(xForward, zRotation);
     }
 

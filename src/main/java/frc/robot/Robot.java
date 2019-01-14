@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.DriveForward;
 import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.Intake;
 import frc.robot.utils.CameraSetup;
 
 /**
@@ -26,6 +27,7 @@ public class Robot extends TimedRobot {
   //Declare Subsystem (Initialization)
   public static OI oi;
   public static Drivetrain drivetrain;
+  public static Intake intake;
 
   SendableChooser<Command> autoChooser;
 
@@ -37,6 +39,7 @@ public class Robot extends TimedRobot {
     
     //Create Subsystem Objects (Initialization)
     drivetrain = new Drivetrain();
+    intake = new Intake();
     
     oi = new OI();
     
@@ -52,10 +55,8 @@ public class Robot extends TimedRobot {
     //SmartDashboard.putData("Auto mode", autoChooser);
 
     //Tank or Arcade chooser in smartdashboard / shuffleboard
-    RobotMap.DefaultArcadeDrive = SmartDashboard.getBoolean("Use Arcade Drive?", false);
-    
+    RobotMap.DefaultArcadeDrive = SmartDashboard.putBoolean("Use Arcade Drive?", SmartDashboard.getBoolean("Use Arcade Drive?", false));
     CameraSetup.setupDefaultCamera();
-
   }
 
   /**
@@ -99,6 +100,9 @@ public class Robot extends TimedRobot {
     log();
   }
 
+    /**
+   * Called once before teleop, aka driver control.
+   */
   @Override
   public void teleopInit() {
     // This makes sure that the autonomous stops running when teleop starts running.
@@ -134,6 +138,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("Right Encoder Value", drivetrain.getREncoder().getDistance());
     SmartDashboard.putNumber("Left Motor Speed", drivetrain.getLSpark().getSpeed());
     SmartDashboard.putNumber("Right Motor Speed", drivetrain.getRSpark().getSpeed());
+    SmartDashboard.putBoolean("Boost Engaged", drivetrain.getBoostEngaged());
   }
 
 }
