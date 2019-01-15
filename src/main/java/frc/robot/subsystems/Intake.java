@@ -19,9 +19,6 @@ public class Intake extends Subsystem {
   private final Spark m_LeftIntake;
   private final Spark m_RightIntake;
 
-
-
-
   public Intake() {
 
     m_LeftIntake = new Spark(RobotMap.LEFT_INTAKE_PORT);

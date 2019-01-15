@@ -20,7 +20,7 @@ public class TurnRightLeft extends Command {
   private double speed;
 
   private boolean turnRight;
-  private static final double GYRO_CONNECTION = 0.0275;
+  private static final double GYRO_CORRECTION = 0.0275;
 
 
   public TurnRightLeft(double angle, double speed) {

@@ -9,9 +9,9 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.GenericHID.Hand;
-import frc.robot.commands.PullInBox;
-import frc.robot.commands.PullOutBox;
+import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import frc.robot.commands.*;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -20,26 +20,25 @@ import frc.robot.commands.PullOutBox;
 public class OI {
 
   public static XboxController m_XBoxController;
-  //maybe use logitech stick? lol
-  public static Joystick SupportStick;
+  public static Joystick supportStick;
+  public static Button abutton;
 
+	/**
+	 * Create a new OI and 
+	 */
 	public OI() {
-
 		m_XBoxController = new XboxController(RobotMap.XBOX_PORT);
+		
 
-		//TODO write commands here
-
-		if (m_XBoxController.getBumper(Hand.kRight)) {
-			new PullInBox();
-		}
-
-		if (m_XBoxController.getBumper(Hand.kLeft)) {
-			new PullOutBox();
-		}
-
+		//Write code here to run commands for button press events
+		abutton = new JoystickButton(m_XBoxController, 1);  //Button A = 1
+		abutton.whenPressed(new DriveForward(10, 0.5, 3));
 	}
 	
 
+	/** 
+	 * Returns the XBoxController Instance.
+	 */
 	public XboxController GetXboxController() {
 		return m_XBoxController;
 	}	

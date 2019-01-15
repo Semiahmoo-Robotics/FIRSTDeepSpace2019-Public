@@ -49,7 +49,6 @@ public class Robot extends TimedRobot {
 
     //TODO Set Default Auto
     autoChooser = new SendableChooser<>();
-
     autoChooser.setDefaultOption("Default - Drive forward", new DriveForward(10, 0.5, 5));
     //autoChooser.addOption("My Auto", new MyAutoCommand());
     //SmartDashboard.putData("Auto mode", autoChooser);
