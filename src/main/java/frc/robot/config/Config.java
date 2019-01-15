@@ -6,7 +6,7 @@ import com.google.gson.GsonBuilder;
 import java.io.*;
 
 /**
- * The Configuration class represents the persistence of a certain configuration.
+ * The Configuration utility allows you to read and write JSON configuration files.
  * It can read and write to a .json file and produce a mapped object as the data.<p>
  * If the file does not exist, a warning will be printed and the file will be created and saved using defaults.<p>
  * The mapped object MUST have a zero-argument constructor!<p>
@@ -23,45 +23,24 @@ import java.io.*;
  *     double decimal = 1500.0;
  *   }
  *   // Somewhere...
- *   Configuration cfg = new Configuration("/path/to/config.json");
- *   ConfigTest config = cfg.readConfig(ConfigTest.class);
+ *   File configFile = new File("/path/to/config.json");
+ *   ConfigTest config = Config.readConfig(configFile, ConfigTest.class);
  *   System.out.println(config.number); // 12
  *   config.number = 3;
  *   config.str = "different string";
  *   // To save it:
- *   cfg.saveConfig(config);
+ *   Config.saveConfig(configFile, config);
  *   // The config.json will be updated according to the new data.
  * </pre>
  */
-public class Configuration {
+public final class Config {
 
-  private final Gson gson = new GsonBuilder()
+  private static final Gson gson = new GsonBuilder()
           .setPrettyPrinting()
           .serializeNulls()
           .create();
 
-  /**
-   * The file this Configuration object refers to.
-   */
-  public final File file;
-
-  /**
-   * Constructor.
-   * @param file The File object that represents the configuration file
-   */
-  public Configuration(File file) {
-    this.file = file;
-    if (!file.exists()) {
-      System.err.println("The configuration file for " + file.getAbsolutePath() + " doesn't exist. Resorting to using defaults.");
-    }
-  }
-
-  /**
-   * Constructor.
-   * @param filePath The string path to the configuration file
-   */
-  public Configuration(String filePath) {
-    this(new File(filePath));
+  private Config() {
   }
 
   /**
@@ -69,11 +48,12 @@ public class Configuration {
    * The class must have a zero-argument constructor.
    * @param clazz The class you want to deserialize. <pre>X.class</pre>
    */
-  public <T> T readConfig(Class<T> clazz) {
+  public static <T> T readConfig(File file, Class<T> clazz) {
     if (!file.exists()) {
+      System.err.println("Warning: The configuration file for " + file.getAbsolutePath() + " does not exist. Resorting to defaults and saving that.");
       try {
         T instance = clazz.newInstance();
-        saveConfig(instance);
+        saveConfig(file, instance);
         return instance;
       } catch (Exception e) {
         throw new RuntimeException(e);
@@ -91,7 +71,7 @@ public class Configuration {
   /**
    * Saves the configuration object to the file this Configuration is using.
    */
-  public <T> void saveConfig(T configObj) {
+  public static <T> void saveConfig(File file, T configObj) {
     try {
       new File(file, "/..").mkdirs();
       file.createNewFile();
