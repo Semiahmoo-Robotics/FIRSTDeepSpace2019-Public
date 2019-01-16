@@ -27,12 +27,11 @@ public class OI {
 	 * Create a new OI and 
 	 */
 	public OI() {
-		m_XBoxController = new XboxController(RobotMap.XBOX_PORT);
-		
+		m_XBoxController = new XboxController(RobotMap.XBOX_PORT);		
 
 		//Write code here to run commands for button press events
-		abutton = new JoystickButton(m_XBoxController, 1);  //Button A = 1
-		abutton.whenPressed(new DriveForward(10, 0.5, 3));
+		//abutton = new JoystickButton(m_XBoxController, 1);  //Button A = 1
+		//abutton.whenPressed(new DriveForward(10, 0.5, 3));
 	}
 	
 
