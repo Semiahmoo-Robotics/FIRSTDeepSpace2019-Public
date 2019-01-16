@@ -42,8 +42,8 @@ public class TankDrive extends Command {
     } else {
       Robot.drivetrain.setBoostEngaged(false);
 
-      left = Robot.oi.GetXboxController().getY(Hand.kLeft) * RobotMap.MULTIPLYER;
-      right = Robot.oi.GetXboxController().getY(Hand.kRight) * RobotMap.MULTIPLYER;
+      left = Robot.oi.GetXboxController().getY(Hand.kLeft) * RobotMap.MULTIPLIER;
+      right = Robot.oi.GetXboxController().getY(Hand.kRight) * RobotMap.MULTIPLIER;
       Robot.drivetrain.TankDriveSet(left, right);
     }
 

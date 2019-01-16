@@ -39,8 +39,8 @@ public class ArcadeDrive extends Command {
     } else {
       Robot.drivetrain.setBoostEngaged(false);
 
-      xForward = Robot.oi.GetXboxController().getY() * RobotMap.MULTIPLYER;
-      zRotation = Robot.oi.GetXboxController().getX() * RobotMap.MULTIPLYER;
+      xForward = Robot.oi.GetXboxController().getY() * RobotMap.MULTIPLIER;
+      zRotation = Robot.oi.GetXboxController().getX() * RobotMap.MULTIPLIER;
       Robot.drivetrain.TankDriveSet(xForward, zRotation);
     }
 
