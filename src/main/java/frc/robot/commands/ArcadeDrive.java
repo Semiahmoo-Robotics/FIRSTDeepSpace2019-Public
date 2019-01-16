@@ -31,7 +31,7 @@ public class ArcadeDrive extends Command {
   protected void execute() {
     Robot.drivetrain.ArcadeDriveSet(Robot.oi.GetXboxController());
 
-    if (Robot.oi.GetXboxController().getTriggerAxis(Hand.kLeft) >= 0.7){
+    if (Robot.oi.GetXboxController().getTriggerAxis(Hand.kRight) >= 0.7){
       Robot.drivetrain.setBoostEngaged(true);
 
       Robot.drivetrain.ArcadeDriveSet(Robot.oi.GetXboxController());
@@ -39,8 +39,8 @@ public class ArcadeDrive extends Command {
     } else {
       Robot.drivetrain.setBoostEngaged(false);
 
-      xForward = Robot.oi.GetXboxController().getY() * RobotMap.MULTIPLYER;
-      zRotation = Robot.oi.GetXboxController().getX() * RobotMap.MULTIPLYER;
+      xForward = Robot.oi.GetXboxController().getY() * RobotMap.MULTIPLIER;
+      zRotation = Robot.oi.GetXboxController().getX() * RobotMap.MULTIPLIER;
       Robot.drivetrain.TankDriveSet(xForward, zRotation);
     }
 
