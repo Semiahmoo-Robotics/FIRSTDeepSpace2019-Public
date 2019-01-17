@@ -52,7 +52,7 @@ public final class Config {
     if (!file.exists()) {
       System.err.println("Warning: The configuration file for " + file.getAbsolutePath() + " does not exist. Resorting to defaults and saving that.");
       try {
-        T instance = clazz.newInstance();
+        T instance = clazz.getDeclaredConstructor().newInstance();
         saveConfig(file, instance);
         return instance;
       } catch (Exception e) {
