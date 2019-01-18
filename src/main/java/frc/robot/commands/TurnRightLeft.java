@@ -12,33 +12,57 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 public class TurnRightLeft extends Command {
+  
+  /**
+   * The difference of angle between the initial angle and the final angle.
+   * It is the desired angle of the robot.
+   */
   private final double difAngle;
+
+  /**
+   * The initial angle the robot was before it starts to rotate.
+   */
   private double initialAngle;
+
+  /**
+   * The current angle of the robot while the robot rotates.
+   * It is updated periodically in the execute() method.
+   */
   private double currentAngle;
+
+  /**
+   * initialAngle + difAngle.
+   * The angle the robot will be at when the command is finished.
+   */
   private double finalAngle;
 
+  /**
+   * The speed in which the robot will turn at
+   */
   private double speed;
 
+  /**
+   * choose if the robot will turn right or left, depending on the difAngle variable's sign.
+   */
   private boolean turnRight;
-  private static final double GYRO_CORRECTION = 0.0275;
 
+  public TurnRightLeft(double difAngle, double speed) {
 
-  public TurnRightLeft(double angle, double speed) {
-    // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
     requires(Robot.drivetrain);
-    difAngle = angle;
+    this.difAngle = difAngle;
     this.speed = speed;
   }
 
-  // Called just before this Command runs the first time
+  // Called just before this Command runs the first time.
   @Override
   protected void initialize() {
+
     initialAngle = Robot.drivetrain.getGyro().getAngle();
     finalAngle = difAngle + initialAngle;
-    if(difAngle > 0) {
-      turnRight = true;
-    } else turnRight = false;
+
+    if(difAngle > 0) turnRight = true;
+    else turnRight = false;
+
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -61,14 +85,14 @@ public class TurnRightLeft extends Command {
     boolean finished = false;
 
     if(turnRight) {
-      if(currentAngle >= finalAngle ) {
+      if(currentAngle >= finalAngle) {
         finished = true;
-      }else finished = false;
+      } else finished = false;
     }
     if(!turnRight) {
       if(currentAngle <= finalAngle) {
         finished = true;
-      }else finished = false;
+      } else finished = false;
     }
     return finished;
     

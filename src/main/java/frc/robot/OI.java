@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.*;
 
 /**
@@ -31,7 +32,7 @@ public class OI {
 
 		//Write code here to run commands for button press events
 		//abutton = new JoystickButton(m_XBoxController, 1);  //Button A = 1
-		//abutton.whenPressed(new DriveForward(10, 0.5, 3));
+		//abutton.whenPressed(new DriveForward(10, 0.5, 1));
 	}
 	
 

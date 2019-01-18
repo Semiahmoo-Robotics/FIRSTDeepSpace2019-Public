@@ -35,7 +35,7 @@ public class RobotMap {
   public static final int LOGITECH_PORT = 1;
 
   //when boost is Engaged, max output is occured. otherwise, the MULTIPLIER takes effect
-  public static final double MULTIPLIER = 0.7;
+  public static final double MULTIPLIER = 0.75;
 
 
   //Choose tank or arcade

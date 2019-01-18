@@ -60,6 +60,7 @@ public class Drivetrain extends Subsystem {
 
     initializeEncoder(m_LEncoder);
     initializeEncoder(m_REncoder);
+    m_Gyro.reset();
 
   }
 
@@ -70,9 +71,9 @@ public class Drivetrain extends Subsystem {
   @Override
   public void initDefaultCommand() {
     if (RobotMap.DefaultArcadeDrive) {
-      setDefaultCommand(new ArcadeDrive());
-    } else {
       setDefaultCommand(new TankDrive());
+    } else {
+      setDefaultCommand(new ArcadeDrive());
     }
   }
 

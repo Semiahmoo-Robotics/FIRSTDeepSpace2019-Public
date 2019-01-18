@@ -12,7 +12,8 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 
 /**
- * TODO Add your docs here.
+ * The intake motors for the previous APOLO robot in 2018 FIRST POWER UP Season.
+ * This subsystem is only for the test robot.
  */
 public class Intake extends Subsystem {
 
