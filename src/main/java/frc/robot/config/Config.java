@@ -52,7 +52,7 @@ public final class Config {
     if (!file.exists()) {
       System.err.println("Warning: The configuration file for " + file.getAbsolutePath() + " does not exist. Resorting to defaults and saving that.");
       try {
-        T instance = clazz.newInstance();
+        T instance = clazz.getDeclaredConstructor().newInstance();
         saveConfig(file, instance);
         return instance;
       } catch (Exception e) {
@@ -60,7 +60,7 @@ public final class Config {
       }
     }
 
-    try (final FileInputStream fis = new FileInputStream(file)) {
+    try (final var fis = new FileInputStream(file)) {
       return gson.fromJson(new InputStreamReader(fis), clazz);
     } catch (Exception e) {
       e.printStackTrace();
@@ -75,8 +75,7 @@ public final class Config {
     try {
       new File(file, "/..").mkdirs();
       file.createNewFile();
-
-      try (final FileOutputStream fos = new FileOutputStream(file); final OutputStreamWriter writer = new OutputStreamWriter(fos)) {
+      try (final var fos = new FileOutputStream(file); final var writer = new OutputStreamWriter(fos)) {
         writer.write(gson.toJson(configObj));
       }
     } catch (IOException e) {
