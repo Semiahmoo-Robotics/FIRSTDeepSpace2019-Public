@@ -44,4 +44,43 @@ public final class Utils {
         return Math.min(max, Math.max(min, value));
     }
 
+    /**
+     * Reverses the sign of an integer
+     * @param num The number to reverse
+     */
+     public static int reverseSign(int num) {
+         return -num;
+     }
+
+     /**
+     * Reverses the sign of an integer if boolean is true
+     * @param num The number to reverse
+     * @param reverse If the number needs to be reversed or not
+     */
+    public static int reverseSign(int num, boolean reverse) {
+        if(reverse) {
+            return -num;
+        }
+        return num;
+    }
+
+     /**
+     * Reverses the sign of a double
+     * @param num The number to reverse
+     */
+    public static double reverseSign(double num) {
+        return -num;
+    }
+
+    /**
+     * Reverses the sign of a double if boolean is true
+     * @param num The number to reverse
+     * @param reverse If the number needs to be reversed or not
+     */
+    public static double reverseSign(double num, boolean reverse) {
+        if(reverse) {
+            return -num;
+        }
+        return num;
+    }
 }

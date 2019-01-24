@@ -10,13 +10,19 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.utils.DashboardKeys;
+import frc.robot.utils.Utils;
+import frc.robot.subsystems.Drivetrain;
 
 public class MecanumDrive extends Command {
 
   private double left;
+  private XboxController controller = Robot.oi.GetXboxController();
+  private Drivetrain drivetrain = Robot.drivetrain;
+  private boolean reverse = false;
 
   public MecanumDrive() {
     requires(Robot.drivetrain);
@@ -33,17 +39,22 @@ public class MecanumDrive extends Command {
   @Override
   protected void execute() {
     
-    if (Robot.oi.GetXboxController().getTriggerAxis(Hand.kRight) >= 0.7){
-      Robot.drivetrain.setBoostEngaged(true);
-
-      Robot.drivetrain.MecanumDriveSet(Robot.oi.GetXboxController());
-
+    if (controller.getBButtonPressed()){ //B button
+      drivetrain.setBoostEngaged(true); //Boost on
     } else {
-      Robot.drivetrain.setBoostEngaged(false);
-
-      left = Robot.oi.GetXboxController().getX(Hand.kLeft);
-      Robot.drivetrain.MecanumDriveSet(left);
+      Robot.drivetrain.setBoostEngaged(false); //Boost off
     }
+
+    if(controller.getTriggerAxis(Hand.kLeft) >= 0.7) {//Left trigger
+      drivetrain.TankDriveSet(-1.0, 1.0); //Turn left
+    }else if(controller.getTriggerAxis(Hand.kRight) >= 0.7) {//Right trigger
+      drivetrain.TankDriveSet(1.0, -1.0); //Turn right
+    }else { //No trigger
+      double forward = Utils.reverseSign(controller.getY(Hand.kLeft), reverse);
+      drivetrain.TankDriveSet(forward, forward); // Drive forward on left joystick's Y ammount
+    }
+    left = Utils.reverseSign(controller.getX(Hand.kLeft), reverse);
+    Robot.drivetrain.MecanumDriveSet(left); //Drive sideways based on left joystick's X amount
 
   }
 

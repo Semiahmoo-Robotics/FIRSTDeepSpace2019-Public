@@ -81,24 +81,22 @@ public class Drivetrain extends Subsystem {
     }
   }
 
-
 /**
-   * Mecanum drive using one value
+   * Mecanum sideways drive using one value
    * 
-   * @param left Left joystick/drive value
+   * @param left Left joystick X value/sideways drive value
    */
   public void MecanumDriveSet(Double left){
     m_MidDrive.set(left);
   }
 
 /**
-   * Mecanum drive using xBoxController instance
+   * Mecanum sideways drive using xBoxController instance
    * 
    * @param controller xBoxController to use as input.
    */
   public void MecanumDriveSet(XboxController controller){
     m_MidDrive.set(controller.getX(Hand.kLeft));
-   
   }
 
 
@@ -119,7 +117,6 @@ public class Drivetrain extends Subsystem {
    */
   public void TankDriveSet(XboxController controller){
     m_Chassis.tankDrive(controller.getY(Hand.kLeft), controller.getY(Hand.kRight));
-   
   }
 
   /**
