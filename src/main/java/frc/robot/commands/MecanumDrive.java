@@ -20,9 +20,9 @@ import frc.robot.subsystems.Drivetrain;
 public class MecanumDrive extends Command {
 
   private double left;
+  private double forward;
   private XboxController controller = Robot.oi.GetXboxController();
   private Drivetrain drivetrain = Robot.drivetrain;
-  private boolean reverse = false;
 
   public MecanumDrive() {
     requires(Robot.drivetrain);
@@ -50,10 +50,10 @@ public class MecanumDrive extends Command {
     }else if(controller.getTriggerAxis(Hand.kRight) >= 0.7) {//Right trigger
       drivetrain.TankDriveSet(1.0, -1.0); //Turn right
     }else { //No trigger
-      double forward = Utils.reverseSign(controller.getY(Hand.kLeft), reverse);
+      forward = controller.getY(Hand.kLeft);
       drivetrain.TankDriveSet(forward, forward); // Drive forward on left joystick's Y ammount
     }
-    left = Utils.reverseSign(controller.getX(Hand.kLeft), reverse);
+    left = controller.getX(Hand.kLeft);
     Robot.drivetrain.MecanumDriveSet(left); //Drive sideways based on left joystick's X amount
 
   }

@@ -49,8 +49,9 @@ public class Drivetrain extends Subsystem {
     m_LeftDrive.setInverted(true);
     m_RightDrive = new Spark(RobotMap.RIGHT_DRIVE_PORT);
     m_RightDrive.setInverted(true);
-    m_Chassis = new DifferentialDrive(m_LeftDrive, m_RightDrive);
     m_MidDrive = new Spark(RobotMap.MID_DRIVE_PORT);
+    m_MidDrive.setInverted(true);
+    m_Chassis = new DifferentialDrive(m_LeftDrive, m_RightDrive);
 
     m_REncoder = new Encoder(RobotMap.R_ENCODER_PORT_CHA, RobotMap.R_ENCODER_PORT_CHB, false, EncodingType.k4X);
     m_LEncoder = new Encoder(RobotMap.L_ENCODER_PORT_CHA, RobotMap.L_ENCODER_PORT_CHB, false, EncodingType.k4X);
