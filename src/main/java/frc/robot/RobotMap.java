@@ -29,6 +29,9 @@ public class RobotMap {
   public static final int L_ENCODER_PORT_CHA = 4;
   public static final int L_ENCODER_PORT_CHB = 5;
 
+  public static final int PCM_MODULE_NUM = 0;
+  public static final int PISTON1_FORWARD_CHN = 0;
+  public static final int PISTON1_REVERSE_CHN = 1;
 
   //Controller ports
   public static final int XBOX_PORT = 0;

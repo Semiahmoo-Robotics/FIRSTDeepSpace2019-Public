@@ -12,10 +12,9 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.commands.DriveForward;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Intake;
-import frc.robot.utils.CameraSetup;
+import frc.robot.subsystems.CargoClaw;
 
 /**
  * Robot java source code for Team 6458 Semiahmoo Robotics
@@ -28,6 +27,7 @@ public class Robot extends TimedRobot {
   public static OI oi;
   public static Drivetrain drivetrain;
   public static Intake intake;
+  public static CargoClaw cargoClaw;
 
   SendableChooser<Command> autoChooser;
 
@@ -40,6 +40,7 @@ public class Robot extends TimedRobot {
     //Create Subsystem Objects (Initialization)
     drivetrain = new Drivetrain();
     intake = new Intake();
+    cargoClaw = new CargoClaw();
     
     oi = new OI();
     
@@ -48,14 +49,14 @@ public class Robot extends TimedRobot {
     SmartDashboard.putData(drivetrain);
 
     //TODO Set Default Auto
-    autoChooser = new SendableChooser<>();
-    autoChooser.setDefaultOption("Default - Drive forward", new DriveForward(10, 0.5, 5));
-    //autoChooser.addOption("My Auto", new MyAutoCommand());
+    //autoChooser = new SendableChooser<>();
+    //autoChooser.setDefaultOption("Default - Drive forward", new DriveForward(10, 0.5, 5));
+    //autoChooser.addOption("My Auto", new TurnRightLeft(50, 0.6));
     //SmartDashboard.putData("Auto mode", autoChooser);
 
     //Tank or Arcade chooser in smartdashboard / shuffleboard
     RobotMap.DefaultArcadeDrive = SmartDashboard.getBoolean("Use Arcade Drive?", SmartDashboard.putBoolean("Use Arcade Drive?", false));
-    CameraSetup.setupDefaultCamera();
+    //CameraSetup.setupDefaultCamera();
   }
 
   /**
@@ -70,6 +71,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void disabledInit() {
+    drivetrain.getGyro().reset();
   }
 
     /**

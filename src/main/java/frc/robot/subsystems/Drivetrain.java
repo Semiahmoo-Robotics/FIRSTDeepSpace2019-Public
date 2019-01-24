@@ -71,9 +71,9 @@ public class Drivetrain extends Subsystem {
   @Override
   public void initDefaultCommand() {
     if (RobotMap.DefaultArcadeDrive) {
-      setDefaultCommand(new TankDrive());
-    } else {
       setDefaultCommand(new ArcadeDrive());
+    } else {
+      setDefaultCommand(new TankDrive());
     }
   }
 
