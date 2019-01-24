@@ -41,7 +41,7 @@ public class MecanumDrive extends Command {
     } else {
       Robot.drivetrain.setBoostEngaged(false);
 
-      left = Robot.oi.GetXboxController().getX(Hand.kLeft)
+      left = Robot.oi.GetXboxController().getX(Hand.kLeft);
       Robot.drivetrain.MecanumDriveSet(left);
     }
 
@@ -56,3 +56,4 @@ public class MecanumDrive extends Command {
   protected void end() {
     Robot.drivetrain.stop();
   }
+}
