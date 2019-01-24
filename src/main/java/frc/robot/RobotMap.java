@@ -22,7 +22,7 @@ public class RobotMap {
   public static final int RIGHT_DRIVE_PORT = 0;
   public static final int LEFT_INTAKE_PORT = 2;
   public static final int RIGHT_INTAKE_PORT = 3;
-
+  public static final int MID_DRIVE_PORT = 4;
    //TODO Later finalize robotmap ports
   public static final int R_ENCODER_PORT_CHA = 2;
   public static final int R_ENCODER_PORT_CHB = 3;
@@ -36,6 +36,7 @@ public class RobotMap {
 
   //when boost is Engaged, max output is occured. otherwise, the MULTIPLIER takes effect
   public static final double MULTIPLIER = 0.75;
+
 
 
   //Choose tank or arcade

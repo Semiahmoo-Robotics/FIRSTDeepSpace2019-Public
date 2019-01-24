@@ -28,6 +28,7 @@ public class Drivetrain extends Subsystem {
 
   private final Spark m_LeftDrive;
   private final Spark m_RightDrive;
+  private final Spark m_MidDrive;
 
   private final DifferentialDrive m_Chassis;
 
@@ -35,7 +36,7 @@ public class Drivetrain extends Subsystem {
   private final Encoder m_LEncoder;
   private final ADXRS450_Gyro m_Gyro;
 
-  //boost mode - When boostEngaged is true, it applies RobotMap.MULTIPLYER to drivebase speed.
+    //boost mode
   public boolean boostEngaged = false;
 
   /**
@@ -49,18 +50,21 @@ public class Drivetrain extends Subsystem {
     m_RightDrive = new Spark(RobotMap.RIGHT_DRIVE_PORT);
     m_RightDrive.setInverted(true);
     m_Chassis = new DifferentialDrive(m_LeftDrive, m_RightDrive);
-    
-    m_REncoder = new Encoder(RobotMap.R_ENCODER_PORT_CHA, RobotMap.R_ENCODER_PORT_CHB, false, EncodingType.k4X); /* CIMcoders */
-    m_LEncoder = new Encoder(RobotMap.L_ENCODER_PORT_CHA, RobotMap.L_ENCODER_PORT_CHB, false, EncodingType.k4X); /* CIMcoders */
+    m_MidDrive = new Spark(RobotMap.MID_DRIVE_PORT);
+
+    m_REncoder = new Encoder(RobotMap.R_ENCODER_PORT_CHA, RobotMap.R_ENCODER_PORT_CHB, false, EncodingType.k4X);
+    m_LEncoder = new Encoder(RobotMap.L_ENCODER_PORT_CHA, RobotMap.L_ENCODER_PORT_CHB, false, EncodingType.k4X);
     m_Gyro = new ADXRS450_Gyro(/* No port. This default constructor uses the built-in port where the gyro sits. */);
 
 
     //Stops motor if the robot loses connection to the driver station.
     m_Chassis.setSafetyEnabled(true);
 
+    //For now, reduce max output for safety. Change to 1 later.
+    //m_Chassis.setMaxOutput(0.5);
+
     initializeEncoder(m_LEncoder);
     initializeEncoder(m_REncoder);
-    m_Gyro.reset();
 
   }
 
@@ -71,11 +75,32 @@ public class Drivetrain extends Subsystem {
   @Override
   public void initDefaultCommand() {
     if (RobotMap.DefaultArcadeDrive) {
-      setDefaultCommand(new TankDrive());
-    } else {
       setDefaultCommand(new ArcadeDrive());
+    } else {
+      setDefaultCommand(new TankDrive());
     }
   }
+
+
+/**
+   * Mecanum drive using one value
+   * 
+   * @param left Left joystick/drive value
+   */
+  public void MecanumDriveSet(Double left){
+    m_MidDrive.set(left);
+  }
+
+/**
+   * Mecanum drive using xBoxController instance
+   * 
+   * @param controller xBoxController to use as input.
+   */
+  public void MecanumDriveSet(XboxController controller){
+    m_MidDrive.set(controller.getX(Hand.kLeft));
+   
+  }
+
 
   /**
    * Tank drive using two values individualy
@@ -117,59 +142,30 @@ public class Drivetrain extends Subsystem {
   
   }
 
-  /**
-   * gets the m_Gyro instance.
-   * @return m_Gyro
-   */
   public ADXRS450_Gyro getGyro(){
     return m_Gyro;
   }
 
-  /**
-   * gets the m_LEncoder instance.
-   * @return m_LEncoder
-   */
   public Encoder getLEncoder(){
     return m_LEncoder;
   }
 
-  /**
-   * gets the m_REncoder instance.
-   * @return m_REncoder
-   */
   public Encoder getREncoder(){
     return m_REncoder;
   }
-  
-  /**
-   * gets the m_LeftDrive spark instance.
-   * @return m_LeftDrive
-   */
+
   public Spark getLSpark(){
     return m_LeftDrive;
   }
 
-  
-  /**
-   * gets the m_RightDrive spark instance.
-   * @return m_RightDrive
-   */
   public Spark getRSpark(){
     return m_RightDrive;
   }
 
-  /**
-   * Sets boostEngaged to parameter's value
-   * @param boostEngaged The value you want to set boostEngaged to
-   */
   public void setBoostEngaged(boolean boostEngaged){
     this.boostEngaged = boostEngaged;
   }
 
-  /**
-   * Gets current this.boostEngaged
-   * @return The value this.boostEngaged is set to.
-   */
   public boolean getBoostEngaged(){
     return boostEngaged;
   }
@@ -185,11 +181,7 @@ public class Drivetrain extends Subsystem {
    
   }
   
-  /** 
-   * Initialize the encoders by setting various needs.
-   * Run this method when encoder instances are created.
-   * @param encoder the encoder which needs to be initialized
-  */
+
   private void initializeEncoder(Encoder encoder) {
     encoder.setMaxPeriod(0.1); //0.1 sec
     encoder.setMinRate(0.01); // 0.01 m/s
@@ -204,6 +196,7 @@ public class Drivetrain extends Subsystem {
   public void stop(){
     m_Chassis.tankDrive(0, 0);
     m_Chassis.arcadeDrive(0, 0);
+    m_MidDrive.set(0);
   }
 
   public double encoderPresets() {
@@ -220,5 +213,6 @@ public class Drivetrain extends Subsystem {
     double distancePerPulse = distancePerRevolution / pulsesPerRevolution;
     return distancePerPulse;
   }
+
 
 }

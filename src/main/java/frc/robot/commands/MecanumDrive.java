@@ -7,38 +7,52 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.Robot;
+import frc.robot.RobotMap;
+import frc.robot.utils.DashboardKeys;
 
 public class MecanumDrive extends Command {
+
+  private double left;
+
   public MecanumDrive() {
-    // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
+    requires(Robot.drivetrain);
   }
 
-  // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+
+    Robot.drivetrain.getLEncoder().reset();
+    Robot.drivetrain.getREncoder().reset();
+    SmartDashboard.putNumber(DashboardKeys.INIT_HEADING, Robot.drivetrain.getGyro().getAngle());
   }
 
-  // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    
+    if (Robot.oi.GetXboxController().getTriggerAxis(Hand.kRight) >= 0.7){
+      Robot.drivetrain.setBoostEngaged(true);
+
+      Robot.drivetrain.MecanumDriveSet(Robot.oi.GetXboxController());
+
+    } else {
+      Robot.drivetrain.setBoostEngaged(false);
+
+      left = Robot.oi.GetXboxController().getX(Hand.kLeft)
+      Robot.drivetrain.MecanumDriveSet(left);
+    }
+
   }
 
-  // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
     return false;
   }
 
-  // Called once after isFinished returns true
   @Override
   protected void end() {
+    Robot.drivetrain.stop();
   }
-
-  // Called when another command which requires one or more of the same
-  // subsystems is scheduled to run
-  @Override
-  protected void interrupted() {
-  }
-}
