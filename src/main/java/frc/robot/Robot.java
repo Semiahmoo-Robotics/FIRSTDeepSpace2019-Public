@@ -14,7 +14,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.Pneumatics;
 import frc.robot.subsystems.CargoClaw;
+import frc.robot.subsystems.ClimbPiston;
 
 /**
  * Robot java source code for Team 6458 Semiahmoo Robotics
@@ -28,6 +30,8 @@ public class Robot extends TimedRobot {
   public static Drivetrain drivetrain;
   public static Intake intake;
   public static CargoClaw cargoClaw;
+  public static ClimbPiston climbPiston;
+  public static Pneumatics pneumatics;
 
   SendableChooser<Command> autoChooser;
 
@@ -41,12 +45,17 @@ public class Robot extends TimedRobot {
     drivetrain = new Drivetrain();
     intake = new Intake();
     cargoClaw = new CargoClaw();
+    pneumatics = new Pneumatics();
+    climbPiston = new ClimbPiston();
     
     oi = new OI();
     
     
     //put data to smartdashboard
     SmartDashboard.putData(drivetrain);
+    SmartDashboard.putData(cargoClaw);
+    SmartDashboard.putData(pneumatics);
+    SmartDashboard.putData(climbPiston);
 
     //TODO Set Default Auto
     //autoChooser = new SendableChooser<>();
@@ -135,11 +144,13 @@ public class Robot extends TimedRobot {
    */
   public void log() {
     SmartDashboard.putNumber("Gyro value", drivetrain.getGyro().getAngle());
-    SmartDashboard.putNumber("Left Encoder Value", drivetrain.getLEncoder().getDistance());
-    SmartDashboard.putNumber("Right Encoder Value", drivetrain.getREncoder().getDistance());
-    SmartDashboard.putNumber("Left Motor Speed", drivetrain.getLSpark().getSpeed());
-    SmartDashboard.putNumber("Right Motor Speed", drivetrain.getRSpark().getSpeed());
+    SmartDashboard.putNumber("Left Encoder", drivetrain.getLEncoder().getDistance());
+    SmartDashboard.putNumber("Right Encoder", drivetrain.getREncoder().getDistance());
+    SmartDashboard.putNumber("Left Motor", drivetrain.getLSpark().getSpeed());
+    SmartDashboard.putNumber("Right Motor", drivetrain.getRSpark().getSpeed());
     SmartDashboard.putBoolean("Boost Engaged", drivetrain.getBoostEngaged());
+    SmartDashboard.putBoolean("Pressure Switch Value", pneumatics.getPressureSwitchValue());
+    SmartDashboard.putBoolean("Enabled?", pneumatics.getEnabled());
   }
 
 }

@@ -24,6 +24,8 @@ public class OI {
   public static Joystick supportStick;
   public static Button abutton;
   public static Button bbutton;
+  public static Button xbutton;
+  public static Button ybutton;
 
 	/**
 	 * Create a new OI and 
@@ -37,6 +39,12 @@ public class OI {
 
 		bbutton = new JoystickButton(m_XBoxController, 2);	//Button B = 2
 		bbutton.whenPressed(new RetractSolenoid());
+
+		xbutton = new JoystickButton(m_XBoxController, 3);	//Button X = 3
+		xbutton.whenPressed(new ExtendClimb());
+
+		ybutton = new JoystickButton(m_XBoxController, 4);	//Button Y = 4
+		ybutton.whenPressed(new RetractClimb());
 	}
 	
 

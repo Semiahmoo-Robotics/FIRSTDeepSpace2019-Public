@@ -30,8 +30,10 @@ public class RobotMap {
   public static final int L_ENCODER_PORT_CHB = 5;
 
   public static final int PCM_MODULE_NUM = 0;
-  public static final int PISTON1_FORWARD_CHN = 0;
-  public static final int PISTON1_REVERSE_CHN = 1;
+  public static final int CLAW_FORWARD_CHN = 0;
+  public static final int CLAW_REVERSE_CHN = 1;
+  public static final int CLIMB_FORWARD_CHN = 4;
+  public static final int CLIMB_REVERSE_CHN = 5;
 
   //Controller ports
   public static final int XBOX_PORT = 0;

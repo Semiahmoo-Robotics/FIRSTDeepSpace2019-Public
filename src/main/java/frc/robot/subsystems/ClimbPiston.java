@@ -13,17 +13,16 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 
 /**
- * This subsystem controls the Cargo Claw piston.
- * It uses one double solenoid connected to the pcm.
+ * Add your docs here.
  */
-public class CargoClaw extends Subsystem {
- 
-  private final DoubleSolenoid m_clawPiston;
+public class ClimbPiston extends Subsystem {
 
-  public CargoClaw() {
-    m_clawPiston = new DoubleSolenoid(RobotMap.PCM_MODULE_NUM, RobotMap.CLAW_FORWARD_CHN, RobotMap.CLAW_REVERSE_CHN);
+  private final DoubleSolenoid m_climbPiston;
+
+
+  public ClimbPiston() {
+    m_climbPiston = new DoubleSolenoid(RobotMap.PCM_MODULE_NUM, RobotMap.CLIMB_FORWARD_CHN, RobotMap.CLIMB_REVERSE_CHN);
   }
-
 
   /**
    * No default command.
@@ -33,24 +32,25 @@ public class CargoClaw extends Subsystem {
   }
 
   /**
-   * Extend claw solenoid.
+   * Extend climb solenoid.
    */
   public void extend() {
-    m_clawPiston.set(Value.kForward);
+    m_climbPiston.set(Value.kForward);
   }
 
   /**
-   * Retract claw solenoid.
+   * retract climb solenoid.
    */
   public void retract() {
-    m_clawPiston.set(Value.kReverse);
+    m_climbPiston.set(Value.kReverse);
   }
 
   /**
-   * Retract claw solenoid.
+   * turn off climb solenoid.
    */
   public void off() {
-    m_clawPiston.set(Value.kOff);
+    m_climbPiston.set(Value.kOff);
   }
+
 
 }
