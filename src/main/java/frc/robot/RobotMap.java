@@ -23,7 +23,6 @@ public class RobotMap {
   public static final int LEFT_INTAKE_PORT = 2;
   public static final int RIGHT_INTAKE_PORT = 3;
 
-   //TODO Later finalize robotmap ports
   public static final int R_ENCODER_PORT_CHA = 2;
   public static final int R_ENCODER_PORT_CHB = 3;
   public static final int L_ENCODER_PORT_CHA = 4;
@@ -32,8 +31,10 @@ public class RobotMap {
   public static final int PCM_MODULE_NUM = 0;
   public static final int CLAW_FORWARD_CHN = 0;
   public static final int CLAW_REVERSE_CHN = 1;
-  public static final int CLIMB_FORWARD_CHN = 4;
-  public static final int CLIMB_REVERSE_CHN = 5;
+  public static final int LCLIMB_FORWARD_CHN = 4;
+  public static final int LCLIMB_REVERSE_CHN = 5;
+  public static final int RCLIMB_FORWARD_CHN = 6;
+  public static final int RCLIMB_REVERSE_CHN = 7;
 
   //Controller ports
   public static final int XBOX_PORT = 0;

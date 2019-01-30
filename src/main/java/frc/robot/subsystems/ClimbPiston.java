@@ -17,11 +17,13 @@ import frc.robot.RobotMap;
  */
 public class ClimbPiston extends Subsystem {
 
-  private final DoubleSolenoid m_climbPiston;
+  private final DoubleSolenoid m_LclimbPiston;
+  private final DoubleSolenoid m_RclimbPiston;
 
 
   public ClimbPiston() {
-    m_climbPiston = new DoubleSolenoid(RobotMap.PCM_MODULE_NUM, RobotMap.CLIMB_FORWARD_CHN, RobotMap.CLIMB_REVERSE_CHN);
+    m_LclimbPiston = new DoubleSolenoid(RobotMap.PCM_MODULE_NUM, RobotMap.LCLIMB_FORWARD_CHN, RobotMap.LCLIMB_REVERSE_CHN);
+    m_RclimbPiston = new DoubleSolenoid(RobotMap.PCM_MODULE_NUM, RobotMap.RCLIMB_FORWARD_CHN, RobotMap.RCLIMB_REVERSE_CHN);
   }
 
   /**
@@ -35,21 +37,27 @@ public class ClimbPiston extends Subsystem {
    * Extend climb solenoid.
    */
   public void extend() {
-    m_climbPiston.set(Value.kForward);
+    m_LclimbPiston.set(Value.kForward);
+    m_RclimbPiston.set(Value.kForward);
+
   }
 
   /**
    * retract climb solenoid.
    */
   public void retract() {
-    m_climbPiston.set(Value.kReverse);
+    m_LclimbPiston.set(Value.kReverse);
+    m_RclimbPiston.set(Value.kForward);
+
   }
 
   /**
    * turn off climb solenoid.
    */
   public void off() {
-    m_climbPiston.set(Value.kOff);
+    m_LclimbPiston.set(Value.kOff);
+    m_RclimbPiston.set(Value.kForward);
+
   }
 
 
