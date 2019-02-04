@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import frc.robot.RobotMap;
 import frc.robot.commands.ArcadeDrive;
 import frc.robot.commands.TankDrive;
@@ -38,9 +39,14 @@ public class Drivetrain extends Subsystem {
   private final ADXRS450_Gyro m_gyro;
 
   private NetworkTableEntry m_maxspeed;
+  private NetworkTableEntry m_boostMultiplyer;
+  private NetworkTableEntry m_ArcadeEnabled;
 
   //boost mode - When boostEngaged is true, it applies RobotMap.MULTIPLYER to drivebase speed.
   public boolean boostEngaged = false;
+
+  //The multiplyer to reduce speed before boost.
+  public double boostmultiplyer = 0.75;
 
   /**
    * Constructor - Create a new DriveTrain class.
@@ -66,6 +72,9 @@ public class Drivetrain extends Subsystem {
     initializeEncoder(m_rEncoder);
     m_gyro.reset();
 
+    m_maxspeed = Shuffleboard.getTab("Configuration").add("Max Speed", 1.0).getEntry();
+    m_boostMultiplyer = Shuffleboard.getTab("Configuration").add("Boost Multiplyer", 0.75).getEntry();
+    m_ArcadeEnabled = Shuffleboard.getTab("Configuration").add("Arcade Drive?", false).getEntry();
   }
 
   /**
@@ -178,6 +187,10 @@ public class Drivetrain extends Subsystem {
     return boostEngaged;
   }
 
+  public double getBoostMultiplyer() {
+    return m_boostMultiplyer.getDouble(0.75);
+  }
+
   /** 
    * Curvature Drive using two values
    * 
@@ -189,6 +202,18 @@ public class Drivetrain extends Subsystem {
    
   }
   
+  /**
+   * Sets the maximum speed of the drivetrain using the value in the
+   * Shuffleboard. This is done by a network table.
+   */
+  public void SetMaxspeed() {
+    m_chassis.setMaxOutput(m_maxspeed.getDouble(1.0));
+  }
+
+  public boolean getIsArcade() {
+    return m_ArcadeEnabled.getBoolean(false);
+  }
+
   /** 
    * Initialize the encoders by setting various needs.
    * Run this method when encoder instances are created.

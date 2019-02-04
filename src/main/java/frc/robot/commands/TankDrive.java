@@ -26,8 +26,6 @@ public class TankDrive extends Command {
   @Override
   protected void initialize() {
 
-    Robot.drivetrain.getLEncoder().reset();
-    Robot.drivetrain.getREncoder().reset();
     SmartDashboard.putNumber(DashboardKeys.INIT_HEADING, Robot.drivetrain.getGyro().getAngle());
   }
 
