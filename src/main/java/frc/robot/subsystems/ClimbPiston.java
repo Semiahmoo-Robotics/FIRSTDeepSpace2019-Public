@@ -10,11 +10,11 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.command.WaitCommand;
 import frc.robot.RobotMap;
 
 /**
- * Add your docs here.
+ * This subsystem controls the Climb pneumatics piston.
+ * It uses two double solenoid connected to the pcm.
  */
 public class ClimbPiston extends Subsystem {
 

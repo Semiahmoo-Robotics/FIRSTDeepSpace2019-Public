@@ -28,7 +28,6 @@ public class Intake extends Subsystem {
 
   }
 
-
   public void SetIntake() {
     m_LeftIntake.set(0.5);
     m_RightIntake.set(0.5);

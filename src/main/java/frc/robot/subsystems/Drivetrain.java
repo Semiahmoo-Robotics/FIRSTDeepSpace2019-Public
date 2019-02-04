@@ -20,10 +20,11 @@ import frc.robot.commands.ArcadeDrive;
 import frc.robot.commands.TankDrive;
 
 /**
- * DriveTrain chassis subsystem code.
- * Differential drive with 6 wheels, 2 OR 4 motors
+ * DriveTrain chassis subsystem.
+ * Differential (Tank) drive with 6 wheels.
+ * 4 motor controlers wired to 2 pwm roborio ports.
+ * 2 cimCoders (encoders) wired to the roborio.
  */
-
 public class Drivetrain extends Subsystem {
 
   private final Spark m_LeftDrive;
