@@ -18,9 +18,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import frc.robot.RobotMap;
-import frc.robot.commands.ArcadeDrive;
 import frc.robot.commands.ArcadeOrTankDrive;
-import frc.robot.commands.TankDrive;
 
 /**
  * DriveTrain chassis subsystem.
@@ -39,11 +37,16 @@ public class Drivetrain extends Subsystem {
   private final Encoder m_lEncoder;
   private final ADXRS450_Gyro m_gyro;
 
+  //Value of the max speed of the drivetrain. Holds a double value.
   private NetworkTableEntry m_maxspeed;
+
+  //Value of the boost multiplyer of the drivetrain. Holds a double value.
   private NetworkTableEntry m_boostMultiplyer;
+
+  //Use arcade drive or tank drive. Holds a boolean value.
   private NetworkTableEntry m_ArcadeEnabled;
 
-  //boost mode - When boostEngaged is true, it applies RobotMap.MULTIPLYER to drivebase speed.
+  //boost mode - When boostEngaged is true, it applies the boostmultiplyer to drivebase speed.
   public boolean boostEngaged = false;
 
   //The multiplyer to reduce speed before boost.
@@ -73,6 +76,7 @@ public class Drivetrain extends Subsystem {
     initializeEncoder(m_rEncoder);
     m_gyro.reset();
 
+    //Get all of the networktable values.
     m_maxspeed = Shuffleboard.getTab("Configuration").add("Max Speed", 1.0).getEntry();
     m_boostMultiplyer = Shuffleboard.getTab("Configuration").add("Boost Multiplyer", 0.75).getEntry();
     m_ArcadeEnabled = Shuffleboard.getTab("Configuration").add("Arcade Drive?", false).getEntry();
@@ -104,7 +108,6 @@ public class Drivetrain extends Subsystem {
    */
   public void TankDriveSet(XboxController controller){
     m_chassis.tankDrive(controller.getY(Hand.kLeft), controller.getY(Hand.kRight));
-   
   }
 
   /**
@@ -124,7 +127,16 @@ public class Drivetrain extends Subsystem {
    */
   public void ArcadeDriveSet(XboxController joystick){ 
     m_chassis.arcadeDrive(joystick.getY(), joystick.getX());
-  
+  }
+
+  /** 
+   * Curvature Drive using two values
+   * 
+   * @param speed desired speed of robot
+   * @param rotation desired rotation rate of robot
+  */
+  public void CurvatureDriveSet(double speed, double rotation) {
+    m_chassis.curvatureDrive(speed, rotation, false);
   }
 
   /**
@@ -184,19 +196,12 @@ public class Drivetrain extends Subsystem {
     return boostEngaged;
   }
 
+  /**
+   * Gets the boost multiplyer which was from the shuffleboard.
+   * @return the value of the boost multiplyer.
+   */
   public double getBoostMultiplyer() {
     return m_boostMultiplyer.getDouble(0.75);
-  }
-
-  /** 
-   * Curvature Drive using two values
-   * 
-   * @param speed desired speed of robot
-   * @param rotation desired rotation rate of robot
-  */
-  public void CurvatureDriveSet(double speed, double rotation) {
-    m_chassis.curvatureDrive(speed, rotation, false);
-   
   }
   
   /**
@@ -207,6 +212,9 @@ public class Drivetrain extends Subsystem {
     m_chassis.setMaxOutput(m_maxspeed.getDouble(1.0));
   }
 
+  /**
+   * @return the boolean value of if arcade drive is applied.
+   */
   public boolean getIsArcade() {
     return m_ArcadeEnabled.getBoolean(false);
   }

@@ -34,6 +34,8 @@ public class OI {
 		m_XBoxController = new XboxController(RobotMap.XBOX_PORT);		
 
 		//Write code here to run commands for button press events
+		//Temporary Mappings for pnumatics piston tests.
+		/*
 		abutton = new JoystickButton(m_XBoxController, 1);  //Button A = 1
 		abutton.whenPressed(new ExtendClaw());
 
@@ -45,6 +47,13 @@ public class OI {
 
 		ybutton = new JoystickButton(m_XBoxController, 4);	//Button Y = 4
 		ybutton.whenPressed(new RetractClimb());
+		*/
+
+		SmartDashboard.putData("Extend Climb Piston", new ExtendClimb());
+		SmartDashboard.putData("Retract Climb Piston", new RetractClimb());
+		SmartDashboard.putData("Extend Claw Piston", new ExtendClaw());
+		SmartDashboard.putData("Retract Claw Piston", new RetractClaw());
+
 	}
 	
 
