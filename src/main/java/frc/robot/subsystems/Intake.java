@@ -17,31 +17,31 @@ import frc.robot.RobotMap;
  */
 public class Intake extends Subsystem {
 
-  private final Spark m_LeftIntake;
-  private final Spark m_RightIntake;
+  private final Spark m_lIntake;
+  private final Spark m_rIntake;
 
   public Intake() {
 
-    m_LeftIntake = new Spark(RobotMap.LEFT_INTAKE_PORT);
-    m_RightIntake = new Spark(RobotMap.RIGHT_INTAKE_PORT);
-    m_RightIntake.setInverted(true);
+    m_lIntake = new Spark(RobotMap.L_INTAKE);
+    m_rIntake = new Spark(RobotMap.R_INTAKE);
+    m_rIntake.setInverted(true);
 
   }
 
   public void SetIntake() {
-    m_LeftIntake.set(0.5);
-    m_RightIntake.set(0.5);
+    m_lIntake.set(0.5);
+    m_rIntake.set(0.5);
   } 
 
   public void ReverseSetIntake() {
-    m_LeftIntake.set(-0.5);
-    m_RightIntake.set(-0.5);
+    m_lIntake.set(-0.5);
+    m_rIntake.set(-0.5);
 
   }
 
   public void StopIntake() {
-    m_LeftIntake.set(0);
-    m_RightIntake.set(0);
+    m_lIntake.set(0);
+    m_rIntake.set(0);
   }
 
   @Override

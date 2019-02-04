@@ -18,10 +18,10 @@ import frc.robot.RobotMap;
  */
 public class CargoClaw extends Subsystem {
  
-  private final DoubleSolenoid m_clawPiston;
+  private final DoubleSolenoid m_claw;
 
   public CargoClaw() {
-    m_clawPiston = new DoubleSolenoid(RobotMap.PCM_MODULE_NUM, RobotMap.CLAW_FORWARD_CHN, RobotMap.CLAW_REVERSE_CHN);
+    m_claw = new DoubleSolenoid(RobotMap.PCM_MODULE, RobotMap.CLAW_FORWARD_CHN, RobotMap.CLAW_REVERSE_CHN);
   }
 
 
@@ -36,21 +36,21 @@ public class CargoClaw extends Subsystem {
    * Extend claw solenoid.
    */
   public void extend() {
-    m_clawPiston.set(Value.kForward);
+    m_claw.set(Value.kForward);
   }
 
   /**
    * Retract claw solenoid.
    */
   public void retract() {
-    m_clawPiston.set(Value.kReverse);
+    m_claw.set(Value.kReverse);
   }
 
   /**
    * turn off claw solenoid.
    */
   public void off() {
-    m_clawPiston.set(Value.kOff);
+    m_claw.set(Value.kOff);
   }
 
 }

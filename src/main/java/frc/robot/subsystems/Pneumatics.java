@@ -21,7 +21,7 @@ public class Pneumatics extends Subsystem {
   private final Compressor m_compressor;
   
   public Pneumatics() {
-    m_compressor = new Compressor(RobotMap.PCM_MODULE_NUM);
+    m_compressor = new Compressor(RobotMap.PCM_MODULE);
   }
 
   /**

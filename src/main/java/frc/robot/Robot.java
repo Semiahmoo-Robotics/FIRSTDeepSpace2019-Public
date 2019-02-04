@@ -57,6 +57,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putData(pneumatics);
     SmartDashboard.putData(climbPiston);
 
+ 
     //TODO Set Default Auto
     //autoChooser = new SendableChooser<>();
     //autoChooser.setDefaultOption("Default - Drive forward", new DriveForward(10, 0.5, 5));

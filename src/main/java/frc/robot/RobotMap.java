@@ -18,23 +18,23 @@ package frc.robot;
 public class RobotMap {
 
   //Motor Ports on ROBOrio
-  public static final int LEFT_DRIVE_PORT = 1;
-  public static final int RIGHT_DRIVE_PORT = 0;
-  public static final int LEFT_INTAKE_PORT = 2;
-  public static final int RIGHT_INTAKE_PORT = 3;
+  public static final int L_DRIVE = 1;
+  public static final int R_DRIVE = 0;
+  public static final int L_INTAKE = 2;
+  public static final int R_INTAKE = 3;
 
-  public static final int R_ENCODER_PORT_CHA = 2;
-  public static final int R_ENCODER_PORT_CHB = 3;
-  public static final int L_ENCODER_PORT_CHA = 4;
-  public static final int L_ENCODER_PORT_CHB = 5;
+  public static final int R_ENCODER_CHA = 2;
+  public static final int R_ENCODER_CHB = 3;
+  public static final int L_ENCODER_CHA = 4;
+  public static final int L_ENCODER_CHB = 5;
 
-  public static final int PCM_MODULE_NUM = 0;
+  public static final int PCM_MODULE = 0;
   public static final int CLAW_FORWARD_CHN = 5;
   public static final int CLAW_REVERSE_CHN = 4;
-  public static final int LCLIMB_FORWARD_CHN = 7;
-  public static final int LCLIMB_REVERSE_CHN = 6;
-  public static final int RCLIMB_FORWARD_CHN = 1;
-  public static final int RCLIMB_REVERSE_CHN = 0;
+  public static final int L_CLIMB_FWD = 7;
+  public static final int L_CLIMB_RVSE = 6;
+  public static final int R_CLIMB_FWD = 1;
+  public static final int R_CLIMB_RVSE = 0;
 
   //Controller ports
   public static final int XBOX_PORT = 0;
@@ -42,7 +42,6 @@ public class RobotMap {
 
   //when boost is Engaged, max output is occured. otherwise, the MULTIPLIER takes effect
   public static final double MULTIPLIER = 0.75;
-
 
   //Choose tank or arcade
   public static boolean DefaultArcadeDrive = false;

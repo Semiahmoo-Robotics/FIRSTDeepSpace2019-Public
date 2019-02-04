@@ -18,12 +18,12 @@ import frc.robot.RobotMap;
  */
 public class ClimbPiston extends Subsystem {
 
-  private final DoubleSolenoid m_LclimbPiston;
-  private final DoubleSolenoid m_RclimbPiston;
+  private final DoubleSolenoid m_lClimb;
+  private final DoubleSolenoid m_rClimb;
 
   public ClimbPiston() {
-    m_LclimbPiston = new DoubleSolenoid(RobotMap.PCM_MODULE_NUM, RobotMap.LCLIMB_FORWARD_CHN, RobotMap.LCLIMB_REVERSE_CHN);
-    m_RclimbPiston = new DoubleSolenoid(RobotMap.PCM_MODULE_NUM, RobotMap.RCLIMB_FORWARD_CHN, RobotMap.RCLIMB_REVERSE_CHN);
+    m_lClimb = new DoubleSolenoid(RobotMap.PCM_MODULE, RobotMap.L_CLIMB_FWD, RobotMap.L_CLIMB_RVSE);
+    m_rClimb = new DoubleSolenoid(RobotMap.PCM_MODULE, RobotMap.R_CLIMB_FWD, RobotMap.R_CLIMB_RVSE);
   }
 
   /**
@@ -38,21 +38,21 @@ public class ClimbPiston extends Subsystem {
    * Right piston extends slower than Left piston.
    */
   public void extend() {
-    m_RclimbPiston.set(Value.kForward);
+    m_rClimb.set(Value.kForward);
     try {
       Thread.sleep(10);
     } catch (InterruptedException e) {
       e.printStackTrace();
     }
-    m_LclimbPiston.set(Value.kForward);
+    m_lClimb.set(Value.kForward);
   }
 
   public void extendRight() {
-    m_RclimbPiston.set(Value.kForward);
+    m_rClimb.set(Value.kForward);
   }
 
   public void ExtendLeft() {
-    m_LclimbPiston.set(Value.kForward);
+    m_lClimb.set(Value.kForward);
   }
 
   /**
@@ -60,30 +60,30 @@ public class ClimbPiston extends Subsystem {
    * Right piston retracts faster than left piston.
    */
   public void retract() {
-    m_LclimbPiston.set(Value.kReverse);
+    m_lClimb.set(Value.kReverse);
     try {
       Thread.sleep(10);
     } catch (InterruptedException e) {
       e.printStackTrace();
     }
-    m_RclimbPiston.set(Value.kReverse);
+    m_rClimb.set(Value.kReverse);
 
   }
 
   public void retractRight() {
-    m_RclimbPiston.set(Value.kReverse);
+    m_rClimb.set(Value.kReverse);
   }
 
   public void RetractLeft() {
-    m_LclimbPiston.set(Value.kReverse);
+    m_lClimb.set(Value.kReverse);
   }
 
   /**
    * turn off both climb solenoids.
    */
   public void off() {
-    m_LclimbPiston.set(Value.kOff);
-    m_RclimbPiston.set(Value.kOff);
+    m_lClimb.set(Value.kOff);
+    m_rClimb.set(Value.kOff);
 
   }
 
