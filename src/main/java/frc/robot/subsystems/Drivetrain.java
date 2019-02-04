@@ -19,6 +19,7 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import frc.robot.RobotMap;
 import frc.robot.commands.ArcadeDrive;
+import frc.robot.commands.ArcadeOrTankDrive;
 import frc.robot.commands.TankDrive;
 
 /**
@@ -83,11 +84,7 @@ public class Drivetrain extends Subsystem {
    */
   @Override
   public void initDefaultCommand() {
-    if (RobotMap.DefaultArcadeDrive) {
-      setDefaultCommand(new ArcadeDrive());
-    } else {
-      setDefaultCommand(new TankDrive());
-    }
+    setDefaultCommand(new ArcadeOrTankDrive());
   }
 
   /**
