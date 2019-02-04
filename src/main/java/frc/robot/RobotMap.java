@@ -29,12 +29,12 @@ public class RobotMap {
   public static final int L_ENCODER_PORT_CHB = 5;
 
   public static final int PCM_MODULE_NUM = 0;
-  public static final int CLAW_FORWARD_CHN = 0;
-  public static final int CLAW_REVERSE_CHN = 1;
-  public static final int LCLIMB_FORWARD_CHN = 4;
-  public static final int LCLIMB_REVERSE_CHN = 5;
-  public static final int RCLIMB_FORWARD_CHN = 6;
-  public static final int RCLIMB_REVERSE_CHN = 7;
+  public static final int CLAW_FORWARD_CHN = 5;
+  public static final int CLAW_REVERSE_CHN = 4;
+  public static final int LCLIMB_FORWARD_CHN = 7;
+  public static final int LCLIMB_REVERSE_CHN = 6;
+  public static final int RCLIMB_FORWARD_CHN = 1;
+  public static final int RCLIMB_REVERSE_CHN = 0;
 
   //Controller ports
   public static final int XBOX_PORT = 0;

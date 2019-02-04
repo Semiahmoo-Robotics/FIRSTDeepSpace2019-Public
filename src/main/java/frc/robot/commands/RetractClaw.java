@@ -10,8 +10,8 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class RetractSolenoid extends Command {
-  public RetractSolenoid() {
+public class RetractClaw extends Command {
+  public RetractClaw() {
     requires(Robot.cargoClaw);
   }
 

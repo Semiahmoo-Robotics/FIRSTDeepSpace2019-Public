@@ -35,10 +35,10 @@ public class OI {
 
 		//Write code here to run commands for button press events
 		abutton = new JoystickButton(m_XBoxController, 1);  //Button A = 1
-		abutton.whenPressed(new ExtendSolenoid());
+		abutton.whenPressed(new ExtendClaw());
 
 		bbutton = new JoystickButton(m_XBoxController, 2);	//Button B = 2
-		bbutton.whenPressed(new RetractSolenoid());
+		bbutton.whenPressed(new RetractClaw());
 
 		xbutton = new JoystickButton(m_XBoxController, 3);	//Button X = 3
 		xbutton.whenPressed(new ExtendClimb());
