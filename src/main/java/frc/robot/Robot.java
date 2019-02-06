@@ -17,6 +17,7 @@ import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Pneumatics;
 import frc.robot.subsystems.CargoClaw;
 import frc.robot.subsystems.ClimbPiston;
+import frc.robot.utils.*;
 
 /**
  * Robot java source code for Team 6458 Semiahmoo Robotics
@@ -66,7 +67,7 @@ public class Robot extends TimedRobot {
 
     //Tank or Arcade chooser in smartdashboard / shuffleboard
     RobotMap.DefaultArcadeDrive = SmartDashboard.getBoolean("Use Arcade Drive?", SmartDashboard.putBoolean("Use Arcade Drive?", false));
-    //CameraSetup.setupDefaultCamera();
+    CameraSetup.setupDefaultCamera();
   }
 
   /**

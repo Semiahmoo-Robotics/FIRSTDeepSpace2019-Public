@@ -7,9 +7,11 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import frc.robot.RobotMap;
 
 /**
@@ -21,9 +23,14 @@ public class ClimbPiston extends Subsystem {
   private final DoubleSolenoid m_lClimb;
   private final DoubleSolenoid m_rClimb;
 
+  private NetworkTableEntry m_extendDelay;
+  private NetworkTableEntry m_retractDelay;
+
   public ClimbPiston() {
     m_lClimb = new DoubleSolenoid(RobotMap.PCM_MODULE, RobotMap.L_CLIMB_FWD, RobotMap.L_CLIMB_RVSE);
     m_rClimb = new DoubleSolenoid(RobotMap.PCM_MODULE, RobotMap.R_CLIMB_FWD, RobotMap.R_CLIMB_RVSE);
+    m_extendDelay = Shuffleboard.getTab("Test").add("Extend Delay", 1.0).getEntry();
+    m_retractDelay = Shuffleboard.getTab("Test").add("Retract Delay", 1.0).getEntry();
   }
 
   /**
@@ -35,12 +42,12 @@ public class ClimbPiston extends Subsystem {
 
   /**
    * Extend climb solenoid.
-   * Right piston extends slower than Left piston.
+   * left piston extends faster than right piston.
    */
   public void extend() {
     m_rClimb.set(Value.kForward);
     try {
-      Thread.sleep(10);
+      Thread.sleep((long)(m_extendDelay.getDouble(55))); //55 is the number when tested.
     } catch (InterruptedException e) {
       e.printStackTrace();
     }
@@ -57,16 +64,16 @@ public class ClimbPiston extends Subsystem {
 
   /**
    * retract climb solenoid.
-   * Right piston retracts faster than left piston.
+   * left piston retracts faster than right piston.
    */
   public void retract() {
-    m_lClimb.set(Value.kReverse);
+    m_rClimb.set(Value.kReverse);
     try {
-      Thread.sleep(10);
+      Thread.sleep((long)(m_retractDelay.getDouble(20))); //55 is the number when tested.
     } catch (InterruptedException e) {
       e.printStackTrace();
     }
-    m_rClimb.set(Value.kReverse);
+    m_lClimb.set(Value.kReverse);
 
   }
 
