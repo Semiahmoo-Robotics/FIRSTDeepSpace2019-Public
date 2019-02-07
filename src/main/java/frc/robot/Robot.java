@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Pneumatics;
+import frc.robot.subsystems.SensorAlign;
 import frc.robot.subsystems.CargoClaw;
 import frc.robot.subsystems.ClimbPiston;
 import frc.robot.utils.*;
@@ -33,6 +34,7 @@ public class Robot extends TimedRobot {
   public static CargoClaw cargoClaw;
   public static ClimbPiston climbPiston;
   public static Pneumatics pneumatics;
+  public static SensorAlign sensorAlign;
 
   SendableChooser<Command> autoChooser;
 
@@ -48,6 +50,7 @@ public class Robot extends TimedRobot {
     cargoClaw = new CargoClaw();
     pneumatics = new Pneumatics();
     climbPiston = new ClimbPiston();
+    sensorAlign = new SensorAlign();
     
     oi = new OI();
     
@@ -153,6 +156,10 @@ public class Robot extends TimedRobot {
     SmartDashboard.putBoolean("Boost Engaged", drivetrain.getBoostEngaged());
     SmartDashboard.putBoolean("Pressure Switch Value", pneumatics.getPressureSwitchValue());
     SmartDashboard.putBoolean("Enabled?", pneumatics.getEnabled());
+
+    SmartDashboard.putNumber("Red", sensorAlign.getRed());
+    SmartDashboard.putNumber("Blue", sensorAlign.getBlue());
+    SmartDashboard.putNumber("Green", sensorAlign.getGreen());
   }
 
 }

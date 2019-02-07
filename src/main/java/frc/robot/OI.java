@@ -48,6 +48,9 @@ public class OI {
 		ybutton.whenPressed(new RetractClimb());
 		*/
 
+		ybutton = new JoystickButton(m_XBoxController, 4);
+		ybutton.whenPressed(new StartStopCompressor());
+
 		SmartDashboard.putData("Extend Climb Piston", new ExtendClimb());
 		SmartDashboard.putData("Retract Climb Piston", new RetractClimb());
 		SmartDashboard.putData("Extend Claw Piston", new ExtendClaw());
