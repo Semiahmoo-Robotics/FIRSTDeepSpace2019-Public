@@ -12,10 +12,13 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.commands.DriveForward;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Intake;
-import frc.robot.utils.CameraSetup;
+import frc.robot.subsystems.Pneumatics;
+import frc.robot.subsystems.SensorAlign;
+import frc.robot.subsystems.CargoClaw;
+import frc.robot.subsystems.ClimbPiston;
+import frc.robot.utils.*;
 
 /**
  * Robot java source code for Team 6458 Semiahmoo Robotics
@@ -28,6 +31,10 @@ public class Robot extends TimedRobot {
   public static OI oi;
   public static Drivetrain drivetrain;
   public static Intake intake;
+  public static CargoClaw cargoClaw;
+  public static ClimbPiston climbPiston;
+  public static Pneumatics pneumatics;
+  public static SensorAlign sensorAlign;
 
   SendableChooser<Command> autoChooser;
 
@@ -40,17 +47,25 @@ public class Robot extends TimedRobot {
     //Create Subsystem Objects (Initialization)
     drivetrain = new Drivetrain();
     intake = new Intake();
+    cargoClaw = new CargoClaw();
+    pneumatics = new Pneumatics();
+    climbPiston = new ClimbPiston();
+    sensorAlign = new SensorAlign();
     
     oi = new OI();
     
     
     //put data to smartdashboard
     SmartDashboard.putData(drivetrain);
+    SmartDashboard.putData(cargoClaw);
+    SmartDashboard.putData(pneumatics);
+    SmartDashboard.putData(climbPiston);
 
+ 
     //TODO Set Default Auto
-    autoChooser = new SendableChooser<>();
-    autoChooser.setDefaultOption("Default - Drive forward", new DriveForward(10, 0.5, 5));
-    //autoChooser.addOption("My Auto", new MyAutoCommand());
+    //autoChooser = new SendableChooser<>();
+    //autoChooser.setDefaultOption("Default - Drive forward", new DriveForward(10, 0.5, 5));
+    //autoChooser.addOption("My Auto", new TurnRightLeft(50, 0.6));
     //SmartDashboard.putData("Auto mode", autoChooser);
 
     //Tank or Arcade chooser in smartdashboard / shuffleboard
@@ -70,6 +85,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void disabledInit() {
+    drivetrain.getGyro().reset();
   }
 
     /**
@@ -133,11 +149,17 @@ public class Robot extends TimedRobot {
    */
   public void log() {
     SmartDashboard.putNumber("Gyro value", drivetrain.getGyro().getAngle());
-    SmartDashboard.putNumber("Left Encoder Value", drivetrain.getLEncoder().getDistance());
-    SmartDashboard.putNumber("Right Encoder Value", drivetrain.getREncoder().getDistance());
-    SmartDashboard.putNumber("Left Motor Speed", drivetrain.getLSpark().getSpeed());
-    SmartDashboard.putNumber("Right Motor Speed", drivetrain.getRSpark().getSpeed());
+    SmartDashboard.putNumber("Left Encoder", drivetrain.getLEncoder().getDistance());
+    SmartDashboard.putNumber("Right Encoder", drivetrain.getREncoder().getDistance());
+    SmartDashboard.putNumber("Left Motor", drivetrain.getLSpark().getSpeed());
+    SmartDashboard.putNumber("Right Motor", drivetrain.getRSpark().getSpeed());
     SmartDashboard.putBoolean("Boost Engaged", drivetrain.getBoostEngaged());
+    SmartDashboard.putBoolean("Pressure Switch Value", pneumatics.getPressureSwitchValue());
+    SmartDashboard.putBoolean("Enabled?", pneumatics.getEnabled());
+
+    SmartDashboard.putNumber("Red", sensorAlign.getRed());
+    SmartDashboard.putNumber("Blue", sensorAlign.getBlue());
+    SmartDashboard.putNumber("Green", sensorAlign.getGreen());
   }
 
 }
