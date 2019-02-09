@@ -7,23 +7,30 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import frc.robot.RobotMap;
 
 /**
- * Add your docs here.
+ * This subsystem controls the Climb pneumatics piston.
+ * It uses two double solenoid connected to the pcm.
  */
 public class ClimbPiston extends Subsystem {
 
-  private final DoubleSolenoid m_LclimbPiston;
-  private final DoubleSolenoid m_RclimbPiston;
+  private final DoubleSolenoid m_lClimb;
+  private final DoubleSolenoid m_rClimb;
 
+  private NetworkTableEntry m_extendDelay;
+  private NetworkTableEntry m_retractDelay;
 
   public ClimbPiston() {
-    m_LclimbPiston = new DoubleSolenoid(RobotMap.PCM_MODULE_NUM, RobotMap.LCLIMB_FORWARD_CHN, RobotMap.LCLIMB_REVERSE_CHN);
-    m_RclimbPiston = new DoubleSolenoid(RobotMap.PCM_MODULE_NUM, RobotMap.RCLIMB_FORWARD_CHN, RobotMap.RCLIMB_REVERSE_CHN);
+    m_lClimb = new DoubleSolenoid(RobotMap.PCM_MODULE, RobotMap.L_CLIMB_FWD, RobotMap.L_CLIMB_RVSE);
+    m_rClimb = new DoubleSolenoid(RobotMap.PCM_MODULE, RobotMap.R_CLIMB_FWD, RobotMap.R_CLIMB_RVSE);
+    m_extendDelay = Shuffleboard.getTab("Test").add("Extend Delay", 1.0).getEntry();
+    m_retractDelay = Shuffleboard.getTab("Test").add("Retract Delay", 1.0).getEntry();
   }
 
   /**
@@ -35,28 +42,55 @@ public class ClimbPiston extends Subsystem {
 
   /**
    * Extend climb solenoid.
+   * left piston extends faster than right piston.
    */
   public void extend() {
-    m_LclimbPiston.set(Value.kForward);
-    m_RclimbPiston.set(Value.kForward);
+    m_rClimb.set(Value.kForward);
+    try {
+      Thread.sleep((long)(m_extendDelay.getDouble(55))); //55 is the number when tested on high pressure.
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
+    m_lClimb.set(Value.kForward);
+  }
 
+  public void extendRight() {
+    m_rClimb.set(Value.kForward);
+  }
+
+  public void ExtendLeft() {
+    m_lClimb.set(Value.kForward);
   }
 
   /**
    * retract climb solenoid.
+   * left piston retracts faster than right piston.
    */
   public void retract() {
-    m_LclimbPiston.set(Value.kReverse);
-    m_RclimbPiston.set(Value.kForward);
+    m_rClimb.set(Value.kReverse);
+    try {
+      Thread.sleep((long)(m_retractDelay.getDouble(20))); //20 is the number when tested on low pressure.
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
+    m_lClimb.set(Value.kReverse);
 
   }
 
+  public void retractRight() {
+    m_rClimb.set(Value.kReverse);
+  }
+
+  public void RetractLeft() {
+    m_lClimb.set(Value.kReverse);
+  }
+
   /**
-   * turn off climb solenoid.
+   * turn off both climb solenoids.
    */
   public void off() {
-    m_LclimbPiston.set(Value.kOff);
-    m_RclimbPiston.set(Value.kForward);
+    m_lClimb.set(Value.kOff);
+    m_rClimb.set(Value.kOff);
 
   }
 

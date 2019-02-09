@@ -12,21 +12,25 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 
 /**
- * This subsystem controls the pneumatics compressor.
+ * This subsystem controls the pneumatics compressor wired to the pcm.
+ * This subsystem is seperate from the other pneumatics subsystems,
+ * such as the CargoClaw and the ClimbPiston.
  */
 public class Pneumatics extends Subsystem {
 
   private final Compressor m_compressor;
   
   public Pneumatics() {
-    m_compressor = new Compressor(RobotMap.PCM_MODULE_NUM);
+    m_compressor = new Compressor(RobotMap.PCM_MODULE);
   }
 
+  /**
+   * No default command.
+   */
   @Override
   public void initDefaultCommand() {
-    // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
   }
+
 
   public double getCompressorCurrent() {
     return m_compressor.getCompressorCurrent();

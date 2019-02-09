@@ -13,15 +13,15 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 
 /**
- * This subsystem controls the Cargo Claw piston.
+ * This subsystem controls the Cargo Claw pneumatics piston.
  * It uses one double solenoid connected to the pcm.
  */
 public class CargoClaw extends Subsystem {
  
-  private final DoubleSolenoid m_clawPiston;
+  private final DoubleSolenoid m_claw;
 
   public CargoClaw() {
-    m_clawPiston = new DoubleSolenoid(RobotMap.PCM_MODULE_NUM, RobotMap.CLAW_FORWARD_CHN, RobotMap.CLAW_REVERSE_CHN);
+    m_claw = new DoubleSolenoid(RobotMap.PCM_MODULE, RobotMap.CLAW_FORWARD_CHN, RobotMap.CLAW_REVERSE_CHN);
   }
 
 
@@ -36,21 +36,21 @@ public class CargoClaw extends Subsystem {
    * Extend claw solenoid.
    */
   public void extend() {
-    m_clawPiston.set(Value.kForward);
+    m_claw.set(Value.kForward);
   }
 
   /**
    * Retract claw solenoid.
    */
   public void retract() {
-    m_clawPiston.set(Value.kReverse);
+    m_claw.set(Value.kReverse);
   }
 
   /**
-   * Retract claw solenoid.
+   * turn off claw solenoid.
    */
   public void off() {
-    m_clawPiston.set(Value.kOff);
+    m_claw.set(Value.kOff);
   }
 
 }

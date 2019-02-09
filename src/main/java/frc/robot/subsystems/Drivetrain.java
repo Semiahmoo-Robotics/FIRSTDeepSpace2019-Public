@@ -7,6 +7,7 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.Encoder;
@@ -20,20 +21,23 @@ import frc.robot.commands.ArcadeDrive;
 import frc.robot.commands.TankDrive;
 
 /**
- * DriveTrain chassis subsystem code.
- * Differential drive with 6 wheels, 2 OR 4 motors
+ * DriveTrain chassis subsystem.
+ * Differential (Tank) drive with 6 wheels.
+ * 4 motor controlers wired to 2 pwm roborio ports.
+ * 2 cimCoders (encoders) wired to the roborio.
  */
-
 public class Drivetrain extends Subsystem {
 
-  private final Spark m_LeftDrive;
-  private final Spark m_RightDrive;
+  private final Spark m_lDrive;
+  private final Spark m_rDrive;
 
-  private final DifferentialDrive m_Chassis;
+  private final DifferentialDrive m_chassis;
 
-  private final Encoder m_REncoder;
-  private final Encoder m_LEncoder;
-  private final ADXRS450_Gyro m_Gyro;
+  private final Encoder m_rEncoder;
+  private final Encoder m_lEncoder;
+  private final ADXRS450_Gyro m_gyro;
+
+  private NetworkTableEntry m_maxspeed;
 
   //boost mode - When boostEngaged is true, it applies RobotMap.MULTIPLYER to drivebase speed.
   public boolean boostEngaged = false;
@@ -44,23 +48,23 @@ public class Drivetrain extends Subsystem {
   public Drivetrain() {
     
     //initialize objects
-    m_LeftDrive = new Spark(RobotMap.LEFT_DRIVE_PORT);
-    m_LeftDrive.setInverted(true);
-    m_RightDrive = new Spark(RobotMap.RIGHT_DRIVE_PORT);
-    m_RightDrive.setInverted(true);
-    m_Chassis = new DifferentialDrive(m_LeftDrive, m_RightDrive);
+    m_lDrive = new Spark(RobotMap.L_DRIVE);
+    m_lDrive.setInverted(true);
+    m_rDrive = new Spark(RobotMap.R_DRIVE);
+    m_rDrive.setInverted(true);
+    m_chassis = new DifferentialDrive(m_lDrive, m_rDrive);
     
-    m_REncoder = new Encoder(RobotMap.R_ENCODER_PORT_CHA, RobotMap.R_ENCODER_PORT_CHB, false, EncodingType.k4X); /* CIMcoders */
-    m_LEncoder = new Encoder(RobotMap.L_ENCODER_PORT_CHA, RobotMap.L_ENCODER_PORT_CHB, false, EncodingType.k4X); /* CIMcoders */
-    m_Gyro = new ADXRS450_Gyro(/* No port. This default constructor uses the built-in port where the gyro sits. */);
+    m_rEncoder = new Encoder(RobotMap.R_ENCODER_CHA, RobotMap.R_ENCODER_CHB, false, EncodingType.k4X); /* CIMcoders */
+    m_lEncoder = new Encoder(RobotMap.L_ENCODER_CHA, RobotMap.L_ENCODER_CHB, false, EncodingType.k4X); /* CIMcoders */
+    m_gyro = new ADXRS450_Gyro(/* No port. This default constructor uses the built-in port where the gyro sits. */);
 
 
     //Stops motor if the robot loses connection to the driver station.
-    m_Chassis.setSafetyEnabled(true);
+    m_chassis.setSafetyEnabled(true);
 
-    initializeEncoder(m_LEncoder);
-    initializeEncoder(m_REncoder);
-    m_Gyro.reset();
+    initializeEncoder(m_lEncoder);
+    initializeEncoder(m_rEncoder);
+    m_gyro.reset();
 
   }
 
@@ -84,7 +88,7 @@ public class Drivetrain extends Subsystem {
    * @param right Right joystick/drive value
    */
   public void TankDriveSet(Double left, Double right){
-    m_Chassis.tankDrive(left, right);
+    m_chassis.tankDrive(left, right);
   }
 
   /**
@@ -93,7 +97,7 @@ public class Drivetrain extends Subsystem {
    * @param controller xBoxController to use as input.
    */
   public void TankDriveSet(XboxController controller){
-    m_Chassis.tankDrive(controller.getY(Hand.kLeft), controller.getY(Hand.kRight));
+    m_chassis.tankDrive(controller.getY(Hand.kLeft), controller.getY(Hand.kRight));
    
   }
 
@@ -104,7 +108,7 @@ public class Drivetrain extends Subsystem {
    * @param z z joystick/drive value
    */
   public void ArcadeDriveSet(Double x, Double z){
-    m_Chassis.arcadeDrive(x, z);
+    m_chassis.arcadeDrive(x, z);
   }
 
   /**
@@ -113,7 +117,7 @@ public class Drivetrain extends Subsystem {
    * @param joystick joystick to use as input.
    */
   public void ArcadeDriveSet(XboxController joystick){ 
-    m_Chassis.arcadeDrive(joystick.getY(), joystick.getX());
+    m_chassis.arcadeDrive(joystick.getY(), joystick.getX());
   
   }
 
@@ -122,7 +126,7 @@ public class Drivetrain extends Subsystem {
    * @return m_Gyro
    */
   public ADXRS450_Gyro getGyro(){
-    return m_Gyro;
+    return m_gyro;
   }
 
   /**
@@ -130,7 +134,7 @@ public class Drivetrain extends Subsystem {
    * @return m_LEncoder
    */
   public Encoder getLEncoder(){
-    return m_LEncoder;
+    return m_lEncoder;
   }
 
   /**
@@ -138,7 +142,7 @@ public class Drivetrain extends Subsystem {
    * @return m_REncoder
    */
   public Encoder getREncoder(){
-    return m_REncoder;
+    return m_rEncoder;
   }
   
   /**
@@ -146,7 +150,7 @@ public class Drivetrain extends Subsystem {
    * @return m_LeftDrive
    */
   public Spark getLSpark(){
-    return m_LeftDrive;
+    return m_lDrive;
   }
 
   
@@ -155,7 +159,7 @@ public class Drivetrain extends Subsystem {
    * @return m_RightDrive
    */
   public Spark getRSpark(){
-    return m_RightDrive;
+    return m_rDrive;
   }
 
   /**
@@ -181,7 +185,7 @@ public class Drivetrain extends Subsystem {
    * @param rotation desired rotation rate of robot
   */
   public void CurvatureDriveSet(double speed, double rotation) {
-    m_Chassis.curvatureDrive(speed, rotation, false);
+    m_chassis.curvatureDrive(speed, rotation, false);
    
   }
   
@@ -202,8 +206,8 @@ public class Drivetrain extends Subsystem {
    * Stop the drivetrain from moving.
    */
   public void stop(){
-    m_Chassis.tankDrive(0, 0);
-    m_Chassis.arcadeDrive(0, 0);
+    m_chassis.tankDrive(0, 0);
+    m_chassis.arcadeDrive(0, 0);
   }
 
   public double encoderPresets() {
