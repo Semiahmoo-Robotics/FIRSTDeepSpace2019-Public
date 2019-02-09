@@ -68,9 +68,7 @@ public class Robot extends TimedRobot {
     //autoChooser.addOption("My Auto", new TurnRightLeft(50, 0.6));
     //SmartDashboard.putData("Auto mode", autoChooser);
 
-    //Tank or Arcade chooser in smartdashboard / shuffleboard
-    RobotMap.DefaultArcadeDrive = SmartDashboard.getBoolean("Use Arcade Drive?", SmartDashboard.putBoolean("Use Arcade Drive?", false));
-    drivetrain.getGyro().calibrate()
+    drivetrain.getGyro().calibrate();
     CameraSetup.setupDefaultCamera();
   }
 
