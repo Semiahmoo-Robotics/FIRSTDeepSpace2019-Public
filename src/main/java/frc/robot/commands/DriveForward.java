@@ -47,7 +47,7 @@ public class DriveForward extends Command {
 
     Robot.drivetrain.getLEncoder().reset();
     Robot.drivetrain.getREncoder().reset();
-    initialHeading = Robot.drivetrain.getGyro().getAngle();
+    initialHeading = Robot.drivetrain.getGyroAngle();
     SmartDashboard.putNumber(DashboardKeys.INIT_HEADING, initialHeading);
     setTimeout(timeout);
   }
@@ -56,7 +56,7 @@ public class DriveForward extends Command {
   @Override
   protected void execute() {
 
-    final double currentHeading = Robot.drivetrain.getGyro().getAngle();
+    final double currentHeading = Robot.drivetrain.getGyroAngle();
     final double angleDifference = currentHeading - initialHeading;
 
     Robot.drivetrain.CurvatureDriveSet(speed, (GYRO_CORRECTION * angleDifference));

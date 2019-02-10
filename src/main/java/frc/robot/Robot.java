@@ -150,7 +150,7 @@ public class Robot extends TimedRobot {
    * Log interesting values to SmartDashboard / Shuffleboard
    */
   public void log() {
-    SmartDashboard.putNumber("Gyro value", drivetrain.getGyro().getAngle());
+    SmartDashboard.putNumber("Gyro value", drivetrain.getGyroAngle());
     SmartDashboard.putNumber("Left Encoder", drivetrain.getLEncoder().getDistance());
     SmartDashboard.putNumber("Right Encoder", drivetrain.getREncoder().getDistance());
     SmartDashboard.putNumber("Left Motor", drivetrain.getLSpark().getSpeed());
