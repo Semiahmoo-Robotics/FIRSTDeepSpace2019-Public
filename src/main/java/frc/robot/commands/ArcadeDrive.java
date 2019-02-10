@@ -24,7 +24,7 @@ public class ArcadeDrive extends Command {
 
   @Override
   protected void initialize() {
-    SmartDashboard.putNumber(DashboardKeys.INIT_HEADING, Robot.drivetrain.getGyro().getAngle());
+    SmartDashboard.putNumber(DashboardKeys.INIT_HEADING, Robot.drivetrain.getGyroAngle());
   }
 
   @Override

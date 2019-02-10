@@ -70,7 +70,7 @@ public class Robot extends TimedRobot {
 
     //Tank or Arcade chooser in smartdashboard / shuffleboard
     RobotMap.DefaultArcadeDrive = SmartDashboard.getBoolean("Use Arcade Drive?", SmartDashboard.putBoolean("Use Arcade Drive?", false));
-    drivetrain.getGyro().calibrate()
+    drivetrain.getGyro().calibrate();
     CameraSetup.setupDefaultCamera();
   }
 

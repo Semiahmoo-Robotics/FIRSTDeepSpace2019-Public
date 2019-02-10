@@ -44,4 +44,17 @@ public final class Utils {
         return Math.min(max, Math.max(min, value));
     }
 
+    /**
+     * truncates a double value to certain amount of decimal places.
+     * It also rounds the value to that decimal place.
+     * @param unroundedNumber The unrounded double value to truncate.
+     * @param decimalPlaces How much decimal values needed.
+     * @return  The truncated double value.
+     */
+    public static double truncateDecimal(double unroundedNumber,int decimalPlaces) {
+        double decimalScaler = Math.pow(10, decimalPlaces);
+        double truncatedNumber = Math.floor((unroundedNumber * decimalScaler) / decimalScaler);
+        return truncatedNumber;
+    }
+
 }

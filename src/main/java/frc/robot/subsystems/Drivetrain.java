@@ -7,7 +7,6 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.Encoder;
@@ -19,6 +18,7 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import frc.robot.RobotMap;
 import frc.robot.commands.ArcadeDrive;
 import frc.robot.commands.TankDrive;
+import frc.robot.utils.Utils;
 
 /**
  * DriveTrain chassis subsystem.
@@ -36,8 +36,6 @@ public class Drivetrain extends Subsystem {
   private final Encoder m_rEncoder;
   private final Encoder m_lEncoder;
   private final ADXRS450_Gyro m_gyro;
-
-  private NetworkTableEntry m_maxspeed;
 
   //boost mode - When boostEngaged is true, it applies RobotMap.MULTIPLYER to drivebase speed.
   public boolean boostEngaged = false;
@@ -127,6 +125,14 @@ public class Drivetrain extends Subsystem {
    */
   public ADXRS450_Gyro getGyro(){
     return m_gyro;
+  }
+
+  /**
+   * gets the truncated m_Gyro angle value.
+   * @return the gyro angle value.
+   */
+  public double getGyroAngle() {
+    return Utils.truncateDecimal(m_gyro.getAngle(), 3);
   }
 
   /**
