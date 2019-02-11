@@ -47,7 +47,7 @@ public class ClimbPiston extends Subsystem {
   public void extend() {
     m_rClimb.set(Value.kForward);
     try {
-      Thread.sleep((long)(m_extendDelay.getDouble(55))); //55 is the number when tested.
+      Thread.sleep((long)(m_extendDelay.getDouble(55))); //55 is the number when tested on high pressure.
     } catch (InterruptedException e) {
       e.printStackTrace();
     }
@@ -69,7 +69,7 @@ public class ClimbPiston extends Subsystem {
   public void retract() {
     m_rClimb.set(Value.kReverse);
     try {
-      Thread.sleep((long)(m_retractDelay.getDouble(20))); //55 is the number when tested.
+      Thread.sleep((long)(m_retractDelay.getDouble(20))); //20 is the number when tested on low pressure.
     } catch (InterruptedException e) {
       e.printStackTrace();
     }
