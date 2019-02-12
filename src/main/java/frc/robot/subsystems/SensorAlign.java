@@ -15,6 +15,7 @@ import java.nio.ByteOrder;
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.commands.ReadColor;
+import frc.robot.RobotMap;
 
 /**
  * Refer to the data sheets for the Register Address
@@ -77,12 +78,12 @@ public class SensorAlign extends Subsystem {
     prox = buffy.getShort(6); 
     if(prox < 0) { prox += 0b10000000000000000; }
     
-    if(red + green + blue >= 1000){ //the sum of the color represents the brightness of the reflection
+    if(red + green + blue >= RobotMap.SENSITIVITY){ //the sum of the color represents the brightness of the reflection
       Robot.oi.GetXboxController().setRumble(kLeftRumble, 0.5);
     }else{
       Robot.oi.GetXboxController().setRumble(kLeftRumble, 0);
     }
-    
+
   }
 
   public short getRed(){
