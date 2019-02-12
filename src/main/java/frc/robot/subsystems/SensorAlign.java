@@ -83,8 +83,6 @@ public class SensorAlign extends Subsystem {
       Robot.oi.GetXboxController().setRumble(kLeftRumble, 0);
     }
     
-    
-
   }
 
   public short getRed(){
