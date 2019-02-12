@@ -7,17 +7,18 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
+import edu.wpi.first.wpilibj.Notifier;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import frc.robot.RobotMap;
 import frc.robot.commands.TankDrive;
+import jaci.pathfinder.followers.EncoderFollower;
 import jaci.pathfinder.Pathfinder;
 import jaci.pathfinder.PathfinderFRC;
 import jaci.pathfinder.Trajectory;
@@ -31,16 +32,19 @@ import jaci.pathfinder.followers.EncoderFollower;
  */
 public class Drivetrain extends Subsystem {
 
-  private final Spark m_lDrive;
-  private final Spark m_rDrive;
+  private final Spark m_ldrive;
+  private final Spark m_rdrive;
 
   private final DifferentialDrive m_chassis;
 
-  private final Encoder m_rEncoder;
-  private final Encoder m_lEncoder;
+  private final Encoder m_rencoder;
+  private final Encoder m_lencoder;
   private final ADXRS450_Gyro m_gyro;
 
-  private NetworkTableEntry m_maxspeed;
+  private EncoderFollower m_lfollower;
+  private EncoderFollower m_rfollower;
+  
+  private Notifier m_pathWeaverfollower_notifyer;
 
   //boost mode - When boostEngaged is true, it applies RobotMap.MULTIPLYER to drivebase speed.
   public boolean boostEngaged = false;
@@ -51,22 +55,22 @@ public class Drivetrain extends Subsystem {
   public Drivetrain() {
     
     //initialize objects
-    m_lDrive = new Spark(RobotMap.L_DRIVE);
-    m_lDrive.setInverted(true);
-    m_rDrive = new Spark(RobotMap.R_DRIVE);
-    m_rDrive.setInverted(true);
-    m_chassis = new DifferentialDrive(m_lDrive, m_rDrive);
+    m_ldrive = new Spark(RobotMap.L_DRIVE);
+    m_ldrive.setInverted(true);
+    m_rdrive = new Spark(RobotMap.R_DRIVE);
+    m_rdrive.setInverted(true);
+    m_chassis = new DifferentialDrive(m_ldrive, m_rdrive);
     
-    m_rEncoder = new Encoder(RobotMap.R_ENCODER_CHA, RobotMap.R_ENCODER_CHB, false, EncodingType.k4X); /* CIMcoders */
-    m_lEncoder = new Encoder(RobotMap.L_ENCODER_CHA, RobotMap.L_ENCODER_CHB, false, EncodingType.k4X); /* CIMcoders */
+    m_rencoder = new Encoder(RobotMap.R_ENCODER_CHA, RobotMap.R_ENCODER_CHB, false, EncodingType.k4X); /* CIMcoders */
+    m_lencoder = new Encoder(RobotMap.L_ENCODER_CHA, RobotMap.L_ENCODER_CHB, false, EncodingType.k4X); /* CIMcoders */
     m_gyro = new ADXRS450_Gyro(/* No port. This default constructor uses the built-in port where the gyro sits. */);
 
 
     //Stops motor if the robot loses connection to the driver station.
     m_chassis.setSafetyEnabled(true);
 
-    initializeEncoder(m_lEncoder);
-    initializeEncoder(m_rEncoder);
+    initializeEncoder(m_lencoder);
+    initializeEncoder(m_rencoder);
     m_gyro.reset();
 
   }
@@ -133,7 +137,7 @@ public class Drivetrain extends Subsystem {
    * @return m_LEncoder
    */
   public Encoder getLEncoder(){
-    return m_lEncoder;
+    return m_lencoder;
   }
 
   /**
@@ -141,7 +145,7 @@ public class Drivetrain extends Subsystem {
    * @return m_REncoder
    */
   public Encoder getREncoder(){
-    return m_rEncoder;
+    return m_rencoder;
   }
   
   /**
@@ -149,7 +153,7 @@ public class Drivetrain extends Subsystem {
    * @return m_LeftDrive
    */
   public Spark getLSpark(){
-    return m_lDrive;
+    return m_ldrive;
   }
 
   
@@ -158,7 +162,7 @@ public class Drivetrain extends Subsystem {
    * @return m_RightDrive
    */
   public Spark getRSpark(){
-    return m_rDrive;
+    return m_rdrive;
   }
 
   /**
@@ -222,6 +226,48 @@ public class Drivetrain extends Subsystem {
     double distancePerRevolution = (Math.PI * 0.1524) / 10.71;
     double distancePerPulse = distancePerRevolution / pulsesPerRevolution;
     return distancePerPulse;
+  }
+
+  public void startPathWeaverAuto(String pathName) {
+    /*
+    PathWeaver currently has a known issue. The left and right paths are being swapped.
+    This will be fixed in PathWeaver v2019.3.1. This is why the file name is reversed for
+    each trajectory.
+    */
+    Trajectory left_trajectory = PathfinderFRC.getTrajectory(pathName + ".right");
+    Trajectory right_trajectory = PathfinderFRC.getTrajectory(pathName + ".left");
+
+    m_lfollower = new EncoderFollower(left_trajectory);
+    m_rfollower = new EncoderFollower(right_trajectory);
+
+    m_lfollower.configureEncoder(m_lencoder.get(), RobotMap.TICK_PER_REV, RobotMap.WHEEL_DIAMETER);
+    // You must tune the PID values next line (line 239)!
+    m_lfollower.configurePIDVA(1.0, 0.0, 0.0, 1 / RobotMap.MAX_VELOCITY, 0);
+
+    m_rfollower.configureEncoder(m_rencoder.get(), RobotMap.TICK_PER_REV, RobotMap.WHEEL_DIAMETER);
+    // Same PID value tuning.
+    m_rfollower.configurePIDVA(1.0, 0.0, 0.0, 1 / RobotMap.MAX_VELOCITY, 0);
+    
+    m_pathWeaverfollower_notifyer = new Notifier(this::pathWeaverFollowPath);
+    m_pathWeaverfollower_notifyer.startPeriodic(left_trajectory.get(0).dt);
+  }
+
+  public void pathWeaverFollowPath() {
+
+    if (m_lfollower.isFinished() || m_rfollower.isFinished()) {
+      m_pathWeaverfollower_notifyer.stop();
+    } else {
+      double lspeed = m_lfollower.calculate(m_lencoder.get());
+      double rspeed = m_rfollower.calculate(m_rencoder.get());
+      double heading = m_gyro.getAngle();
+      //TODO Because of a bug, Depending on the orientation of your gyro, may also need to invert the desired heading.
+      double desired_heading = Pathfinder.r2d(m_lfollower.getHeading());
+      double heading_difference = Pathfinder.boundHalfDegrees(desired_heading - heading);
+      double turn =  0.8 * (-1.0 / 80.0) * heading_difference;
+
+      m_ldrive.set(lspeed + turn);
+      m_rdrive.set(rspeed - turn);
+    }
   }
 
 }

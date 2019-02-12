@@ -36,6 +36,17 @@ public class RobotMap {
   public static final int R_CLIMB_FWD = 1;
   public static final int R_CLIMB_RVSE = 0;
 
+  //Path Weaver Constants
+  //number of encoder counts per wheel revolution for the drivetrain
+  public static final int TICK_PER_REV = 1024;
+  //diameter of the wheels of the drivetrain in the chosen unit value (ft I believe).
+  //The wheels have a diameter of 15.24 cm (6").
+  public static final double WHEEL_DIAMETER = 6 / 12;
+  //maximum velocity of the robot
+  public static final double MAX_VELOCITY = 10;
+
+  public static final String PATH_NAME = "example";
+
   //Controller ports
   public static final int XBOX_PORT = 0;
   public static final int LOGITECH_PORT = 1;
