@@ -12,6 +12,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.utils.DashboardKeys;
 
+/**
+ * Drives the robot forward with support of encoders & gyro.
+ */
 public class DriveForward extends Command {
 
   private final double distance, speed, timeout;
