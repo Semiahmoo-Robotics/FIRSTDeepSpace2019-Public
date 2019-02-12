@@ -40,17 +40,15 @@ public class Drivetrain extends Subsystem {
   //Value of the max speed of the drivetrain. Holds a double value.
   private NetworkTableEntry m_maxspeed;
 
-  //Value of the boost multiplyer of the drivetrain. Holds a double value.
-  private NetworkTableEntry m_boostMultiplyer;
-
   //Use arcade drive or tank drive. Holds a boolean value.
   private NetworkTableEntry m_ArcadeEnabled;
 
+  //Value of the boost multiplyer of the drivetrain. Holds a double value.
+  private NetworkTableEntry m_boostMultiplyer;
+
+
   //boost mode - When boostEngaged is true, it applies the boostmultiplyer to drivebase speed.
   public boolean boostEngaged = false;
-
-  //The multiplyer to reduce speed before boost.
-  public double boostmultiplyer = 0.75;
 
   /**
    * Constructor - Create a new DriveTrain class.
@@ -72,6 +70,7 @@ public class Drivetrain extends Subsystem {
     //Stops motor if the robot loses connection to the driver station.
     m_chassis.setSafetyEnabled(true);
 
+    //Initialize encoder and gyro.
     initializeEncoder(m_lEncoder);
     initializeEncoder(m_rEncoder);
     m_gyro.reset();
@@ -140,6 +139,14 @@ public class Drivetrain extends Subsystem {
   }
 
   /**
+   * Stop the drivetrain from moving.
+   */
+  public void stop(){
+    m_chassis.tankDrive(0, 0);
+    m_chassis.arcadeDrive(0, 0);
+  }
+
+  /**
    * gets the m_Gyro instance.
    * @return m_Gyro
    */
@@ -197,10 +204,10 @@ public class Drivetrain extends Subsystem {
   }
 
   /**
-   * Gets the boost multiplyer which was from the shuffleboard.
+   * Gets the boost multiplyer which was from the network table.
    * @return the value of the boost multiplyer.
    */
-  public double getBoostMultiplyer() {
+  public double getNWTBoostMultiplyer() {
     return m_boostMultiplyer.getDouble(0.75);
   }
   
@@ -208,14 +215,14 @@ public class Drivetrain extends Subsystem {
    * Sets the maximum speed of the drivetrain using the value in the
    * Shuffleboard. This is done by a network table.
    */
-  public void SetMaxspeed() {
+  public void GetNWTMaxspeed() {
     m_chassis.setMaxOutput(m_maxspeed.getDouble(1.0));
   }
 
   /**
-   * @return the boolean value of if arcade drive is applied.
+   * @return the boolean value of if arcade drive is applied from the network table.
    */
-  public boolean getIsArcade() {
+  public boolean GetNWTIsArcade() {
     return m_ArcadeEnabled.getBoolean(false);
   }
 
@@ -225,19 +232,10 @@ public class Drivetrain extends Subsystem {
    * @param encoder the encoder which needs to be initialized
   */
   private void initializeEncoder(Encoder encoder) {
-    encoder.setMaxPeriod(0.1); //0.1 sec
     encoder.setMinRate(0.01); // 0.01 m/s
     encoder.setDistancePerPulse(encoderPresets());
     encoder.setReverseDirection(false);
     encoder.setSamplesToAverage(7);
-  }
-  
-  /**
-   * Stop the drivetrain from moving.
-   */
-  public void stop(){
-    m_chassis.tankDrive(0, 0);
-    m_chassis.arcadeDrive(0, 0);
   }
 
   public double encoderPresets() {
