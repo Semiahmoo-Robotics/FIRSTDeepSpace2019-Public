@@ -38,15 +38,19 @@ public class OI {
 		//Write code here to run commands for button press events
 		abutton = new JoystickButton(m_XBoxController, 1);  //Button A = 1
 		abutton.whenPressed(new ExtendClaw());
+
 		bbutton = new JoystickButton(m_XBoxController, 2);	//Button B = 2
 		bbutton.whenPressed(new RetractClaw());
+
 		xbutton = new JoystickButton(m_XBoxController, 3);	//Button X = 3
 		xbutton.whenPressed(new ExtendClimb());
+
 		ybutton = new JoystickButton(m_XBoxController, 4);	//Button Y = 4
 		ybutton.whenPressed(new RetractClimb());
     
 		lbutton = new JoystickButton(m_XBoxController, 5);	//L Bumper = 5
 		lbutton.whenPressed(new TurnRightLeft(90, 50));
+		
 		//SmartDashboard Buttons
 		SmartDashboard.putData("ReCallibrate Gyro", new CalibrateGyro());
 		*/
