@@ -29,13 +29,13 @@ public class Intake extends Subsystem {
   }
 
   public void SetIntake() {
-    m_lIntake.set(0.5);
-    m_rIntake.set(0.5);
+    m_lIntake.set(1.0);
+    m_rIntake.set(1.0);
   } 
 
   public void ReverseSetIntake() {
-    m_lIntake.set(-0.5);
-    m_rIntake.set(-0.5);
+    m_lIntake.set(-1.0);
+    m_rIntake.set(-1.0);
 
   }
 
