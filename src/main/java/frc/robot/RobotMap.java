@@ -48,8 +48,5 @@ public class RobotMap {
 
   //when boost is Engaged, max output is occured. otherwise, the MULTIPLIER takes effect
   public static final double MULTIPLIER = 0.75;
-
-  //Choose tank or arcade
-  public static boolean DefaultArcadeDrive = false;
-
+  
 }

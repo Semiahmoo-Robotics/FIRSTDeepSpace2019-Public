@@ -7,7 +7,6 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.Encoder;
@@ -35,8 +34,6 @@ public class Drivetrain extends Subsystem {
   private final Encoder m_rEncoder;
   private final Encoder m_lEncoder;
   private final ADXRS450_Gyro m_gyro;
-
-  private NetworkTableEntry m_maxspeed;
 
   //boost mode - When boostEngaged is true, it applies RobotMap.MULTIPLYER to drivebase speed.
   public boolean boostEngaged = false;
@@ -74,7 +71,7 @@ public class Drivetrain extends Subsystem {
   @Override
   public void initDefaultCommand() {
       setDefaultCommand(new TankDrive());
-    }
+  }
 
   /**
    * Tank drive using two values individualy
