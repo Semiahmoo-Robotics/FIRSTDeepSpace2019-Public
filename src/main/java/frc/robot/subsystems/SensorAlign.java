@@ -13,6 +13,7 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
 import edu.wpi.first.wpilibj.I2C;
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.commands.ReadColor;
 import frc.robot.RobotMap;
@@ -79,9 +80,9 @@ public class SensorAlign extends Subsystem {
     if(prox < 0) { prox += 0b10000000000000000; }
     
     if(red + green + blue >= RobotMap.SENSITIVITY){ //the sum of the color represents the brightness of the reflection
-      Robot.oi.GetXboxController().setRumble(kLeftRumble, 0.5);
+      Robot.oi.GetXboxController().setRumble(RumbleType.kRightRumble, 1);
     }else{
-      Robot.oi.GetXboxController().setRumble(kLeftRumble, 0);
+      Robot.oi.GetXboxController().setRumble(RumbleType.kLeftRumble, 1);
     }
 
   }
