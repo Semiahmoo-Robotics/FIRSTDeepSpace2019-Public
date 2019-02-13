@@ -16,7 +16,6 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import frc.robot.RobotMap;
-import frc.robot.commands.ArcadeDrive;
 import frc.robot.commands.TankDrive;
 import frc.robot.utils.Utils;
 
@@ -72,11 +71,7 @@ public class Drivetrain extends Subsystem {
    */
   @Override
   public void initDefaultCommand() {
-    if (RobotMap.DefaultArcadeDrive) {
-      setDefaultCommand(new ArcadeDrive());
-    } else {
       setDefaultCommand(new TankDrive());
-    }
   }
 
   /**
