@@ -26,7 +26,6 @@ public class OI {
   public static Button bbutton;
   public static Button xbutton;
   public static Button ybutton;
-  public static Button lbutton;
 
 	/**
 	 * Create a new OI and 
@@ -47,21 +46,13 @@ public class OI {
 
 		ybutton = new JoystickButton(m_XBoxController, 4);	//Button Y = 4
 		ybutton.whenPressed(new RetractClimb());
-    
-		lbutton = new JoystickButton(m_XBoxController, 5);	//L Bumper = 5
-		lbutton.whenPressed(new TurnRightLeft(90, 50));
-
-		//SmartDashboard Buttons
-		SmartDashboard.putData("ReCallibrate Gyro", new CalibrateGyro());
 		*/
-
-		ybutton = new JoystickButton(m_XBoxController, 4);
-		ybutton.whenPressed(new StartStopCompressor());
 
 		SmartDashboard.putData("Extend Climb Piston", new ExtendClimb());
 		SmartDashboard.putData("Retract Climb Piston", new RetractClimb());
 		SmartDashboard.putData("Extend Claw Piston", new ExtendClaw());
 		SmartDashboard.putData("Retract Claw Piston", new RetractClaw());
+
 	}
 	
 

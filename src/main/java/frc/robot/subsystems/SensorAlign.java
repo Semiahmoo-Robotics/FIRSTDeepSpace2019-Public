@@ -7,20 +7,15 @@
 
 package frc.robot.subsystems;
 
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
-
-import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import frc.robot.commands.ReadColor;
+
 
 /**
- * Refer to the data sheets for the Register Address
- * http://www.revrobotics.com/content/docs/TMD3782_v2.pdf
+ * Add your docs here.
  */
 public class SensorAlign extends Subsystem {
 
-  protected final static int COMMAND_REGISTER_BIT = 0x80;
+  protected final static int CMD = 0x80;
   protected final static int MULTI_BYTE_BIT = 0x20;
 
   protected final static int ENABLE_REGISTER  = 0x00;
@@ -40,28 +35,28 @@ public class SensorAlign extends Subsystem {
   protected final static int WEN   = 0b00001000;
   protected final static int AIEN  = 0b00010000;
   protected final static int PIEN  = 0b00100000;
-  
-  private I2C colorsensor;
+  private I2C sensor;
 
   private ByteBuffer buffy = ByteBuffer.allocate(8);
 
   public short red = 0, green = 0, blue = 0, prox = 0; //public not private!!!
-  
-  public SensorAlign() {
+  public ColorSensor(I2C.Port port) {
 
     //initialize objects
-    colorsensor = new I2C(I2C.Port.kOnboard, 0x39); //0x39 is the device address of the Vex ColorSensor V2
     buffy.order(ByteOrder.LITTLE_ENDIAN);
-
-    colorsensor.write(COMMAND_REGISTER_BIT | 0x00, PON | AEN | PEN); //Enable the color sensor
-    //colorsensor.write(COMMAND_REGISTER_BIT | 0x0E, 0b1111); // Specifies the number of proximity pulses to be generated.
+    sensor = new I2C(port, 0x39); //0x39 is the address of the Vex ColorSensor V2
+    
+    sensor.write(CMD | 0x00, PON | AEN | PEN);
+    
+    sensor.write(CMD | 0x01, (int) (256-integrationTime/2.38)); //configures the integration time (time for updating color data)
+    sensor.write(CMD | 0x0E, 0b1111);
       
   }
 
-  //called by an outside class to update red, green and b lue. these variables are public.
+  //called by an outside class to update red, green and blue. these variables are public.
   public void read() { 
     buffy.clear();
-    colorsensor.read(COMMAND_REGISTER_BIT | MULTI_BYTE_BIT | RDATA_REGISTER, 8, buffy);
+    sensor.read(CMD | MULTI_BYTE_BIT | RDATA_REGISTER, 8, buffy);
     
     red = buffy.getShort(0);
     if(red < 0) { red += 0b10000000000000000; }
@@ -76,21 +71,26 @@ public class SensorAlign extends Subsystem {
     if(prox < 0) { prox += 0b10000000000000000; }
       
   }
-
-  public short getRed(){
-    return this.red;
+  
+  public int status() {
+    buffy.clear();
+    sensor.read(CMD | 0x13, 1, buffy);
+    return buffy.get(0);
+  }
+  
+  public void free() {
+    sensor.free();
   }
 
-  public short getBlue(){
-    return this.blue;
-  }
-
-  public short getGreen(){
-    return this.green;
+  public void drive() {
+    read();
+    //insert movement command here
   }
 
   @Override
   public void initDefaultCommand() {
-    setDefaultCommand(new ReadColor());
+    // Set the default command for a subsystem here.
+    // setDefaultCommand(new MySpecialCommand());
+    setDefaultCommand(new drive());
   }
 }
