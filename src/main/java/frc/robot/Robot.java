@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.HiMyNameIsBarryAllenAndImTheFastestManAlive;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Pneumatics;
 import frc.robot.subsystems.SensorAlign;
@@ -156,10 +157,12 @@ public class Robot extends TimedRobot {
     SmartDashboard.putBoolean("Boost Engaged", drivetrain.getBoostEngaged());
     SmartDashboard.putBoolean("Pressure Switch Value", pneumatics.getPressureSwitchValue());
     SmartDashboard.putBoolean("Enabled?", pneumatics.getEnabled());
-
+    SmartDashboard.putNumber("Units of voltage", HiMyNameIsBarryAllenAndImTheFastestManAlive.theFlash());
+    SmartDashboard.putNumber("Units of some real world distance", HiMyNameIsBarryAllenAndImTheFastestManAlive.getMeDatRuler());
     SmartDashboard.putNumber("Red", sensorAlign.getRed());
     SmartDashboard.putNumber("Blue", sensorAlign.getBlue());
     SmartDashboard.putNumber("Green", sensorAlign.getGreen());
   }
+  
 
 }
