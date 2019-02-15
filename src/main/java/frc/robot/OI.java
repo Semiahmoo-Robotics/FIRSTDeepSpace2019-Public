@@ -44,9 +44,6 @@ public class OI {
 
 		xbutton = new JoystickButton(m_XBoxController, 3);	//Button X = 3
 		xbutton.whenPressed(new ExtendClimb());
-
-		ybutton = new JoystickButton(m_XBoxController, 4);	//Button Y = 4
-		ybutton.whenPressed(new RetractClimb());
     
 		lbutton = new JoystickButton(m_XBoxController, 5);	//L Bumper = 5
 		lbutton.whenPressed(new TurnRightLeft(90, 50));
@@ -54,6 +51,12 @@ public class OI {
 		//SmartDashboard Buttons
 		SmartDashboard.putData("ReCallibrate Gyro", new CalibrateGyro());
 		*/
+
+		bbutton = new JoystickButton(m_XBoxController, 5);	//L Bumper = 5
+		bbutton.whenPressed(new PullOutBox());
+
+		xbutton = new JoystickButton(m_XBoxController, 6);	//R Bumper = 6
+		xbutton.whenPressed(new PullInBox());
 
 		ybutton = new JoystickButton(m_XBoxController, 4);
 		ybutton.whenPressed(new StartStopCompressor());
