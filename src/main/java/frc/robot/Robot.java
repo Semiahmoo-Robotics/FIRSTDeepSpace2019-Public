@@ -13,7 +13,8 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.Drivetrain;
-import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.HatchHolder;
+import frc.robot.subsystems.CargoIntake;
 import frc.robot.subsystems.Pneumatics;
 import frc.robot.subsystems.SensorAlign;
 import frc.robot.subsystems.CargoClaw;
@@ -30,11 +31,12 @@ public class Robot extends TimedRobot {
   //Declare Subsystem (Initialization)
   public static OI oi;
   public static Drivetrain drivetrain;
-  public static Intake intake;
+  public static CargoIntake cargoIntake;
   public static CargoClaw cargoClaw;
   public static ClimbPiston climbPiston;
   public static Pneumatics pneumatics;
   public static SensorAlign sensorAlign;
+  public static HatchHolder hatchHolder;
 
   SendableChooser<Command> autoChooser;
 
@@ -46,11 +48,12 @@ public class Robot extends TimedRobot {
     
     //Create Subsystem Objects (Initialization)
     drivetrain = new Drivetrain();
-    intake = new Intake();
+    cargoIntake = new CargoIntake();
     cargoClaw = new CargoClaw();
     pneumatics = new Pneumatics();
     climbPiston = new ClimbPiston();
     sensorAlign = new SensorAlign();
+    hatchHolder = new HatchHolder();
     
     oi = new OI();
     
