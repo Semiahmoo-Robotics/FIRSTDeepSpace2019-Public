@@ -53,7 +53,7 @@ public final class Utils {
      */
     public static double truncateDecimal(double unroundedNumber,int decimalPlaces) {
         double decimalScaler = Math.pow(10, decimalPlaces);
-        double truncatedNumber = Math.floor((unroundedNumber * decimalScaler) / decimalScaler);
+        double truncatedNumber = Math.floor((unroundedNumber * decimalScaler)) / decimalScaler;
         return truncatedNumber;
     }
 
