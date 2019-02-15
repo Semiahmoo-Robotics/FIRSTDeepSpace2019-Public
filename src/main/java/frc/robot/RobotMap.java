@@ -22,6 +22,7 @@ public class RobotMap {
   public static final int R_DRIVE = 0;
   public static final int L_INTAKE = 2;
   public static final int R_INTAKE = 3;
+  public static final int HATCHHOLDER = 4;
 
   public static final int R_ENCODER_CHA = 2;
   public static final int R_ENCODER_CHB = 3;

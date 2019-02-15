@@ -26,7 +26,8 @@ public class OI {
   public static Button bbutton;
   public static Button xbutton;
   public static Button ybutton;
-  public static Button lbutton;
+  public static Button lbumper;
+  public static Button rbumper;
 
 	/**
 	 * Create a new OI and 
@@ -52,10 +53,13 @@ public class OI {
 		SmartDashboard.putData("ReCallibrate Gyro", new CalibrateGyro());
 		*/
 
-		bbutton = new JoystickButton(m_XBoxController, 5);	//L Bumper = 5
+		bbutton = new JoystickButton(m_XBoxController, 2);	//Button B = 2
+		bbutton.whenPressed(new ChangeHatchFormation());
+
+		lbumper = new JoystickButton(m_XBoxController, 5);	//L Bumper = 5
 		bbutton.whenPressed(new PullOutBox());
 
-		xbutton = new JoystickButton(m_XBoxController, 6);	//R Bumper = 6
+		rbumper = new JoystickButton(m_XBoxController, 6);	//R Bumper = 6
 		xbutton.whenPressed(new PullInBox());
 
 		ybutton = new JoystickButton(m_XBoxController, 4);
