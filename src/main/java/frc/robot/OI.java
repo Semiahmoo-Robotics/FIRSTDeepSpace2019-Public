@@ -57,10 +57,10 @@ public class OI {
 		bbutton.whenPressed(new ChangeHatchFormation());
 
 		lbumper = new JoystickButton(m_XBoxController, 5);	//L Bumper = 5
-		bbutton.whenPressed(new PullOutBox());
+		lbumper.whenPressed(new PullOutBox());
 
 		rbumper = new JoystickButton(m_XBoxController, 6);	//R Bumper = 6
-		xbutton.whenPressed(new PullInBox());
+		rbumper.whenPressed(new PullInBox());
 
 		ybutton = new JoystickButton(m_XBoxController, 4);
 		ybutton.whenPressed(new StartStopCompressor());

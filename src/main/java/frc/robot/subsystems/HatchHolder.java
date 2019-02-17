@@ -28,11 +28,11 @@ public class HatchHolder extends Subsystem {
   }
 
   public void SetHolder() {
-    m_HatchHolder.set(0.3);
+    m_HatchHolder.set(0.6);
   } 
 
   public void ReverseSetHolder() {
-    m_HatchHolder.set(-0.3);
+    m_HatchHolder.set(-0.6);
   }
 
   public void StopHolder() {

@@ -23,7 +23,7 @@ public class ChangeHatchFormation extends Command {
   protected void initialize() {
     if (!Robot.hatchHolder.HolderUp) Robot.hatchHolder.SetHolder();
     else Robot.hatchHolder.ReverseSetHolder();
-    setTimeout(0.5);
+    setTimeout(2);
   }
 
   // Called repeatedly when this Command is scheduled to run
