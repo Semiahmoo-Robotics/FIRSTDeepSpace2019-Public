@@ -19,13 +19,13 @@ public class PullOutBox extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.cargoIntake.ReverseSetIntake();
+    Robot.cargoIntake.ReverseStrongSetIntake();
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return !Robot.oi.GetXboxController().getBumper(Hand.kLeft);
+    return !Robot.oi.GetXboxController().getBumper(Hand.kRight);
   }
 
   // Called once after isFinished returns true

@@ -18,10 +18,10 @@ package frc.robot;
 public class RobotMap {
 
   //Motor Ports on ROBOrio
-  public static final int L_DRIVE = 1;
-  public static final int R_DRIVE = 0;
-  public static final int L_INTAKE = 2;
-  public static final int R_INTAKE = 3;
+  public static final int L_DRIVE = 2;
+  public static final int R_DRIVE = 3;
+  public static final int L_INTAKE = 0;
+  public static final int R_INTAKE = 1;
   public static final int HATCHHOLDER = 4;
 
   public static final int R_ENCODER_CHA = 2;
@@ -38,7 +38,7 @@ public class RobotMap {
   public static final int R_CLIMB_RVSE = 0;
 
   //Controller ports
-  public static final int XBOX_PORT = 0;
+  public static final int XBOX_PORT = 2;
   public static final int LOGITECH_PORT = 1;
 
   //when boost is Engaged, max output is occured. otherwise, the MULTIPLIER takes effect
