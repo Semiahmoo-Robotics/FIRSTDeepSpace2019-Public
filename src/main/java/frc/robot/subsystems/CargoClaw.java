@@ -20,6 +20,8 @@ public class CargoClaw extends Subsystem {
  
   private final DoubleSolenoid m_claw;
 
+  public boolean extended = false;
+
   public CargoClaw() {
     m_claw = new DoubleSolenoid(RobotMap.PCM_MODULE, RobotMap.CLAW_FORWARD_CHN, RobotMap.CLAW_REVERSE_CHN);
   }
