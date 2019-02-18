@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.Forklift;
 import frc.robot.subsystems.HatchHolder;
 import frc.robot.subsystems.CargoIntake;
 import frc.robot.subsystems.Pneumatics;
@@ -38,6 +39,7 @@ public class Robot extends TimedRobot {
   public static Pneumatics pneumatics;
   public static SensorAlign sensorAlign;
   public static HatchHolder hatchHolder;
+  public static Forklift forklift;
 
   SendableChooser<Command> autoChooser;
 
@@ -55,6 +57,7 @@ public class Robot extends TimedRobot {
     climbPiston = new ClimbPiston();
     sensorAlign = new SensorAlign();
     hatchHolder = new HatchHolder();
+    forklift = new Forklift();
     
     oi = new OI();
     
