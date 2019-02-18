@@ -15,27 +15,29 @@ import frc.robot.utils.EncoderInitialization;
 import frc.robot.RobotMap;
 
 /**
- * Add your docs here.
- */
+  * The forklift is controlled by a PID closed loop, and
+  * utilizes a PID subsystem using an internal PIDcontroller.
+  * Input: The rotation count from the Aideepen encoder.
+  * Output: The CIM motor's PWM value.
+  */
 public class Forklift extends PIDSubsystem {
   
   private final Spark m_liftmotor = new Spark(RobotMap.FORKLIFT);
   private final Encoder m_liftcoder = 
   new Encoder(RobotMap.R_ENCODER_CHA, RobotMap.R_ENCODER_CHB, false, EncodingType.k2X);  
   
-  /**
-   * Add your docs here.
-   */
   public Forklift() {
-
-    // Intert a subsystem name and PID values here
+    // PID values go here:
     super("Forklift", 1.0, 0.0, 0.0);
-    setAbsoluteTolerance(0.05);
-    getPIDController().setContinuous(false);
+
+    setOutputRange(0.0, 1.0);
+    setInputRange(0.0, 100.0);
+    //Units are in Rotations of the motor
+    setAbsoluteTolerance(0.01); //3.6 degrees
 
     EncoderInitialization.initializeAideepen(m_liftcoder);
 
-    setSetpoint(0); //Sets where the PID controller should move the system to
+    setSetpoint(0); //Sets where the PID controller should move the system to: Initially 0 rotations.
     enable(); //Enables the PID controller.
   }
 
@@ -46,12 +48,13 @@ public class Forklift extends PIDSubsystem {
 
   @Override
   protected double returnPIDInput() {
-    return m_liftcoder.get(); // returns the sensor value that is providing the feedback for the system
+    //Units are in Rotations of the motor
+    return m_liftcoder.getDistance(); // returns the sensor value that is providing the feedback for the system
   }
 
   @Override
   protected void usePIDOutput(double output) {
-    m_liftmotor.set(output); // this is where the computed output value fromthe PIDController is applied to the motor
+    m_liftmotor.pidWrite(output); // this is where the computed output value fromthe PIDController is applied to the motor
   }
 
 }

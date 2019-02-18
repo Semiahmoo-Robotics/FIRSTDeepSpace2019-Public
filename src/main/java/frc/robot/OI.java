@@ -54,10 +54,10 @@ public class OI {
 		rbumper.whenPressed(new PullOutBox());
 
 		ubutton = new POVButton(m_XBoxController, 0);		//Up on D pad = 0
-		ubutton.whenPressed(new PIDLiftUpDown());
+		ubutton.whileHeld(new PIDLiftUpDown());
 
 		dbutton = new POVButton(m_XBoxController, 180);		//Down on D pad = 180
-		dbutton.whenPressed(new PIDLiftUpDown());
+		dbutton.whileHeld(new PIDLiftUpDown());
 
 		SmartDashboard.putData("Extend Climb Piston", new ExtendClimb());
 		SmartDashboard.putData("Retract Climb Piston", new RetractClimb());

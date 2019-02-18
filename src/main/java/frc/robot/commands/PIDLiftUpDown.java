@@ -9,7 +9,6 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import frc.robot.subsystems.Forklift;
 
 public class PIDLiftUpDown extends Command {
 
@@ -20,29 +19,17 @@ public class PIDLiftUpDown extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-  }
-
-  // Called repeatedly when this Command is scheduled to run
-  @Override
-  protected void execute() {
-
     if (Robot.oi.GetXboxController().getPOV() == 0) {
-      Robot.forklift.setSetpoint(Robot.forklift.getSetpoint() + 1);
+      Robot.forklift.setSetpointRelative(0.5);
     } else if (Robot.oi.GetXboxController().getPOV() == 180) {
-      Robot.forklift.setSetpoint(Robot.forklift.getSetpoint() - 0.5);
+      Robot.forklift.setSetpointRelative(-0.5);
     }
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    boolean finished;
-    if (Robot.oi.GetXboxController().getPOV() == -1) {
-      finished = true;
-    } else {
-      finished = false;
-    }
-    return finished;
+    return false;
   }
 
   // Called once after isFinished returns true

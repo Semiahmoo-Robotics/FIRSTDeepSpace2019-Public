@@ -59,7 +59,7 @@ public final class EncoderInitialization {
     /* */
 
     encoder.setMinRate(0.01); // 0.01 RPS
-    encoder.setDistancePerPulse(RotationsPerPulse(600, 1)); //inches
+    encoder.setDistancePerPulse(RotationsPerPulse(600, 1)); //rotations
     encoder.setReverseDirection(false);
     encoder.reset();
   }
