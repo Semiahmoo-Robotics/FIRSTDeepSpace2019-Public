@@ -9,10 +9,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
-import frc.robot.RobotMap;
-import frc.robot.utils.DashboardKeys;
 
 public class TankDrive extends Command {
 
@@ -24,29 +21,25 @@ public class TankDrive extends Command {
   }
 
   @Override
-  protected void initialize() {
-
-    Robot.drivetrain.getLEncoder().reset();
-    Robot.drivetrain.getREncoder().reset();
-    SmartDashboard.putNumber(DashboardKeys.INIT_HEADING, Robot.drivetrain.getGyroAngle());
-  }
-
-  @Override
   protected void execute() {
-    
-    if (Robot.oi.GetXboxController().getTriggerAxis(Hand.kRight) >= 0.7){
+    if (Robot.oi.GetXboxController().getTriggerAxis(Hand.kLeft) >= 0.7) {
       Robot.drivetrain.setBoostEngaged(true);
-
       Robot.drivetrain.TankDriveSet(Robot.oi.GetXboxController());
+
+    } else if (Robot.oi.GetXboxController().getTriggerAxis(Hand.kRight) >=0.7) {
+      Robot.drivetrain.setPrecisionEngaged(true);
+      left = Robot.oi.GetXboxController().getY(Hand.kLeft) * Robot.drivetrain.PRECISION_MULTIPLIER;
+      right = Robot.oi.GetXboxController().getY(Hand.kRight) * Robot.drivetrain.PRECISION_MULTIPLIER;
+      Robot.drivetrain.TankDriveSet(left, right);
 
     } else {
       Robot.drivetrain.setBoostEngaged(false);
-
-      left = Robot.oi.GetXboxController().getY(Hand.kLeft) * RobotMap.MULTIPLIER;
-      right = Robot.oi.GetXboxController().getY(Hand.kRight) * RobotMap.MULTIPLIER;
+      Robot.drivetrain.setPrecisionEngaged(false);
+      left = Robot.oi.GetXboxController().getY(Hand.kLeft) * Robot.drivetrain.NORMAL_MULTIPLIER;
+      right = Robot.oi.GetXboxController().getY(Hand.kRight) * Robot.drivetrain.NORMAL_MULTIPLIER;
       Robot.drivetrain.TankDriveSet(left, right);
-    }
 
+    }
   }
 
   @Override

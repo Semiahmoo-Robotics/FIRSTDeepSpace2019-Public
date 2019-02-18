@@ -36,8 +36,14 @@ public class Drivetrain extends Subsystem {
   private final Encoder m_lEncoder;
   private final ADXRS450_Gyro m_gyro;
 
-  //boost mode - When boostEngaged is true, it applies RobotMap.MULTIPLYER to drivebase speed.
+  public final double NORMAL_MULTIPLIER = 0.75;
+  public final double PRECISION_MULTIPLIER = 0.5;
+
+  //boost mode - when true, makes the robot's max speed to 100%. Apples no MULTIPLIERs.
   public boolean boostEngaged = false;
+  //presicion mode - when true, makes the robot's max speed to 50%. Apples PRECISION_MULTIPLIER.
+  public boolean precisionEngaged = false;
+  //If boost & precision is false, then NORMAL_MULTIPLIER is applied.
 
   /**
    * Constructor - Create a new DriveTrain class.
@@ -51,8 +57,8 @@ public class Drivetrain extends Subsystem {
     m_rDrive.setInverted(true);
     m_chassis = new DifferentialDrive(m_lDrive, m_rDrive);
     
-    m_rEncoder = new Encoder(RobotMap.R_ENCODER_CHA, RobotMap.R_ENCODER_CHB, false, EncodingType.k4X); /* CIMcoders */
-    m_lEncoder = new Encoder(RobotMap.L_ENCODER_CHA, RobotMap.L_ENCODER_CHB, false, EncodingType.k4X); /* CIMcoders */
+    m_rEncoder = new Encoder(RobotMap.R_ENCODER_CHA, RobotMap.R_ENCODER_CHB, false, EncodingType.k2X); /* CIMcoders */
+    m_lEncoder = new Encoder(RobotMap.L_ENCODER_CHA, RobotMap.L_ENCODER_CHB, false, EncodingType.k2X); /* CIMcoders */
     m_gyro = new ADXRS450_Gyro(/* No port. This default constructor uses the built-in port where the gyro sits. */);
 
 
@@ -61,7 +67,7 @@ public class Drivetrain extends Subsystem {
 
     initializeEncoder(m_lEncoder);
     initializeEncoder(m_rEncoder);
-    m_gyro.reset();
+    m_gyro.calibrate();
 
   }
 
@@ -177,6 +183,22 @@ public class Drivetrain extends Subsystem {
    */
   public boolean getBoostEngaged(){
     return boostEngaged;
+  }
+
+  /**
+   * Sets precisionEngaged to parameter's value
+   * @param boostEngaged The value you want to set precisionEngaged to
+   */
+  public void setPrecisionEngaged(boolean precisionEngaged){
+    this.precisionEngaged = precisionEngaged;
+  }
+
+  /**
+   * Gets current this.precisionEngaged
+   * @return The value this.precisionEngaged is set to.
+   */
+  public boolean getPrecisionEngaged(){
+    return precisionEngaged;
   }
 
   /** 

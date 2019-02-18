@@ -17,31 +17,34 @@ package frc.robot;
 
 public class RobotMap {
 
-  //Motor Ports on ROBOrio
+  //PWM ports on ROBOrio
   public static final int L_DRIVE = 2;
   public static final int R_DRIVE = 3;
   public static final int L_INTAKE = 0;
   public static final int R_INTAKE = 1;
   public static final int HATCHHOLDER = 4;
+  public static final int FORKLIFT = 5;
 
+  //DIO ports on ROBOrio
+  public static final int L_ENCODER_CHA = 0;
+  public static final int L_ENCODER_CHB = 1;
   public static final int R_ENCODER_CHA = 2;
   public static final int R_ENCODER_CHB = 3;
-  public static final int L_ENCODER_CHA = 4;
-  public static final int L_ENCODER_CHB = 5;
+  public static final int LIFTCODER_CHA = 4;
+  public static final int LIFTCODER_CHB = 5;
 
+  //PCM ports
   public static final int PCM_MODULE = 0;
-  public static final int CLAW_FORWARD_CHN = 5;
-  public static final int CLAW_REVERSE_CHN = 4;
-  public static final int L_CLIMB_FWD = 7;
-  public static final int L_CLIMB_RVSE = 6;
-  public static final int R_CLIMB_FWD = 1;
-  public static final int R_CLIMB_RVSE = 0;
 
-  //Controller ports
+  public static final int R_CLIMB_RVSE = 0;
+  public static final int R_CLIMB_FWD = 1;
+  public static final int CLAW_REVERSE_CHN = 4;
+  public static final int CLAW_FORWARD_CHN = 5;
+  public static final int L_CLIMB_RVSE = 6;
+  public static final int L_CLIMB_FWD = 7;
+
+  //Driver Station ports
   public static final int XBOX_PORT = 2;
   public static final int LOGITECH_PORT = 1;
-
-  //when boost is Engaged, max output is occured. otherwise, the MULTIPLIER takes effect
-  public static final double MULTIPLIER = 0.75;
 
 }
