@@ -16,13 +16,13 @@ import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.commands.TankDrive;
 import jaci.pathfinder.followers.EncoderFollower;
 import jaci.pathfinder.Pathfinder;
 import jaci.pathfinder.PathfinderFRC;
 import jaci.pathfinder.Trajectory;
-import jaci.pathfinder.followers.EncoderFollower;
 
 /**
  * DriveTrain chassis subsystem.
@@ -228,6 +228,10 @@ public class Drivetrain extends Subsystem {
     return distancePerPulse;
   }
 
+  /**
+   * Starts an Autonomous pre-made Path. The paths are made using the Pathweaver tool.
+   * @param pathName
+   */
   public void startPathWeaverAuto(String pathName) {
     /*
     PathWeaver currently has a known issue. The left and right paths are being swapped.
@@ -268,6 +272,10 @@ public class Drivetrain extends Subsystem {
       m_ldrive.set(lspeed + turn);
       m_rdrive.set(rspeed - turn);
     }
+  }
+
+  public void StopNotifyer() {
+    Robot.drivetrain.m_pathWeaverfollower_notifyer.stop();
   }
 
 }

@@ -100,8 +100,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    m_autonomousCommand = autoChooser.getSelected();
-    m_autonomousCommand.start();
+    drivetrain.startPathWeaverAuto("Blue1lv1-ShipHatchFrontLeft");
   }
 
   /**
@@ -118,10 +117,8 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopInit() {
-    // This makes sure that the autonomous stops running when teleop starts running.
-    if (m_autonomousCommand != null) {
-      m_autonomousCommand.cancel();
-    }
+    drivetrain.StopNotifyer();
+    drivetrain.stop();
   }
 
   /**
