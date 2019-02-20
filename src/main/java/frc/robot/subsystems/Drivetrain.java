@@ -16,9 +16,13 @@ import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.commands.TankDrive;
+import frc.robot.utils.EncoderInitialization;
+import frc.robot.utils.Utils;
+
 import jaci.pathfinder.followers.EncoderFollower;
 import jaci.pathfinder.Pathfinder;
 import jaci.pathfinder.PathfinderFRC;
@@ -46,8 +50,14 @@ public class Drivetrain extends Subsystem {
   
   private Notifier m_pathWeaverfollower_notifyer;
 
-  //boost mode - When boostEngaged is true, it applies RobotMap.MULTIPLYER to drivebase speed.
+  public final double NORMAL_MULTIPLIER = 0.75;
+  public final double PRECISION_MULTIPLIER = 0.5;
+
+  //boost mode - when true, makes the robot's max speed to 100%. Apples no MULTIPLIERs.
   public boolean boostEngaged = false;
+  //presicion mode - when true, makes the robot's max speed to 50%. Apples PRECISION_MULTIPLIER.
+  public boolean precisionEngaged = false;
+  //If boost & precision is false, then NORMAL_MULTIPLIER is applied.
 
   /**
    * Constructor - Create a new DriveTrain class.
@@ -61,17 +71,18 @@ public class Drivetrain extends Subsystem {
     m_rdrive.setInverted(true);
     m_chassis = new DifferentialDrive(m_ldrive, m_rdrive);
     
-    m_rencoder = new Encoder(RobotMap.R_ENCODER_CHA, RobotMap.R_ENCODER_CHB, false, EncodingType.k4X); /* CIMcoders */
-    m_lencoder = new Encoder(RobotMap.L_ENCODER_CHA, RobotMap.L_ENCODER_CHB, false, EncodingType.k4X); /* CIMcoders */
+    m_rEncoder = new Encoder(RobotMap.R_ENCODER_CHA, RobotMap.R_ENCODER_CHB, false, EncodingType.k2X); /* CIMcoders */
+    m_lEncoder = new Encoder(RobotMap.L_ENCODER_CHA, RobotMap.L_ENCODER_CHB, false, EncodingType.k2X); /* CIMcoders */
     m_gyro = new ADXRS450_Gyro(/* No port. This default constructor uses the built-in port where the gyro sits. */);
 
 
     //Stops motor if the robot loses connection to the driver station.
     m_chassis.setSafetyEnabled(true);
 
-    initializeEncoder(m_lencoder);
-    initializeEncoder(m_rencoder);
-    m_gyro.reset();
+    EncoderInitialization.initializeCIMcoder(m_lEncoder);
+    EncoderInitialization.initializeCIMcoder(m_rEncoder);
+
+    m_gyro.calibrate();
 
   }
 
@@ -133,6 +144,14 @@ public class Drivetrain extends Subsystem {
   }
 
   /**
+   * gets the truncated m_Gyro angle value.
+   * @return the gyro angle value.
+   */
+  public double getGyroAngle() {
+    return Utils.truncateDecimal(m_gyro.getAngle(), 3);
+  }
+
+  /**
    * gets the m_LEncoder instance.
    * @return m_LEncoder
    */
@@ -181,6 +200,22 @@ public class Drivetrain extends Subsystem {
     return boostEngaged;
   }
 
+  /**
+   * Sets precisionEngaged to parameter's value
+   * @param boostEngaged The value you want to set precisionEngaged to
+   */
+  public void setPrecisionEngaged(boolean precisionEngaged){
+    this.precisionEngaged = precisionEngaged;
+  }
+
+  /**
+   * Gets current this.precisionEngaged
+   * @return The value this.precisionEngaged is set to.
+   */
+  public boolean getPrecisionEngaged(){
+    return precisionEngaged;
+  }
+
   /** 
    * Curvature Drive using two values
    * 
@@ -190,19 +225,6 @@ public class Drivetrain extends Subsystem {
   public void CurvatureDriveSet(double speed, double rotation) {
     m_chassis.curvatureDrive(speed, rotation, false);
    
-  }
-  
-  /** 
-   * Initialize the encoders by setting various needs.
-   * Run this method when encoder instances are created.
-   * @param encoder the encoder which needs to be initialized
-  */
-  private void initializeEncoder(Encoder encoder) {
-    encoder.setMaxPeriod(0.1); //0.1 sec
-    encoder.setMinRate(0.01); // 0.01 m/s
-    encoder.setDistancePerPulse(encoderPresets());
-    encoder.setReverseDirection(false);
-    encoder.setSamplesToAverage(7);
   }
   
   /**

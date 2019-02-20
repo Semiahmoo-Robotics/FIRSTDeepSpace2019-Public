@@ -57,7 +57,7 @@ public class TurnRightLeft extends Command {
   @Override
   protected void initialize() {
 
-    initialAngle = Robot.drivetrain.getGyro().getAngle();
+    initialAngle = Robot.drivetrain.getGyroAngle();
     finalAngle = difAngle + initialAngle;
 
     if(difAngle > 0) turnRight = true;
@@ -69,7 +69,7 @@ public class TurnRightLeft extends Command {
   @Override
   protected void execute() {
 
-    currentAngle = Robot.drivetrain.getGyro().getAngle();
+    currentAngle = Robot.drivetrain.getGyroAngle();
 
     if(turnRight) {
       Robot.drivetrain.TankDriveSet(speed, -speed);

@@ -7,39 +7,29 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class PullInBox extends Command {
-
-  public PullInBox() {
-    requires(Robot.intake);
+public class ExtendRetractClaw extends Command {
+  public ExtendRetractClaw() {
+    requires(Robot.cargoClaw);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.intake.SetIntake();
+    if (Robot.cargoClaw.extended) {
+      Robot.cargoClaw.retract();
+      Robot.cargoClaw.extended = false;
+    } else {
+      Robot.cargoClaw.extend();
+      Robot.cargoClaw.extended = true;
+    }
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return !Robot.oi.GetXboxController().getBumper(Hand.kRight);
+    return false;
   }
-
-  // Called once after isFinished returns true
-  @Override
-  protected void end() {
-    Robot.intake.StopIntake();
-  }
-
-  // Called when another command which requires one or more of the same
-  // subsystems is scheduled to run
-  @Override
-  protected void interrupted() {
-    Robot.intake.StopIntake();
-  }
-
 }

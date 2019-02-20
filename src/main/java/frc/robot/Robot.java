@@ -13,9 +13,12 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.Drivetrain;
-import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.Forklift;
+import frc.robot.subsystems.HatchHolder;
+import frc.robot.subsystems.CargoIntake;
 import frc.robot.subsystems.Pneumatics;
 import frc.robot.subsystems.SensorAlign;
+import frc.robot.subsystems.UltrasonicSensor;
 import frc.robot.subsystems.CargoClaw;
 import frc.robot.subsystems.ClimbPiston;
 import frc.robot.utils.*;
@@ -30,11 +33,13 @@ public class Robot extends TimedRobot {
   //Declare Subsystem (Initialization)
   public static OI oi;
   public static Drivetrain drivetrain;
-  public static Intake intake;
+  public static CargoIntake cargoIntake;
   public static CargoClaw cargoClaw;
   public static ClimbPiston climbPiston;
   public static Pneumatics pneumatics;
   public static SensorAlign sensorAlign;
+  public static HatchHolder hatchHolder;
+  public static Forklift forklift;
 
   SendableChooser<Command> autoChooser;
 
@@ -46,11 +51,13 @@ public class Robot extends TimedRobot {
     
     //Create Subsystem Objects (Initialization)
     drivetrain = new Drivetrain();
-    intake = new Intake();
+    cargoIntake = new CargoIntake();
     cargoClaw = new CargoClaw();
     pneumatics = new Pneumatics();
     climbPiston = new ClimbPiston();
     sensorAlign = new SensorAlign();
+    hatchHolder = new HatchHolder();
+    forklift = new Forklift();
     
     oi = new OI();
     
@@ -67,8 +74,6 @@ public class Robot extends TimedRobot {
     //autoChooser.setDefaultOption("Default - Drive forward", new DriveForward(10, 0.5, 5));
     //autoChooser.addOption("My Auto", new TurnRightLeft(50, 0.6));
     //SmartDashboard.putData("Auto mode", autoChooser);
-
-    drivetrain.getGyro().calibrate();
     CameraSetup.setupDefaultCamera();
   }
 
@@ -143,7 +148,7 @@ public class Robot extends TimedRobot {
    * Log interesting values to SmartDashboard / Shuffleboard
    */
   public void log() {
-    SmartDashboard.putNumber("Gyro value", drivetrain.getGyro().getAngle());
+    SmartDashboard.putNumber("Gyro value", drivetrain.getGyroAngle());
     SmartDashboard.putNumber("Left Encoder", drivetrain.getLEncoder().getDistance());
     SmartDashboard.putNumber("Right Encoder", drivetrain.getREncoder().getDistance());
     SmartDashboard.putNumber("Left Motor", drivetrain.getLSpark().getSpeed());
@@ -151,10 +156,12 @@ public class Robot extends TimedRobot {
     SmartDashboard.putBoolean("Boost Engaged", drivetrain.getBoostEngaged());
     SmartDashboard.putBoolean("Pressure Switch Value", pneumatics.getPressureSwitchValue());
     SmartDashboard.putBoolean("Enabled?", pneumatics.getEnabled());
-
+    SmartDashboard.putNumber("Units of voltage", UltrasonicSensor.GetVoltage());
+    SmartDashboard.putNumber("Units of some real world distance", UltrasonicSensor.getDistance());
     SmartDashboard.putNumber("Red", sensorAlign.getRed());
     SmartDashboard.putNumber("Blue", sensorAlign.getBlue());
     SmartDashboard.putNumber("Green", sensorAlign.getGreen());
   }
+  
 
 }

@@ -11,33 +11,33 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 
-public class PullOutBox extends Command {
-  public PullOutBox() {
-    requires(Robot.intake);
+public class CargoOut extends Command {
+  public CargoOut() {
+    requires(Robot.cargoIntake);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.intake.ReverseSetIntake();
+    Robot.cargoIntake.ReverseStrongSetIntake();
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return !Robot.oi.GetXboxController().getBumper(Hand.kLeft);
+    return !Robot.oi.GetXboxController().getBumper(Hand.kRight);
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.intake.StopIntake();
+    Robot.cargoIntake.StopIntake();
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    Robot.intake.StopIntake();
+    Robot.cargoIntake.StopIntake();
   }
 }
