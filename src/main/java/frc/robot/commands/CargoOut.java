@@ -11,8 +11,8 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 
-public class PullOutBox extends Command {
-  public PullOutBox() {
+public class CargoOut extends Command {
+  public CargoOut() {
     requires(Robot.cargoIntake);
   }
 
