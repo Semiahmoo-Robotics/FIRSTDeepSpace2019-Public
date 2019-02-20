@@ -61,14 +61,14 @@ public class Robot extends TimedRobot {
     
     oi = new OI();
     
-    
+
     //put data to smartdashboard
     SmartDashboard.putData(drivetrain);
     SmartDashboard.putData(cargoClaw);
     SmartDashboard.putData(pneumatics);
     SmartDashboard.putData(climbPiston);
 
- 
+
     //TODO Set Default Auto
     //autoChooser = new SendableChooser<>();
     //autoChooser.setDefaultOption("Default - Drive forward", new DriveForward(10, 0.5, 5));
@@ -105,9 +105,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    drivetrain.getGyro().reset();
-    m_autonomousCommand = autoChooser.getSelected();
-    m_autonomousCommand.start();
+    drivetrain.startPathWeaverAuto("Blue1lv1-ShipHatchFrontLeft");
   }
 
   /**
@@ -124,11 +122,8 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopInit() {
-    // This makes sure that the autonomous stops running when teleop starts running.
-    if (m_autonomousCommand != null) {
-      m_autonomousCommand.cancel();
-    }
-    drivetrain.getGyro().reset();
+    drivetrain.StopNotifyer();
+    drivetrain.stop();
   }
 
   /**
