@@ -9,8 +9,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.buttons.Button;
-import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.buttons.*;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.*;
 
@@ -28,33 +27,25 @@ public class OI {
   public static Button ybutton;
   public static Button lbumper;
   public static Button rbumper;
+  public static POVButton ubutton;
+  public static POVButton dbutton;
 
 	/**
 	 * Create a new OI and 
 	 */
 	public OI() {
 		m_XBoxController = new XboxController(RobotMap.XBOX_PORT);		
-
-		/*
-		//Write code here to run commands for button press events
-		abutton = new JoystickButton(m_XBoxController, 1);  //Button A = 1
-		abutton.whenPressed(new ExtendClaw());
-
-		bbutton = new JoystickButton(m_XBoxController, 2);	//Button B = 2
-		bbutton.whenPressed(new RetractClaw());
-
-		xbutton = new JoystickButton(m_XBoxController, 3);	//Button X = 3
-		xbutton.whenPressed(new ExtendClimb());
-    
-		lbutton = new JoystickButton(m_XBoxController, 5);	//L Bumper = 5
-		lbutton.whenPressed(new TurnRightLeft(90, 50));
-
-		//SmartDashboard Buttons
-		SmartDashboard.putData("ReCallibrate Gyro", new CalibrateGyro());
-		*/
+		
+		abutton = new JoystickButton(m_XBoxController, 1); 	//Button A = 1
+		abutton.whenPressed(new ExtendRetractClaw());
 
 		bbutton = new JoystickButton(m_XBoxController, 2);	//Button B = 2
 		bbutton.whenPressed(new ChangeHatchFormation());
+
+		xbutton = new JoystickButton(m_XBoxController, 3);	//Button X = 3
+		xbutton.whenPressed(new ExtendClimb());
+
+		ybutton = new JoystickButton(m_XBoxController, 4);	//Button Y = 4
 
 		lbumper = new JoystickButton(m_XBoxController, 5);	//L Bumper = 5
 		lbumper.whenPressed(new CargoIn());
@@ -62,13 +53,17 @@ public class OI {
 		rbumper = new JoystickButton(m_XBoxController, 6);	//R Bumper = 6
 		rbumper.whenPressed(new CargoOut());
 
-		ybutton = new JoystickButton(m_XBoxController, 4);
-		ybutton.whenPressed(new StartStopCompressor());
+		ubutton = new POVButton(m_XBoxController, 0);		//Up on D pad = 0
+		ubutton.whileHeld(new PIDLiftUpDown());
+
+		dbutton = new POVButton(m_XBoxController, 180);		//Down on D pad = 180
+		dbutton.whileHeld(new PIDLiftUpDown());
 
 		SmartDashboard.putData("Extend Climb Piston", new ExtendClimb());
 		SmartDashboard.putData("Retract Climb Piston", new RetractClimb());
 		SmartDashboard.putData("Extend Claw Piston", new ExtendClaw());
 		SmartDashboard.putData("Retract Claw Piston", new RetractClaw());
+		SmartDashboard.putData("Start Or Stop Compressor", new StartStopCompressor());
 	}
 	
 

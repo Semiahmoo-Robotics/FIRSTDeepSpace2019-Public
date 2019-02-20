@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import frc.robot.RobotMap;
 import frc.robot.commands.TankDrive;
+import frc.robot.utils.EncoderInitialization;
 import frc.robot.utils.Utils;
 
 /**
@@ -65,8 +66,9 @@ public class Drivetrain extends Subsystem {
     //Stops motor if the robot loses connection to the driver station.
     m_chassis.setSafetyEnabled(true);
 
-    initializeEncoder(m_lEncoder);
-    initializeEncoder(m_rEncoder);
+    EncoderInitialization.initializeCIMcoder(m_lEncoder);
+    EncoderInitialization.initializeCIMcoder(m_rEncoder);
+
     m_gyro.calibrate();
 
   }
@@ -212,40 +214,12 @@ public class Drivetrain extends Subsystem {
    
   }
   
-  /** 
-   * Initialize the encoders by setting various needs.
-   * Run this method when encoder instances are created.
-   * @param encoder the encoder which needs to be initialized
-  */
-  private void initializeEncoder(Encoder encoder) {
-    encoder.setMaxPeriod(0.1); //0.1 sec
-    encoder.setMinRate(0.01); // 0.01 m/s
-    encoder.setDistancePerPulse(encoderPresets());
-    encoder.setReverseDirection(false);
-    encoder.setSamplesToAverage(7);
-  }
-  
   /**
    * Stop the drivetrain from moving.
    */
   public void stop(){
     m_chassis.tankDrive(0, 0);
     m_chassis.arcadeDrive(0, 0);
-  }
-
-  public double encoderPresets() {
-    
-    //TODO Check if correct. lAST YEAR'S DATA
-    //The gearbox ratio for the motors these CIMcoders are mounted on is 10.71:1.
-    //(The motor spins 10.71 times for every 1 rotation of the wheels.)
-    //The wheels have a diameter of 15.24 cm (6").
-    //20 pulses per revolution for CIMcoders
-    //the values are in the instance are in metres
-
-    double pulsesPerRevolution = 20;
-    double distancePerRevolution = (Math.PI * 0.1524) / 10.71;
-    double distancePerPulse = distancePerRevolution / pulsesPerRevolution;
-    return distancePerPulse;
   }
 
 }
