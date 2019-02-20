@@ -71,16 +71,16 @@ public class Drivetrain extends Subsystem {
     m_rdrive.setInverted(true);
     m_chassis = new DifferentialDrive(m_ldrive, m_rdrive);
     
-    m_rEncoder = new Encoder(RobotMap.R_ENCODER_CHA, RobotMap.R_ENCODER_CHB, false, EncodingType.k2X); /* CIMcoders */
-    m_lEncoder = new Encoder(RobotMap.L_ENCODER_CHA, RobotMap.L_ENCODER_CHB, false, EncodingType.k2X); /* CIMcoders */
+    m_rencoder = new Encoder(RobotMap.R_ENCODER_CHA, RobotMap.R_ENCODER_CHB, false, EncodingType.k2X); /* CIMcoders */
+    m_lencoder = new Encoder(RobotMap.L_ENCODER_CHA, RobotMap.L_ENCODER_CHB, false, EncodingType.k2X); /* CIMcoders */
     m_gyro = new ADXRS450_Gyro(/* No port. This default constructor uses the built-in port where the gyro sits. */);
 
 
     //Stops motor if the robot loses connection to the driver station.
     m_chassis.setSafetyEnabled(true);
 
-    EncoderInitialization.initializeCIMcoder(m_lEncoder);
-    EncoderInitialization.initializeCIMcoder(m_rEncoder);
+    EncoderInitialization.initializeCIMcoder(m_lencoder);
+    EncoderInitialization.initializeCIMcoder(m_rencoder);
 
     m_gyro.calibrate();
 
