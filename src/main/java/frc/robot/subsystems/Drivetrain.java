@@ -235,21 +235,6 @@ public class Drivetrain extends Subsystem {
     m_chassis.arcadeDrive(0, 0);
   }
 
-  public double encoderPresets() {
-    
-    //TODO Check if correct. lAST YEAR'S DATA
-    //The gearbox ratio for the motors these CIMcoders are mounted on is 10.71:1.
-    //(The motor spins 10.71 times for every 1 rotation of the wheels.)
-    //The wheels have a diameter of 15.24 cm (6").
-    //20 pulses per revolution for CIMcoders
-    //the values are in the instance are in metres
-
-    double pulsesPerRevolution = 20;
-    double distancePerRevolution = (Math.PI * 0.1524) / 10.71;
-    double distancePerPulse = distancePerRevolution / pulsesPerRevolution;
-    return distancePerPulse;
-  }
-
   /**
    * Starts an Autonomous pre-made Path. The paths are made using the Pathweaver tool.
    * @param pathName
