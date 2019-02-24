@@ -36,10 +36,10 @@ public class RobotMap {
   //PCM ports
   public static final int PCM_MODULE = 0;
 
-  public static final int R_CLIMB_RVSE = 0;
-  public static final int R_CLIMB_FWD = 1;
-  public static final int CLAW_REVERSE_CHN = 4;
-  public static final int CLAW_FORWARD_CHN = 5;
+  public static final int R_CLIMB_RVSE = 4;
+  public static final int R_CLIMB_FWD = 5;
+  public static final int CLAW_REVERSE_CHN = 0;
+  public static final int CLAW_FORWARD_CHN = 1;
   public static final int L_CLIMB_RVSE = 6;
   public static final int L_CLIMB_FWD = 7;
 

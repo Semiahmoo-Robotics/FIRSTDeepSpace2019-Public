@@ -28,7 +28,7 @@ public class Forklift extends PIDSubsystem {
   
   public Forklift() {
     // PID values go here:
-    super("Forklift", 1.0, 0.0, 0.0);
+    super("Forklift", 0.5, 0.0, 0.0);
 
     setOutputRange(0.0, 1.0);
     setInputRange(0.0, 100.0);
