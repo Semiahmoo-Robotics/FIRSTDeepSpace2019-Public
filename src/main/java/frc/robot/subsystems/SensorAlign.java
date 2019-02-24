@@ -47,6 +47,8 @@ public class SensorAlign extends Subsystem {
 
   public short red = 0, green = 0, blue = 0, prox = 0; //public not private!!!
   
+  public final int WHITE_ERROR = 700;
+
   public SensorAlign() {
 
     //initialize objects

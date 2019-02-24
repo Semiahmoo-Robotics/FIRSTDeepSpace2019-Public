@@ -7,27 +7,38 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.command.InstantCommand;
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
+import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 /**
- * Add your docs here.
+ * Reads the color sensor, and if the color detected is a white alignment line,
+ * sends the rumble to notify the driver.
  */
-public class ReadColor extends InstantCommand {
-  /**
-   * Add your docs here.
-   */
+public class ReadColor extends Command {
+
   public ReadColor() {
-    super();
-    // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
     requires(Robot.sensorAlign);
   }
 
-  // Called once when the command executes
   @Override
-  protected void initialize() {
+  protected void execute() {
     Robot.sensorAlign.read();
+    if (Robot.sensorAlign.getRed() >= Robot.sensorAlign.WHITE_ERROR
+        && Robot.sensorAlign.getBlue() >= Robot.sensorAlign.WHITE_ERROR
+        && Robot.sensorAlign.getGreen() >= Robot.sensorAlign.WHITE_ERROR ) {
+
+      Robot.oi.GetXboxController().setRumble(RumbleType.kLeftRumble, 1);
+      Robot.oi.GetXboxController().setRumble(RumbleType.kRightRumble, 1);
+    } else {
+      Robot.oi.GetXboxController().setRumble(RumbleType.kLeftRumble, 0);
+      Robot.oi.GetXboxController().setRumble(RumbleType.kRightRumble, 0);
+    }
+  }
+
+  @Override
+  protected boolean isFinished() {
+    return false;
   }
 
 }
