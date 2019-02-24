@@ -8,9 +8,11 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
+import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import frc.robot.utils.EncoderInitialization;
 import frc.robot.RobotMap;
 
@@ -21,6 +23,8 @@ import frc.robot.RobotMap;
   * Output: The CIM motor's PWM value.
   */
 public class Forklift extends PIDSubsystem {
+
+  public NetworkTableEntry m_setpoint;
   
   private final Spark m_liftmotor = new Spark(RobotMap.FORKLIFT);
   private final Encoder m_liftcoder = 
@@ -39,6 +43,8 @@ public class Forklift extends PIDSubsystem {
 
     setSetpoint(0); //Sets where the PID controller should move the system to: Initially 0 rotations.
     enable(); //Enables the PID controller.
+
+    m_setpoint = Shuffleboard.getTab("Test").add("Set Setpoint", 0.0).getEntry();
   }
 
   @Override

@@ -7,7 +7,6 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -41,7 +40,6 @@ public class Robot extends TimedRobot {
   public static SensorAlign sensorAlign;
   public static HatchHolder hatchHolder;
   public static Forklift forklift;
-  public static PowerDistributionPanel power;
 
   SendableChooser<Command> autoChooser;
 
@@ -60,24 +58,21 @@ public class Robot extends TimedRobot {
     sensorAlign = new SensorAlign();
     hatchHolder = new HatchHolder();
     forklift = new Forklift();
-    power = new PowerDistributionPanel();
     
     oi = new OI();
     
-    power.clearStickyFaults();
-
     //put data to smartdashboard
     SmartDashboard.putData(drivetrain);
     SmartDashboard.putData(cargoClaw);
     SmartDashboard.putData(pneumatics);
     SmartDashboard.putData(climbPiston);
+    
 
-    //TODO Set Default Auto
     //autoChooser = new SendableChooser<>();
     //autoChooser.setDefaultOption("Default - Drive forward", new DriveForward(10, 0.5, 5));
     //autoChooser.addOption("My Auto", new TurnRightLeft(50, 0.6));
     //SmartDashboard.putData("Auto mode", autoChooser);
-    CameraSetup.setupDefaultCamera();
+    CameraSetup.setupDefaultCamera(); 
   }
 
   /**

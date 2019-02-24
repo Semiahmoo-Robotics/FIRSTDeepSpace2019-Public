@@ -64,6 +64,7 @@ public class OI {
 		SmartDashboard.putData("Extend Claw Piston", new ExtendClaw());
 		SmartDashboard.putData("Retract Claw Piston", new RetractClaw());
 		SmartDashboard.putData("Start Or Stop Compressor", new StartStopCompressor());
+		SmartDashboard.putData("SetSetpointHeight", new PIDSetpoint(Robot.forklift.m_setpoint.getDouble(0)));
 	}
 	
 

@@ -12,9 +12,9 @@ import frc.robot.Robot;
 
 public class PIDSetpoint extends Command {
 
-  private int set;
+  private double set;
 
-  public PIDSetpoint(int set) {
+  public PIDSetpoint(double set) {
     requires(Robot.forklift);
     this.set = set;
   }
