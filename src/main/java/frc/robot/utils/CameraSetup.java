@@ -7,6 +7,9 @@ import java.util.logging.Logger;
 
 /**
  * A utility class to start USB camera capture data.
+ * This camera initialization is only used if the camera is plugged in the roboRIO.
+ * The final robot has the camera processed by the RPi coprocessor,
+ * then send the image through Network Tables, showing the image in the Shuffleboard.
  */
 public final class CameraSetup {
 

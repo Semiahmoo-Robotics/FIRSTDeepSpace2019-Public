@@ -32,7 +32,7 @@ public final class EncoderInitialization {
   public static void initializeCIMcoder(Encoder encoder) {
 
     encoder.setMinRate(0.01); // 0.01 in/s
-    encoder.setDistancePerPulse(DistancePerPulseForWheels(20, 6, 10.71)); //inches
+    encoder.setDistancePerPulse(DistancePerPulse(20, 6, 10.71)); //inches
     encoder.setReverseDirection(false);
     encoder.reset();
   }
@@ -64,20 +64,41 @@ public final class EncoderInitialization {
     encoder.reset();
   }
 
-
-  private static double DistancePerPulseForWheels(double pulsesPerRevolution, double wheeldiameter, double gearratio) {
-    double distancePerRevolution = (Math.PI * wheeldiameter) / gearratio;
-    double distancePerPulse = distancePerRevolution / pulsesPerRevolution;
+  /**
+   * Converts encoder pulses per revolution to distance per encoder pulse, based on the
+   * wheel diameter and the gear ratio.
+   * @param ppr encoder pulses per one revolution of the encoder shaft.
+   * @param diameter the diameter of the wheel.
+   * @param gr The gear ratio from the encoder shaft to the wheel axis.
+   * @return distance of robot traveled per encoder pulse
+   */
+  private static double DistancePerPulse(double ppr, double diameter, double gr) {
+    double distancePerRevolution = (Math.PI * diameter) / gr;
+    double distancePerPulse = distancePerRevolution / ppr;
     return distancePerPulse;
   }
 
-  private static double DegreesPerPulse(double pulsesPerRevolution, double gearratio) {
-    double degreesperpulse = 360 / (gearratio * pulsesPerRevolution);
+  /**
+   * Converts encoder pulses per revolution to degrees of motor rotation per encoder pulse,
+   * based on the gear ratio.
+   * @param ppr encoder pulses per one revolution of the encoder shaft.
+   * @param gr The gear ratio from the encoder shaft to the wheel axis.
+   * @return degrees of motor rotation per encoder pulse
+   */
+  private static double DegreesPerPulse(double ppr, double gr) {
+    double degreesperpulse = 360 / (gr * ppr);
     return degreesperpulse;
   }
 
-  private static double RotationsPerPulse(double pulsesPerRevolution, double gearratio) {
-    double rotationsperpulse = 1 / (gearratio * pulsesPerRevolution);
+  /**
+   * Converts encoder pulses per revolution to degrees of motor rotation per encoder pulse,
+   * based on the gear ratio.
+   * @param pprencoder pulses per one revolution of the encoder shaft.
+   * @param gr The gear ratio from the encoder shaft to the wheel axis.
+   * @return Motor Rotations Per encoder Pulse
+   */
+  private static double RotationsPerPulse(double ppr, double gr) {
+    double rotationsperpulse = 1 / (gr * ppr);
     return rotationsperpulse;
   }
 }
