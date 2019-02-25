@@ -8,13 +8,22 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.AnalogInput;
 
+/**
+ * A class ported over from 2018.
+ * <p>
+ * Using an {@link edu.wpi.first.wpilibj.AnalogInput}, this class outputs distance based on an ultrasonic rangefinder
+ * such as the <a href=https://www.maxbotix.com/Ultrasonic_Sensors/MB1010.htm>MB1010 LV-MaxSonar-EZ1</a>.
+ */
 public class UltrasonicSensor {
+
   private static final AnalogInput ultrasonicsensor = new AnalogInput(0);
-  private static final double volts_to_distance = 1.0;
+  private static final double DEFAULT_SCALING_FACTOR = 5.0 / 1024.0;
+
   public static double GetVoltage() {
-    return ultrasonicsensor.getVoltage();
+    return ultrasonicsensor.getAverageVoltage();
   }
+  
   public static double getDistance() {
-    return GetVoltage() * volts_to_distance;
+    return 5 * (ultrasonicsensor.getAverageVoltage() * DEFAULT_SCALING_FACTOR);
   }
 }
