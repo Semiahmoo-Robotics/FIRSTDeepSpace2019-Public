@@ -55,7 +55,7 @@ public class RobotMap {
   public static final String PATH_NAME = "example";
 
   //Controller ports
-  public static final int XBOX_PORT = 0;
-  public static final int LOGITECH_PORT = 1;
+  public static final int XBOX_1P_PORT = 0;
+  public static final int KEYBOARD_2P_PORT = 1;
 
 }

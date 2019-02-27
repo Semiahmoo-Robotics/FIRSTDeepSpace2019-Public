@@ -34,7 +34,7 @@ public class OI {
 	 * Create a new OI and 
 	 */
 	public OI() {
-		m_XBoxController = new XboxController(RobotMap.XBOX_PORT);		
+		m_XBoxController = new XboxController(RobotMap.XBOX_1P_PORT);		
 		
 		abutton = new JoystickButton(m_XBoxController, 1); 	//Button A = 1
 		abutton.whenPressed(new ExtendRetractClaw());
