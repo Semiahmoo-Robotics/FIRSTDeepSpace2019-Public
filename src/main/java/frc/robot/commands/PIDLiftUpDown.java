@@ -20,9 +20,9 @@ public class PIDLiftUpDown extends Command {
   @Override
   protected void initialize() {
     if (Robot.oi.GetXboxController().getPOV() == 0) {
-      Robot.forklift.setSetpointRelative(0.5);
+      Robot.forklift.setSetpointRelative(1);
     } else if (Robot.oi.GetXboxController().getPOV() == 180) {
-      Robot.forklift.setSetpointRelative(-0.5);
+      Robot.forklift.setSetpointRelative(-0.2);
     }
   }
 
