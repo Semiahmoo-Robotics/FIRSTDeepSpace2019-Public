@@ -18,12 +18,12 @@ package frc.robot;
 public class RobotMap {
 
   //PWM ports on ROBOrio
-  public static final int L_DRIVE = 2;
-  public static final int R_DRIVE = 3;
-  public static final int L_INTAKE = 0;
-  public static final int R_INTAKE = 1;
-  public static final int HATCHHOLDER = 4;
-  public static final int FORKLIFT = 5;
+  public static final int L_DRIVE = 0;
+  public static final int R_DRIVE = 1;
+  public static final int L_INTAKE = 9;
+  public static final int R_INTAKE = 4;
+  public static final int HATCHHOLDER = 2;
+  public static final int FORKLIFT = 3;
 
   //DIO ports on ROBOrio
   public static final int L_ENCODER_CHA = 0;
@@ -57,5 +57,6 @@ public class RobotMap {
   //Controller ports
   public static final int XBOX_1P_PORT = 0;
   public static final int KEYBOARD_2P_PORT = 1;
+  public static final int SUPPORT_2P_PORT = 2;
 
 }
