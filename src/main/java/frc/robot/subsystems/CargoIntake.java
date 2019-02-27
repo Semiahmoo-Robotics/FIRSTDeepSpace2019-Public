@@ -12,8 +12,8 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 
 /**
- * The intake motors for the previous APOLO robot in 2018 FIRST POWER UP Season.
- * This subsystem is only for the test robot.
+ * This subsystem controls the intake motors for the cargo intake.
+ * Connected to a SPARK motor controller.
  */
 public class CargoIntake extends Subsystem {
 
@@ -29,24 +29,14 @@ public class CargoIntake extends Subsystem {
 
   }
 
-  public void SetIntake() {
-    m_lIntake.set(0.3);
-    m_rIntake.set(0.3);
+  public void SetIntake(double set) {
+    m_lIntake.set(set);
+    m_rIntake.set(set);
   } 
 
-  public void SetStrongIntake() {
-    m_lIntake.set(1.0);
-    m_rIntake.set(1.0);
-  } 
-
-  public void ReverseSetIntake() {
-    m_lIntake.set(-0.3);
-    m_rIntake.set(-0.3);
-  }
-
-  public void ReverseStrongSetIntake() {
-    m_lIntake.set(-1.0);
-    m_rIntake.set(-1.0);
+  public void ReverseSetIntake(double set) {
+    m_lIntake.set(set);
+    m_rIntake.set(set);
   }
 
   public void StopIntake() {

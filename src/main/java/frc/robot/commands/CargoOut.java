@@ -19,7 +19,7 @@ public class CargoOut extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.cargoIntake.ReverseStrongSetIntake();
+    Robot.cargoIntake.ReverseSetIntake(1.0);
   }
 
   // Make this return true when this Command no longer needs to run execute()
