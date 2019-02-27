@@ -19,52 +19,79 @@ import frc.robot.commands.*;
  */
 public class OI {
 
-  public static XboxController m_XBoxController;
-  public static Joystick supportStick;
-  public static Button abutton;
-  public static Button bbutton;
-  public static Button xbutton;
-  public static Button ybutton;
-  public static Button lbumper;
-  public static Button rbumper;
-  public static POVButton ubutton;
-  public static POVButton dbutton;
+  public static XboxController m_p1XBox;
+  public static XboxController m_p2Keyboard;
+  public static Joystick m_p2Support;
+
+  public static Button p1_abtn;
+  public static Button p1_bbtn;
+  public static Button p1_xbtn;
+  public static Button p1_ybtn;
+  public static Button p1_lbumper;
+  public static Button p1_rbumper;
+  public static POVButton p1_ubtn;
+  public static POVButton p1_dbtn;
+
+  public static Button p2_btn1;
+  public static Button p2_btn2;
+  public static Button p2_btn3;
+  public static Button p2_btn4;
+  public static Button p2_btn5;
+  public static Button p2_btn6;
+  public static Button p2_btn7;
+  public static Button p2_btn8;
+  public static Button p2_btn9;
+  public static Button p2_btn0;
 
 	/**
 	 * Create a new OI and 
 	 */
 	public OI() {
-		m_XBoxController = new XboxController(RobotMap.XBOX_1P_PORT);		
+		m_p1XBox = new XboxController(RobotMap.XBOX_1P_PORT);		
 		
-		abutton = new JoystickButton(m_XBoxController, 1); 	//Button A = 1
-		abutton.whenPressed(new ExtendRetractClaw());
+		/*
+		Drivetrain: Controlled by drive commands.
+		P1 L R Joysticks. Tank/Arcade
+		P1 L Trigger. Boost mode
+		P1 R Trigger. Precision mide
+		*/
 
-		bbutton = new JoystickButton(m_XBoxController, 2);	//Button B = 2
-		bbutton.whenPressed(new ChangeHatchFormation());
+		/*
+		Forklift: Controlled in OI.
+		P2 Btn 1~8. Height Presets
+		P2 Joystick X. Manual Height change.
+		*/
 
-		xbutton = new JoystickButton(m_XBoxController, 3);	//Button X = 3
-		xbutton.whenPressed(new ExtendClimb());
+		/*
+		Cargo Intake: Controlled in OI.
+		P1 
+		*/
 
-		ybutton = new JoystickButton(m_XBoxController, 4);	//Button Y = 4
+		p1_abtn = new JoystickButton(m_p1XBox, 1); 	//btn A = 1
+		p1_abtn.whenPressed(new SetElevator());
 
-		lbumper = new JoystickButton(m_XBoxController, 5);	//L Bumper = 5
-		lbumper.whenPressed(new CargoIn());
+		p1_bbtn = new JoystickButton(m_p1XBox, 2);	//btn B = 2
+		p1_bbtn.whenPressed(new ChangeHatchFormation());
 
-		rbumper = new JoystickButton(m_XBoxController, 6);	//R Bumper = 6
-		rbumper.whenPressed(new CargoOut());
+		p1_xbtn = new JoystickButton(m_p1XBox, 3);	//btn X = 3
+		p1_xbtn.whenPressed(new ExtendClimb());
 
-		ubutton = new POVButton(m_XBoxController, 0);		//Up on D pad = 0
-		ubutton.whileHeld(new PIDLiftUpDown());
+		p1_ybtn = new JoystickButton(m_p1XBox, 4);	//btn Y = 4
+		p1_ybtn.whenPressed(new RetractClimb());
 
-		dbutton = new POVButton(m_XBoxController, 180);		//Down on D pad = 180
-		dbutton.whileHeld(new PIDLiftUpDown());
+
+		p1_lbumper = new JoystickButton(m_p1XBox, 5);	//L Bumper = 5
+		p1_lbumper.whenPressed(new CargoIn());
+
+		p1_rbumper = new JoystickButton(m_p1XBox, 6);	//R Bumper = 6
+		p1_rbumper.whenPressed(new CargoOut());
 
 		SmartDashboard.putData("Extend Climb Piston", new ExtendClimb());
 		SmartDashboard.putData("Retract Climb Piston", new RetractClimb());
-		SmartDashboard.putData("Extend Claw Piston", new ExtendClaw());
-		SmartDashboard.putData("Retract Claw Piston", new RetractClaw());
 		SmartDashboard.putData("Start Or Stop Compressor", new StartStopCompressor());
-		SmartDashboard.putData("SetSetpointHeight", new PIDSetpoint(Robot.forklift.m_setpoint.getDouble(0)));
+		SmartDashboard.putData("Extend Small Climb Piston", new ExtendSmallClimb());
+		SmartDashboard.putData("Retract Small Climb Piston", new RetractSmallClimb());
+
 	}
 	
 
@@ -72,7 +99,7 @@ public class OI {
 	 * Returns the XBoxController Instance.
 	 */
 	public XboxController GetXboxController() {
-		return m_XBoxController;
+		return m_p1XBox;
 	}	
 
 }

@@ -10,15 +10,16 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class ExtendClaw extends Command {
-  public ExtendClaw() {
-    requires(Robot.cargoClaw);
+public class ExtendSmallClimb extends Command {
+  public ExtendSmallClimb() {
+    // Use requires() here to declare subsystem dependencies
+    requires(Robot.climbPiston);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.cargoClaw.extend();
+    Robot.climbPiston.extendSmall();
   }
 
   // Make this return true when this Command no longer needs to run execute()

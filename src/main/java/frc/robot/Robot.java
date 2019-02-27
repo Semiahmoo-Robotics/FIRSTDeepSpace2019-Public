@@ -7,22 +7,20 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.Drivetrain;
-import frc.robot.subsystems.Forklift;
+import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.HatchHolder;
 import frc.robot.subsystems.CargoIntake;
 import frc.robot.subsystems.Pneumatics;
 import frc.robot.subsystems.SensorAlign;
 import frc.robot.subsystems.UltrasonicSensor;
-import frc.robot.commands.DriveForward;
-import frc.robot.subsystems.CargoClaw;
 import frc.robot.subsystems.ClimbPiston;
-import frc.robot.utils.*;
 
 /**
  * Robot java source code for Team 6458 Semiahmoo Robotics
@@ -35,12 +33,12 @@ public class Robot extends TimedRobot {
   public static OI oi;
   public static Drivetrain drivetrain;
   public static CargoIntake cargoIntake;
-  public static CargoClaw cargoClaw;
   public static ClimbPiston climbPiston;
   public static Pneumatics pneumatics;
   public static SensorAlign sensorAlign;
   public static HatchHolder hatchHolder;
-  public static Forklift forklift;
+  public static Elevator elevator;
+  public static PowerDistributionPanel power;
 
   public SendableChooser<String> m_autoChooser;
   public SendableChooser<Boolean> m_driveChooser;
@@ -54,18 +52,17 @@ public class Robot extends TimedRobot {
     //Create Subsystem Objects (Initialization)
     drivetrain = new Drivetrain();
     cargoIntake = new CargoIntake();
-    cargoClaw = new CargoClaw();
     pneumatics = new Pneumatics();
     climbPiston = new ClimbPiston();
     sensorAlign = new SensorAlign();
     hatchHolder = new HatchHolder();
-    forklift = new Forklift();
+    elevator = new Elevator();
+    power = new PowerDistributionPanel();
     
     oi = new OI();
     
     //put data to smartdashboard
     SmartDashboard.putData(drivetrain);
-    SmartDashboard.putData(cargoClaw);
     SmartDashboard.putData(pneumatics);
     SmartDashboard.putData(climbPiston);
     
@@ -79,6 +76,9 @@ public class Robot extends TimedRobot {
     m_driveChooser.setDefaultOption("Default - Tank Drive", true);
     m_driveChooser.addOption("Arcade Drive", false);
     SmartDashboard.putData("Drive Mode", m_driveChooser);
+
+    power.clearStickyFaults();
+    
 
     //Cammera connected to RPi. If connected on RoboRIO, take off comment.
     //CameraSetup.setupDefaultCamera(); 
@@ -131,7 +131,8 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopInit() {
-    drivetrain.StopNotifyer();
+    //Causes error
+    //drivetrain.StopNotifyer();
     drivetrain.stop();
   }
 
@@ -149,8 +150,13 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void testPeriodic() {
-    //DriveForward MoveTest = new DriveForward();
-    //MoveTest 
+    if (oi.GetXboxController().getBackButton()) {
+      cargoIntake.SetIntake(0.5);
+    } else if (oi.GetXboxController().getBButton()) {
+      cargoIntake.SetIntake(-0.2);
+    } else {
+      cargoIntake.SetIntake(0);
+    }
   }
 
   /**

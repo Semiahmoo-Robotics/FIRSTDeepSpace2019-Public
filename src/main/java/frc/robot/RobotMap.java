@@ -23,7 +23,8 @@ public class RobotMap {
   public static final int L_INTAKE = 9;
   public static final int R_INTAKE = 4;
   public static final int HATCHHOLDER = 2;
-  public static final int FORKLIFT = 3;
+  public static final int FORKLIFT = 8;
+  public static final int ELEVATOR = 3;
 
   //DIO ports on ROBOrio
   public static final int L_ENCODER_CHA = 0;
@@ -36,12 +37,12 @@ public class RobotMap {
   //PCM ports
   public static final int PCM_MODULE = 0;
 
-  public static final int R_CLIMB_RVSE = 4;
-  public static final int R_CLIMB_FWD = 5;
-  public static final int CLAW_REVERSE_CHN = 0;
-  public static final int CLAW_FORWARD_CHN = 1;
-  public static final int L_CLIMB_RVSE = 6;
-  public static final int L_CLIMB_FWD = 7;
+  public static final int FRONT_CLIMB_RVSE = 4;
+  public static final int FRONT_CLIMB_FWD = 5;
+  public static final int BACK_CLIMB_RVSE = 0;
+  public static final int BACK_CLIMB_FWD = 1;
+  public static final int SMALL_CLIMB_RVSE = 6;
+  public static final int SMALL_CLIMB_FWD = 7;
 
   //Path Weaver Constants
   //number of encoder counts per wheel revolution for the drivetrain
@@ -51,8 +52,6 @@ public class RobotMap {
   public static final double WHEEL_DIAMETER = 6;
   //maximum velocity of the robot
   public static final double MAX_VELOCITY = 10;
-
-  public static final String PATH_NAME = "example";
 
   //Controller ports
   public static final int XBOX_1P_PORT = 0;

@@ -12,42 +12,28 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 
 /**
- * This subsystem controls the intake motors for the cargo intake.
- * Connected to a SPARK motor controller.
+ * Add your docs here.
  */
-public class CargoIntake extends Subsystem {
+public class Elevator extends Subsystem {
 
-  private final Spark m_lIntake;
-  private final Spark m_rIntake;
+  private final Spark m_elevator;
 
-  public CargoIntake() {
+  public Elevator() {
 
-    m_lIntake = new Spark(RobotMap.L_INTAKE);
-    m_lIntake.setInverted(true);
-    m_rIntake = new Spark(RobotMap.R_INTAKE);
-    m_rIntake.setInverted(true);
+    m_elevator = new Spark(RobotMap.ELEVATOR);
 
   }
 
-  public void SetIntake(double set) {
-    m_lIntake.set(set);
-    m_rIntake.set(set);
+  public void Set(double set) {
+    m_elevator.set(set);
   } 
 
-  public void ReverseSetIntake(double set) {
-    m_lIntake.set(-set);
-    m_rIntake.set(-set);
-  }
-
-  public void StopIntake() {
-    m_lIntake.set(0);
-    m_rIntake.set(0);
+  public void Stop() {
+    m_elevator.set(0);
   }
 
   @Override
   public void initDefaultCommand() {
     //none
   }
-
-
 }
