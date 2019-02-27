@@ -19,6 +19,7 @@ import frc.robot.subsystems.CargoIntake;
 import frc.robot.subsystems.Pneumatics;
 import frc.robot.subsystems.SensorAlign;
 import frc.robot.subsystems.UltrasonicSensor;
+import frc.robot.commands.DriveForward;
 import frc.robot.subsystems.CargoClaw;
 import frc.robot.subsystems.ClimbPiston;
 import frc.robot.utils.*;
@@ -41,7 +42,8 @@ public class Robot extends TimedRobot {
   public static HatchHolder hatchHolder;
   public static Forklift forklift;
 
-  SendableChooser<Command> autoChooser;
+  public SendableChooser<String> m_autoChooser;
+  public SendableChooser<Boolean> m_driveChooser;
 
   /**
    * Called once when robot is first started up
@@ -68,11 +70,18 @@ public class Robot extends TimedRobot {
     SmartDashboard.putData(climbPiston);
     
 
-    //autoChooser = new SendableChooser<>();
-    //autoChooser.setDefaultOption("Default - Drive forward", new DriveForward(10, 0.5, 5));
-    //autoChooser.addOption("My Auto", new TurnRightLeft(50, 0.6));
-    //SmartDashboard.putData("Auto mode", autoChooser);
-    CameraSetup.setupDefaultCamera(); 
+    m_autoChooser = new SendableChooser<>();
+    m_autoChooser.setDefaultOption("Default - Drive forward", "Blue1lv1-ShipHatchFrontLeft");
+    SmartDashboard.putData("Auto mode", m_autoChooser);
+
+    //Tank or Arcade chooser
+    m_driveChooser = new SendableChooser<Boolean>();
+    m_driveChooser.setDefaultOption("Default - Tank Drive", true);
+    m_driveChooser.addOption("Arcade Drive", false);
+    SmartDashboard.putData("Drive Mode", m_driveChooser);
+
+    //Cammera connected to RPi. If connected on RoboRIO, take off comment.
+    //CameraSetup.setupDefaultCamera(); 
   }
 
   /**
@@ -103,7 +112,9 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    drivetrain.startPathWeaverAuto("Blue1lv1-ShipHatchFrontLeft");
+    String autoCommand = (String) m_autoChooser.getSelected();
+
+    drivetrain.startPathWeaverAuto(autoCommand);
   }
 
   /**
