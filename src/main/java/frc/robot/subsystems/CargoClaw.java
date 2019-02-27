@@ -15,6 +15,7 @@ import frc.robot.RobotMap;
 /**
  * This subsystem controls the Cargo Claw pneumatics piston.
  * It uses one double solenoid connected to the pcm.
+ * Not used in final Robot Product
  */
 public class CargoClaw extends Subsystem {
  

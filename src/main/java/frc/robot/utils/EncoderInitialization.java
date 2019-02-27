@@ -47,7 +47,6 @@ public final class EncoderInitialization {
     encoder.reset();
   }
   
-  //for PID lift encoder
   /**
    * Initializes a Aideepen encoder for the forklift mechanism with the following data:
    * The Aideepen encoder is directly mounted on the shaft of the gearbox, so the 
@@ -56,7 +55,6 @@ public final class EncoderInitialization {
    * @param encoder the Aideepen encoder to initialize.
    */
   public static void initializeAideepen(Encoder encoder) {
-    /* */
 
     encoder.setMinRate(0.01); // 0.01 RPS
     encoder.setDistancePerPulse(RotationsPerPulse(600, 1)); //rotations

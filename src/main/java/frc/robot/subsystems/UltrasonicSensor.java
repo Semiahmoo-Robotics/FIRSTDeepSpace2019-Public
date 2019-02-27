@@ -9,8 +9,7 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.AnalogInput;
 
 /**
- * A class ported over from 2018.
- * <p>
+ * A class ported over from 2018. Detects distance from sensor to a blockage.
  * Using an {@link edu.wpi.first.wpilibj.AnalogInput}, this class outputs distance based on an ultrasonic rangefinder
  * such as the <a href=https://www.maxbotix.com/Ultrasonic_Sensors/MB1010.htm>MB1010 LV-MaxSonar-EZ1</a>.
  */

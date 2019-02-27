@@ -21,8 +21,8 @@ public class ChangeHatchFormation extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    if (!Robot.hatchHolder.HolderUp) Robot.hatchHolder.SetHolder();
-    else Robot.hatchHolder.ReverseSetHolder();
+    if (!Robot.hatchHolder.Hold) Robot.hatchHolder.Set(0.6);
+    else Robot.hatchHolder.Reverse(0.6);
     setTimeout(2);
   }
 
@@ -42,8 +42,8 @@ public class ChangeHatchFormation extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    if (Robot.hatchHolder.HolderUp) Robot.hatchHolder.HolderUp = false;
-    else Robot.hatchHolder.HolderUp = true;
+    if (Robot.hatchHolder.Hold) Robot.hatchHolder.Hold = false;
+    else Robot.hatchHolder.Hold = true;
     Robot.hatchHolder.StopHolder();
   }
 

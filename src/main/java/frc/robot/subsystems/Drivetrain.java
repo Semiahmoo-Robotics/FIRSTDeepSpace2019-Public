@@ -135,6 +135,17 @@ public class Drivetrain extends Subsystem {
   
   }
 
+  /** 
+   * Curvature Drive using two values
+   * 
+   * @param speed desired speed of robot
+   * @param rotation desired rotation rate of robot
+  */
+  public void CurvatureDriveSet(double speed, double rotation) {
+    m_chassis.curvatureDrive(speed, rotation, false);
+   
+  }
+  
   /**
    * gets the m_Gyro instance.
    * @return m_Gyro
@@ -216,17 +227,6 @@ public class Drivetrain extends Subsystem {
     return precisionEngaged;
   }
 
-  /** 
-   * Curvature Drive using two values
-   * 
-   * @param speed desired speed of robot
-   * @param rotation desired rotation rate of robot
-  */
-  public void CurvatureDriveSet(double speed, double rotation) {
-    m_chassis.curvatureDrive(speed, rotation, false);
-   
-  }
-  
   /**
    * Stop the drivetrain from moving.
    */
@@ -252,7 +252,7 @@ public class Drivetrain extends Subsystem {
     m_rfollower = new EncoderFollower(right_trajectory);
 
     m_lfollower.configureEncoder(m_lencoder.get(), RobotMap.TICK_PER_REV, RobotMap.WHEEL_DIAMETER);
-    // You must tune the PID values next line (line 239)!
+    // TODO You must tune the PID values!
     m_lfollower.configurePIDVA(1.0, 0.0, 0.0, 1 / RobotMap.MAX_VELOCITY, 0);
 
     m_rfollower.configureEncoder(m_rencoder.get(), RobotMap.TICK_PER_REV, RobotMap.WHEEL_DIAMETER);

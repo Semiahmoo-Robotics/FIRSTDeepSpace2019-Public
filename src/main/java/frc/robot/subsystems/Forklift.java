@@ -24,6 +24,7 @@ import frc.robot.RobotMap;
   */
 public class Forklift extends PIDSubsystem {
 
+  //Network table value containing setpoint value. Value is currently in rotations.
   public NetworkTableEntry m_setpoint;
   
   private final Spark m_liftmotor = new Spark(RobotMap.FORKLIFT);
@@ -31,18 +32,18 @@ public class Forklift extends PIDSubsystem {
   new Encoder(RobotMap.R_ENCODER_CHA, RobotMap.R_ENCODER_CHB, false, EncodingType.k2X);  
   
   public Forklift() {
-    // PID values go here:
+    // TODO PID values go here. Need to tune!
     super("Forklift", 0.5, 0.0, 0.0);
+
+    EncoderInitialization.initializeAideepen(m_liftcoder);
 
     setOutputRange(0.0, 1.0);
     setInputRange(0.0, 100.0);
     //Units are in Rotations of the motor
     setAbsoluteTolerance(0.01); //3.6 degrees
 
-    EncoderInitialization.initializeAideepen(m_liftcoder);
-
-    setSetpoint(0); //Sets where the PID controller should move the system to: Initially 0 rotations.
     enable(); //Enables the PID controller.
+    setSetpoint(0); //Sets where the PID controller should move the system to: Initially 0 rotations.
 
     m_setpoint = Shuffleboard.getTab("Test").add("Set Setpoint", 0.0).getEntry();
   }

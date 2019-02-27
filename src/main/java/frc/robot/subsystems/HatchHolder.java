@@ -12,14 +12,15 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 
 /**
- * The intake motors for the previous APOLO robot in 2018 FIRST POWER UP Season.
- * This subsystem is only for the test robot.
+ * Subsystem controls one motor that acts like a servo.
+ * By toggle, the hatch holder rotates to hold or release position.
  */
 public class HatchHolder extends Subsystem {
 
   private final Spark m_HatchHolder;
 
-  public boolean HolderUp = false;
+  //Toggle to determine of the holder is at release or hold position.
+  public boolean Hold = false;
 
   public HatchHolder() {
 
@@ -27,14 +28,26 @@ public class HatchHolder extends Subsystem {
 
   }
 
-  public void SetHolder() {
-    m_HatchHolder.set(0.6);
+  /**
+   * Sets the hatch holder to release position.
+   * @param set PWM value to set the motor to
+   */
+  public void Set(double set) {
+    m_HatchHolder.set(set);
   } 
 
-  public void ReverseSetHolder() {
-    m_HatchHolder.set(-0.6);
+  /**
+   * Reverses the hatch holder to Hold position.
+   * @param set PWM value to set the motor to
+   */
+  public void Reverse(double set) {
+    m_HatchHolder.set(-set);
   }
 
+  /**
+   * Stops the hatch holer in place.
+   * Always call after using SetHolder() or ReverseSetHolder().
+   */
   public void StopHolder() {
     m_HatchHolder.set(0);
   }

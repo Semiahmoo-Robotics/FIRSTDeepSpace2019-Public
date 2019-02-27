@@ -15,6 +15,8 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.commands.ReadColor;
 
 /**
+ * This sensor detect color of objects. In the final robot,
+ * it is used to detect alignment lines.
  * Refer to the data sheets for the Register Address
  * http://www.revrobotics.com/content/docs/TMD3782_v2.pdf
  */
