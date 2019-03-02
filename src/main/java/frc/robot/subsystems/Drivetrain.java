@@ -79,8 +79,8 @@ public class Drivetrain extends Subsystem {
     //Stops motor if the robot loses connection to the driver station.
     m_chassis.setSafetyEnabled(true);
 
-    EncoderInitialization.initializeCIMcoder(m_lencoder);
-    EncoderInitialization.initializeCIMcoder(m_rencoder);
+    EncoderInitialization.initDriveEncoder(m_lencoder);
+    EncoderInitialization.initDriveEncoder(m_rencoder);
 
     m_gyro.calibrate();
 

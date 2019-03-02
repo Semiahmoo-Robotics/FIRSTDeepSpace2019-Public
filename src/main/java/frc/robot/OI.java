@@ -62,6 +62,28 @@ public class OI {
 		P2 Joystick X. Manual Height change.
 		*/
 		
+		p2_btn1 = new JoystickButton(m_p2Keyboard, 1);
+
+		p2_btn2 = new JoystickButton(m_p2Keyboard, 2);
+
+		p2_btn3 = new JoystickButton(m_p2Keyboard, 3);
+
+		p2_btn4 = new JoystickButton(m_p2Keyboard, 4);
+
+		p2_btn5 = new JoystickButton(m_p2Keyboard, 5);
+
+		p2_btn6 = new JoystickButton(m_p2Keyboard, 6);
+
+		p2_btn7 = new JoystickButton(m_p2Keyboard, 7);
+
+		p2_btn8 = new JoystickButton(m_p2Keyboard, 8);
+
+		p2_btn9 = new JoystickButton(m_p2Keyboard, 1);
+
+		p2_btn0 = new JoystickButton(m_p2Keyboard, 1);
+
+
+
 		/*
 		Cargo Intake: Controlled in OI.
 		P1 Btn 5, L Bumper. Feed In

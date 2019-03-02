@@ -29,7 +29,7 @@ public final class EncoderInitialization {
     20 pulses per revolution for CIMcoders
    * @param encoder the CIM coder to initialize.
    */
-  public static void initializeCIMcoder(Encoder encoder) {
+  public static void initDriveEncoder(Encoder encoder) {
 
     encoder.setMinRate(0.01); // 0.01 in/s
     encoder.setDistancePerPulse(DistancePerPulse(20, 6, 10.71)); //inches
@@ -42,8 +42,10 @@ public final class EncoderInitialization {
    * Data is unknown yet.
    * @param encoder the PG17 to initialize.
    */
-  public static void initializePG17(Encoder encoder) {
-    /*Data is unknown yet. */
+  public static void initLiftEncoder(Encoder encoder) {
+    encoder.setMinRate(0.01); // 0.01 in/s
+    encoder.setDistancePerPulse(RotationsPerPulse(20, 10.71)); //inches
+    encoder.setReverseDirection(false);
     encoder.reset();
   }
   
@@ -54,7 +56,7 @@ public final class EncoderInitialization {
     600 pulses per revolution for Aideepen Encoders.
    * @param encoder the Aideepen encoder to initialize.
    */
-  public static void initializeAideepen(Encoder encoder) {
+  public static void initAideepen(Encoder encoder) {
 
     encoder.setMinRate(0.01); // 0.01 RPS
     encoder.setDistancePerPulse(RotationsPerPulse(600, 1)); //rotations
