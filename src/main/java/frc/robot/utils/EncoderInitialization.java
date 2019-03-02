@@ -85,11 +85,12 @@ public final class EncoderInitialization {
    * @param gr The gear ratio from the encoder shaft to the wheel axis.
    * @return degrees of motor rotation per encoder pulse
    */
+  /*
   private static double DegreesPerPulse(double ppr, double gr) {
     double degreesperpulse = 360 / (gr * ppr);
     return degreesperpulse;
   }
-
+  */
   /**
    * Converts encoder pulses per revolution to degrees of motor rotation per encoder pulse,
    * based on the gear ratio.
