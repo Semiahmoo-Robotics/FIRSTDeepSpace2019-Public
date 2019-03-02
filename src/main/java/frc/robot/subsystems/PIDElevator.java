@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
+import frc.robot.commands.PIDDeltaElevator;
 import frc.robot.utils.EncoderInitialization;
 
 /**
@@ -44,7 +45,7 @@ public class PIDElevator extends Subsystem implements PIDOutput {
     //PID stuff
     m_heightController.setInputRange(0, 100);
     m_heightController.setOutputRange(-0.5, 0.5);
-    m_heightController.setAbsoluteTolerance(0.01); //3.6 degrees
+    m_heightController.setAbsoluteTolerance(0.02); //7.2 degrees
     m_heightController.setContinuous(false);
 
   }
@@ -58,12 +59,20 @@ public class PIDElevator extends Subsystem implements PIDOutput {
     m_elevator.set(0);
   }
 
+  /**
+   * Set's the PID control loop's set point.
+   * @param setpoint The value to set the height to
+   */
   public void ChangeSetPoint(double setpoint) {
     m_heightController.setPID(KP, KI, KD);
     m_heightController.setSetpoint(setpoint);
     m_heightController.enable();
   }
 
+  /**
+   * Set's the PID control loop's set point based on the current setpoint.
+   * @param delta Rhe amount to change the PID set point of the elevator.
+   */
   public void DeltaSetPoint(double delta) {
     double initial = m_heightController.getSetpoint();
     m_heightController.setPID(KP, KI, KD);
@@ -71,12 +80,9 @@ public class PIDElevator extends Subsystem implements PIDOutput {
     m_heightController.enable();
   }
 
-  public void DisablePID() {
-    m_heightController.disable();
-  }
-
   @Override
   public void initDefaultCommand() {
+    setDefaultCommand(new PIDDeltaElevator());
   }
 
   @Override

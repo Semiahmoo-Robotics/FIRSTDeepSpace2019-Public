@@ -25,11 +25,11 @@ public class PIDDeltaElevator extends Command {
   protected void execute() {
     double set;
 
-    //deadband
+    //deadband & apply multiplyer
     if (Math.abs(Robot.oi.getSupportStick().getY()) < 0.1) set = 0;
-    else set = Robot.oi.getSupportStick().getY();
+    else set = Robot.oi.getSupportStick().getY() * Robot.elevator.MULTIPLYER;
 
-    Robot.elevator.DeltaSetPoint(Robot.oi.getSupportStick().getY() * Robot.elevator.MULTIPLYER);
+    Robot.elevator.DeltaSetPoint(set);
   }
 
   // Make this return true when this Command no longer needs to run execute()

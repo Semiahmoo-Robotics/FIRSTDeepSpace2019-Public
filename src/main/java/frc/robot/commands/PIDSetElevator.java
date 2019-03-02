@@ -26,16 +26,14 @@ public class PIDSetElevator extends Command {
 
   @Override
   protected boolean isFinished() {
-    return false;
+    return true;
   }
 
   @Override
   protected void end() {
-    Robot.elevator.DisablePID();
   }
 
   @Override
   protected void interrupted() {
-    this.end();
   }
 }

@@ -43,11 +43,18 @@ public class OI {
   public static Button p2_btn9;
   public static Button p2_btn0;
 
+  public static Boolean frontClimbToggle = false;
+  public static Boolean backClimbToggle = false;
+  public static Boolean smallClimbToggle = false;
+
+
 	/**
-	 * Create a new OI and 
+	 * Operator Interface. It maps all of the robot commands to the input methods.
 	 */
 	public OI() {
 		m_p1XBox = new XboxController(RobotMap.XBOX_1P_PORT);		
+		m_p2Keyboard = new XboxController(RobotMap.KEYBOARD_2P_PORT);		
+		m_p2Support = new Joystick(RobotMap.SUPPORT_2P_PORT);		
 		
 		/*
 		Drivetrain: Controlled by drive commands.
@@ -59,33 +66,29 @@ public class OI {
 		/*
 		TODO Change values of the setpoints
 		Forklift: Controlled in OI.
-		P2 Btn 1~8. Height Presets
+		P2 Btn 3~9. Height Presets
 		P2 Joystick X. Manual Height change.
 		*/
-		
-		p2_btn1 = new JoystickButton(m_p2Keyboard, 1);
-		p2_btn1.whenPressed(new PIDSetElevator(5));
-
-		p2_btn2 = new JoystickButton(m_p2Keyboard, 2);
-		p2_btn2.whenPressed(new PIDSetElevator(10));
-
 		p2_btn3 = new JoystickButton(m_p2Keyboard, 3);
-		p2_btn3.whenPressed(new PIDSetElevator(15));
+		p2_btn3.whenPressed(new PIDSetElevator(5));
 
 		p2_btn4 = new JoystickButton(m_p2Keyboard, 4);
-		p2_btn4.whenPressed(new PIDSetElevator(20));
+		p2_btn4.whenPressed(new PIDSetElevator(10));
 
 		p2_btn5 = new JoystickButton(m_p2Keyboard, 5);
-		p2_btn5.whenPressed(new PIDSetElevator(25));
+		p2_btn5.whenPressed(new PIDSetElevator(15));
 
 		p2_btn6 = new JoystickButton(m_p2Keyboard, 6);
-		p2_btn6.whenPressed(new PIDSetElevator(30));
+		p2_btn6.whenPressed(new PIDSetElevator(20));
 
 		p2_btn7 = new JoystickButton(m_p2Keyboard, 7);
-		p2_btn7.whenPressed(new PIDSetElevator(35));
+		p2_btn7.whenPressed(new PIDSetElevator(25));
 
 		p2_btn8 = new JoystickButton(m_p2Keyboard, 8);
-		p2_btn8.whenPressed(new PIDSetElevator(40));
+		p2_btn8.whenPressed(new PIDSetElevator(30));
+
+		p2_btn9 = new JoystickButton(m_p2Keyboard, 9);
+		p2_btn9.whenPressed(new PIDSetElevator(35));
 
 
 		/*
@@ -109,24 +112,28 @@ public class OI {
 		/*
 		TODO
 		Climb Piston: Controlled in OI
-		P2 Btn 9. Retract Climb
-		P2 Btn 10. Extend Climb
+		P2 Btn 0. Retract Climb
+		P2 Btn 1. Extend Climb
+		P2 Btn 2
 		*/
-		SmartDashboard.putData("Extend Small Climb Piston", new ExtendSmallClimb());
-		SmartDashboard.putData("Retract Small Climb Piston", new RetractSmallClimb());
-		SmartDashboard.putData("Extend Back Climb Piston", new ExtendBackClimb());
-		SmartDashboard.putData("Retract Back Climb Piston", new RetractBackClimb());
+		p2_btn0 = new JoystickButton(m_p2Keyboard, 0);
+		p2_btn0.whenPressed(new ExtendFrontClimb());
 
+		p2_btn1 = new JoystickButton(m_p2Keyboard, 1);
+		p2_btn1.whenPressed(new ExtendBackClimb());
+
+		p2_btn2 = new JoystickButton(m_p2Keyboard, 2);
+		p2_btn2.whenPressed(new PIDSetElevator(15));
+
+		//Other
 		SmartDashboard.putData("Start Or Stop Compressor", new StartStopCompressor());
-
-
 	}
 	
 
 	/** 
 	 * Returns the XBoxController Instance.
 	 */
-	public XboxController getXbox() {
+	public XboxController getP1Xbox() {
 		return m_p1XBox;
 	}	
 
