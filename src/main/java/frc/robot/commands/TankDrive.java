@@ -22,21 +22,21 @@ public class TankDrive extends Command {
 
   @Override
   protected void execute() {
-    if (Robot.oi.GetXboxController().getTriggerAxis(Hand.kLeft) >= 0.7) {
+    if (Robot.oi.getXbox().getTriggerAxis(Hand.kLeft) >= 0.7) {
       Robot.drivetrain.setBoostEngaged(true);
-      Robot.drivetrain.TankDriveSet(Robot.oi.GetXboxController());
+      Robot.drivetrain.TankDriveSet(Robot.oi.getXbox());
 
-    } else if (Robot.oi.GetXboxController().getTriggerAxis(Hand.kRight) >=0.7) {
+    } else if (Robot.oi.getXbox().getTriggerAxis(Hand.kRight) >=0.7) {
       Robot.drivetrain.setPrecisionEngaged(true);
-      left = Robot.oi.GetXboxController().getY(Hand.kLeft) * Robot.drivetrain.PRECISION_MULTIPLIER;
-      right = Robot.oi.GetXboxController().getY(Hand.kRight) * Robot.drivetrain.PRECISION_MULTIPLIER;
+      left = Robot.oi.getXbox().getY(Hand.kLeft) * Robot.drivetrain.PRECISION_MULTIPLIER;
+      right = Robot.oi.getXbox().getY(Hand.kRight) * Robot.drivetrain.PRECISION_MULTIPLIER;
       Robot.drivetrain.TankDriveSet(left, right);
 
     } else {
       Robot.drivetrain.setBoostEngaged(false);
       Robot.drivetrain.setPrecisionEngaged(false);
-      left = Robot.oi.GetXboxController().getY(Hand.kLeft) * Robot.drivetrain.NORMAL_MULTIPLIER;
-      right = Robot.oi.GetXboxController().getY(Hand.kRight) * Robot.drivetrain.NORMAL_MULTIPLIER;
+      left = Robot.oi.getXbox().getY(Hand.kLeft) * Robot.drivetrain.NORMAL_MULTIPLIER;
+      right = Robot.oi.getXbox().getY(Hand.kRight) * Robot.drivetrain.NORMAL_MULTIPLIER;
       Robot.drivetrain.TankDriveSet(left, right);
 
     }

@@ -7,7 +7,9 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Spark;
+import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 
@@ -17,10 +19,12 @@ import frc.robot.RobotMap;
 public class Elevator extends Subsystem {
 
   private final Spark m_elevator;
+  private final Encoder m_liftcoder;
 
   public Elevator() {
 
     m_elevator = new Spark(RobotMap.ELEVATOR);
+    m_liftcoder = new Encoder(RobotMap.LIFTCODER_CHA, RobotMap.LIFTCODER_CHB, false, EncodingType.k2X);
 
   }
 

@@ -61,36 +61,37 @@ public class OI {
 		P2 Btn 1~8. Height Presets
 		P2 Joystick X. Manual Height change.
 		*/
-
+		
 		/*
 		Cargo Intake: Controlled in OI.
-		P1 
+		P1 Btn 5, L Bumper. Feed In
+		P1 Btn 6 R Bumper. Feed Out
 		*/
-
-		p1_abtn = new JoystickButton(m_p1XBox, 1); 	//btn A = 1
-		p1_abtn.whenPressed(new SetElevator());
-
-		p1_bbtn = new JoystickButton(m_p1XBox, 2);	//btn B = 2
-		p1_bbtn.whenPressed(new ChangeHatchFormation());
-
-		p1_xbtn = new JoystickButton(m_p1XBox, 3);	//btn X = 3
-		p1_xbtn.whenPressed(new ExtendClimb());
-
-		p1_ybtn = new JoystickButton(m_p1XBox, 4);	//btn Y = 4
-		p1_ybtn.whenPressed(new RetractClimb());
-
-
 		p1_lbumper = new JoystickButton(m_p1XBox, 5);	//L Bumper = 5
 		p1_lbumper.whenPressed(new CargoIn());
 
 		p1_rbumper = new JoystickButton(m_p1XBox, 6);	//R Bumper = 6
 		p1_rbumper.whenPressed(new CargoOut());
 
-		SmartDashboard.putData("Extend Climb Piston", new ExtendClimb());
-		SmartDashboard.putData("Retract Climb Piston", new RetractClimb());
-		SmartDashboard.putData("Start Or Stop Compressor", new StartStopCompressor());
+		/*
+		Hatch Holder: Controlled in OI
+		P1 Btn 2, B Button. Toggle change formation (Hold/Release)
+		*/
+		p1_bbtn = new JoystickButton(m_p1XBox, 2);	//btn B = 2
+		p1_bbtn.whenPressed(new ChangeHatchFormation());
+
+		/*
+		Climb Piston: Controlled in OI
+		P2 Btn 9. Retract Climb
+		P2 Btn 10. Extend Climb
+		*/
 		SmartDashboard.putData("Extend Small Climb Piston", new ExtendSmallClimb());
 		SmartDashboard.putData("Retract Small Climb Piston", new RetractSmallClimb());
+		SmartDashboard.putData("Extend Back Climb Piston", new ExtendBackClimb());
+		SmartDashboard.putData("Retract Back Climb Piston", new RetractBackClimb());
+
+		SmartDashboard.putData("Start Or Stop Compressor", new StartStopCompressor());
+
 
 	}
 	
@@ -98,7 +99,14 @@ public class OI {
 	/** 
 	 * Returns the XBoxController Instance.
 	 */
-	public XboxController GetXboxController() {
+	public XboxController getXbox() {
+		return m_p1XBox;
+	}	
+
+	/** 
+	 * Returns the 3D Joystick Instance.
+	 */
+	public XboxController getSupportStick() {
 		return m_p1XBox;
 	}	
 

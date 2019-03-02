@@ -10,15 +10,15 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class RetractClimb extends Command {
-  public RetractClimb() {
+public class RetractFrontClimb extends Command {
+  public RetractFrontClimb() {
     requires(Robot.climbPiston);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.climbPiston.retract();
+    Robot.climbPiston.retractFront();
   }
 
   // Make this return true when this Command no longer needs to run execute()

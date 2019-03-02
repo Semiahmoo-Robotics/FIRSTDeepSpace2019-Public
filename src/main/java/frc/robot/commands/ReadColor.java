@@ -28,11 +28,11 @@ public class ReadColor extends Command {
         && Robot.sensorAlign.getBlue() >= Robot.sensorAlign.WHITE_ERROR
         && Robot.sensorAlign.getGreen() >= Robot.sensorAlign.WHITE_ERROR ) {
 
-      Robot.oi.GetXboxController().setRumble(RumbleType.kLeftRumble, 1);
-      Robot.oi.GetXboxController().setRumble(RumbleType.kRightRumble, 1);
+      Robot.oi.getXbox().setRumble(RumbleType.kLeftRumble, 1);
+      Robot.oi.getXbox().setRumble(RumbleType.kRightRumble, 1);
     } else {
-      Robot.oi.GetXboxController().setRumble(RumbleType.kLeftRumble, 0);
-      Robot.oi.GetXboxController().setRumble(RumbleType.kRightRumble, 0);
+      Robot.oi.getXbox().setRumble(RumbleType.kLeftRumble, 0);
+      Robot.oi.getXbox().setRumble(RumbleType.kRightRumble, 0);
     }
   }
 

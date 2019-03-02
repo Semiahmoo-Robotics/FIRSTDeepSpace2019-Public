@@ -37,32 +37,49 @@ public class ClimbPiston extends Subsystem {
   }
 
   /**
-   * Extend climb solenoid.
+   * Extend front solenoid.
    */                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
-  public void extend() {
+  public void extendFront() {
     m_frontClimb.set(Value.kForward);
+  }
+
+  /**
+   * Extend back solenoid.
+   */  
+  public void extendBack() {
     m_backClimb.set(Value.kForward);
   }
 
+  /**
+   * Extend small solenoid.
+   */  
   public void extendSmall() {
     m_smlClimb.set(Value.kForward);
   }
 
   /**
-   * retract climb solenoid.
-   */
-  public void retract() {
+   * Retract front solenoid.
+   */                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+  public void retractFront() {
     m_frontClimb.set(Value.kReverse);
-    m_backClimb.set(Value.kReverse);
-
   }
 
+  /**
+   * Extend back solenoid.
+   */  
+  public void retractBack() {
+    m_backClimb.set(Value.kReverse);
+  }
+
+  /**
+   * Retract small solenoid.
+   */  
   public void retractSmall() {
     m_smlClimb.set(Value.kReverse);
   }
 
   /**
-   * turn off both climb solenoids.
+   * turn off all climb solenoids.
    */
   public void off() {
     m_backClimb.set(Value.kOff);

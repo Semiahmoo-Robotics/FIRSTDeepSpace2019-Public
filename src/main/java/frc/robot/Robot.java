@@ -150,9 +150,9 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void testPeriodic() {
-    if (oi.GetXboxController().getBackButton()) {
+    if (oi.getXbox().getBackButton()) {
       cargoIntake.SetIntake(0.5);
-    } else if (oi.GetXboxController().getBButton()) {
+    } else if (oi.getXbox().getBButton()) {
       cargoIntake.SetIntake(-0.2);
     } else {
       cargoIntake.SetIntake(0);
