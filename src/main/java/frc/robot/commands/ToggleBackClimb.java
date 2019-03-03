@@ -10,32 +10,19 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class ExtendBackClimb extends Command {
-  public ExtendBackClimb() {
-    // Use requires() here to declare subsystem dependencies
+public class ToggleBackClimb extends Command {
+  public ToggleBackClimb() {
     requires(Robot.climbPiston);
   }
 
-  // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.climbPiston.extendFront();
+    if (Robot.climbPiston.backExtended) Robot.climbPiston.retractBack();
+    else Robot.climbPiston.extendBack();
   }
 
-  // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
     return false;
-  }
-
-  // Called once after isFinished returns true
-  @Override
-  protected void end() {
-  }
-
-  // Called when another command which requires one or more of the same
-  // subsystems is scheduled to run
-  @Override
-  protected void interrupted() {
   }
 }

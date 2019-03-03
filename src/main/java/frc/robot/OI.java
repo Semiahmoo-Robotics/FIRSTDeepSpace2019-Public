@@ -110,20 +110,19 @@ public class OI {
 		p1_bbtn.whenPressed(new ChangeHatchFormation());
 
 		/*
-		TODO
 		Climb Piston: Controlled in OI
-		P2 Btn 0. Retract Climb
-		P2 Btn 1. Extend Climb
-		P2 Btn 2
+		P2 Btn 0. Retract or Extend Front Climb
+		P2 Btn 1. Retract or Extend Back Climb
+		P2 Btn 2. Retract or Extend Small Climb
 		*/
 		p2_btn0 = new JoystickButton(m_p2Keyboard, 0);
-		p2_btn0.whenPressed(new ExtendFrontClimb());
+		p2_btn0.whenPressed(new ToggleFrontClimb());
 
 		p2_btn1 = new JoystickButton(m_p2Keyboard, 1);
-		p2_btn1.whenPressed(new ExtendBackClimb());
+		p2_btn1.whenPressed(new ToggleBackClimb());
 
 		p2_btn2 = new JoystickButton(m_p2Keyboard, 2);
-		p2_btn2.whenPressed(new PIDSetElevator(15));
+		p2_btn2.whenPressed(new ToggleSmallClimb());
 
 		//Other
 		SmartDashboard.putData("Start Or Stop Compressor", new StartStopCompressor());

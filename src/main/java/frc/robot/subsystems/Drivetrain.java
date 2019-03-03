@@ -237,7 +237,7 @@ public class Drivetrain extends Subsystem {
 
   /**
    * Starts an Autonomous pre-made Path. The paths are made using the Pathweaver tool.
-   * @param pathName
+   * @param pathName String that will locate the path file
    */
   public void startPathWeaverAuto(String pathName) {
     /*

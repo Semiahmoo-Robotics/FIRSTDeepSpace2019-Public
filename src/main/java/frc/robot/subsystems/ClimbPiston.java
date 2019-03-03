@@ -23,6 +23,8 @@ public class ClimbPiston extends Subsystem {
   private final DoubleSolenoid m_backClimb;
   private final DoubleSolenoid m_smlClimb;
 
+  public boolean frontExtended, backExtended, smallExtended = false;
+
   public ClimbPiston() {
     m_frontClimb = new DoubleSolenoid(RobotMap.PCM_MODULE, RobotMap.FRONT_CLIMB_FWD, RobotMap.FRONT_CLIMB_RVSE);
     m_backClimb = new DoubleSolenoid(RobotMap.PCM_MODULE, RobotMap.BACK_CLIMB_FWD, RobotMap.BACK_CLIMB_RVSE);
@@ -41,6 +43,7 @@ public class ClimbPiston extends Subsystem {
    */                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
   public void extendFront() {
     m_frontClimb.set(Value.kForward);
+    frontExtended = true;
   }
 
   /**
@@ -48,6 +51,7 @@ public class ClimbPiston extends Subsystem {
    */  
   public void extendBack() {
     m_backClimb.set(Value.kForward);
+    backExtended = true;
   }
 
   /**
@@ -55,6 +59,7 @@ public class ClimbPiston extends Subsystem {
    */  
   public void extendSmall() {
     m_smlClimb.set(Value.kForward);
+    smallExtended = true;
   }
 
   /**
@@ -62,6 +67,7 @@ public class ClimbPiston extends Subsystem {
    */                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
   public void retractFront() {
     m_frontClimb.set(Value.kReverse);
+    frontExtended = false;
   }
 
   /**
@@ -69,6 +75,7 @@ public class ClimbPiston extends Subsystem {
    */  
   public void retractBack() {
     m_backClimb.set(Value.kReverse);
+    backExtended = false;
   }
 
   /**
@@ -76,16 +83,7 @@ public class ClimbPiston extends Subsystem {
    */  
   public void retractSmall() {
     m_smlClimb.set(Value.kReverse);
+    smallExtended = false;
   }
-
-  /**
-   * turn off all climb solenoids.
-   */
-  public void off() {
-    m_backClimb.set(Value.kOff);
-    m_frontClimb.set(Value.kOff);
-
-  }
-
 
 }
