@@ -69,26 +69,6 @@ public class OI {
 		P2 Btn 3~9. Height Presets
 		P2 Joystick X. Manual Height change.
 		*/
-		p2_btn3 = new JoystickButton(m_p2Keyboard, 3);
-		p2_btn3.whenPressed(new PIDSetElevator(5));
-
-		p2_btn4 = new JoystickButton(m_p2Keyboard, 4);
-		p2_btn4.whenPressed(new PIDSetElevator(10));
-
-		p2_btn5 = new JoystickButton(m_p2Keyboard, 5);
-		p2_btn5.whenPressed(new PIDSetElevator(15));
-
-		p2_btn6 = new JoystickButton(m_p2Keyboard, 6);
-		p2_btn6.whenPressed(new PIDSetElevator(20));
-
-		p2_btn7 = new JoystickButton(m_p2Keyboard, 7);
-		p2_btn7.whenPressed(new PIDSetElevator(25));
-
-		p2_btn8 = new JoystickButton(m_p2Keyboard, 8);
-		p2_btn8.whenPressed(new PIDSetElevator(30));
-
-		p2_btn9 = new JoystickButton(m_p2Keyboard, 9);
-		p2_btn9.whenPressed(new PIDSetElevator(35));
 
 
 		/*
@@ -115,14 +95,17 @@ public class OI {
 		P2 Btn 1. Retract or Extend Back Climb
 		P2 Btn 2. Retract or Extend Small Climb
 		*/
-		p2_btn0 = new JoystickButton(m_p2Keyboard, 0);
-		p2_btn0.whenPressed(new ToggleFrontClimb());
+		p2_btn3 = new JoystickButton(m_p2Keyboard, 3);
+		p2_btn3.whenPressed(new ToggleFrontClimb());
 
 		p2_btn1 = new JoystickButton(m_p2Keyboard, 1);
 		p2_btn1.whenPressed(new ToggleBackClimb());
 
 		p2_btn2 = new JoystickButton(m_p2Keyboard, 2);
 		p2_btn2.whenPressed(new ToggleSmallClimb());
+
+		p2_btn4 = new JoystickButton(m_p2Keyboard, 4);
+		p2_btn4.whenPressed(new ToggleSideClimb());
 
 		//Other
 		SmartDashboard.putData("Start Or Stop Compressor", new StartStopCompressor());

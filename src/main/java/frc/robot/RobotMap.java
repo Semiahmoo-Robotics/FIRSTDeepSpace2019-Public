@@ -20,9 +20,9 @@ public class RobotMap {
   //PWM ports on ROBOrio
   public static final int L_DRIVE = 0;
   public static final int R_DRIVE = 1;
+  public static final int HATCHHOLDER = 4;
   public static final int L_INTAKE = 9;
-  public static final int R_INTAKE = 4;
-  public static final int HATCHHOLDER = 2;
+  public static final int R_INTAKE = 2;
   public static final int FORKLIFT = 8;
   public static final int ELEVATOR = 3;
 
@@ -43,6 +43,9 @@ public class RobotMap {
   public static final int BACK_CLIMB_FWD = 1;
   public static final int SMALL_CLIMB_RVSE = 6;
   public static final int SMALL_CLIMB_FWD = 7;
+  public static final int SIDE_CLIMB_FWD = 2;
+  public static final int SIDE_CLIMB_RVSE = 3;
+
 
   //Path Weaver Constants
   //number of encoder counts per wheel revolution for the drivetrain

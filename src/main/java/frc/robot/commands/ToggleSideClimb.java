@@ -10,19 +10,20 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.InstantCommand;
 import frc.robot.Robot;
 
-public class ToggleSmallClimb extends InstantCommand {
-  public ToggleSmallClimb() {
+public class ToggleSideClimb extends InstantCommand {
+  public ToggleSideClimb() {
+    super();
     requires(Robot.climbPiston);
   }
 
   @Override
   protected void initialize() {
-    if (Robot.climbPiston.smallExtended) {
-      Robot.climbPiston.retractSmall();
-      Robot.climbPiston.smallExtended = false;
+    if (Robot.climbPiston.sideExtended) {
+      Robot.climbPiston.retractSide();
+      Robot.climbPiston.sideExtended = false;
     } else {
-      Robot.climbPiston.extendSmall();
-      Robot.climbPiston.smallExtended = true;
+      Robot.climbPiston.ExtendSide();
+      Robot.climbPiston.sideExtended = true;
     }
   }
 

@@ -7,22 +7,24 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.InstantCommand;
 import frc.robot.Robot;
 
-public class ToggleFrontClimb extends Command {
+public class ToggleFrontClimb extends InstantCommand {
   public ToggleFrontClimb() {
+    super();
     requires(Robot.climbPiston);
   }
 
   @Override
   protected void initialize() {
-    if (Robot.climbPiston.frontExtended) Robot.climbPiston.retractFront();
-    else Robot.climbPiston.extendFront();
+    if (Robot.climbPiston.frontExtended) {
+      Robot.climbPiston.retractFront();
+      Robot.climbPiston.frontExtended = false;
+    } else {
+      Robot.climbPiston.extendFront();
+      Robot.climbPiston.frontExtended = true;
+    }
   }
 
-  @Override
-  protected boolean isFinished() {
-    return false;
-  }
 }

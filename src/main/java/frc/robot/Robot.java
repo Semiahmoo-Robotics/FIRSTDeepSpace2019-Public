@@ -7,7 +7,6 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -38,7 +37,6 @@ public class Robot extends TimedRobot {
   public static SensorAlign sensorAlign;
   public static HatchHolder hatchHolder;
   public static PIDElevator elevator;
-  public static PowerDistributionPanel power;
 
   public SendableChooser<String> m_autoChooser;
   public SendableChooser<Boolean> m_driveChooser;
@@ -57,7 +55,6 @@ public class Robot extends TimedRobot {
     sensorAlign = new SensorAlign();
     hatchHolder = new HatchHolder();
     elevator = new PIDElevator();
-    power = new PowerDistributionPanel();
     
     oi = new OI();
     
@@ -78,7 +75,6 @@ public class Robot extends TimedRobot {
     SmartDashboard.putData("Drive Mode", m_driveChooser);
 
     //Other initializations
-    power.clearStickyFaults();
     climbPiston.retractFront();
     climbPiston.retractBack();
     climbPiston.retractSmall();
@@ -135,7 +131,7 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopInit() {
     //Causes error
-    drivetrain.StopNotifyer();
+    //drivetrain.StopNotifyer();
     drivetrain.stop();
   }
 
@@ -166,6 +162,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("Left Motor", drivetrain.getLSpark().getSpeed());
     SmartDashboard.putNumber("Right Motor", drivetrain.getRSpark().getSpeed());
     SmartDashboard.putBoolean("Boost Engaged", drivetrain.getBoostEngaged());
+    SmartDashboard.putBoolean("Precision Engaged", drivetrain.getPrecisionEngaged());
     SmartDashboard.putBoolean("Pressure Switch Value", pneumatics.getPressureSwitchValue());
     SmartDashboard.putBoolean("Enabled?", pneumatics.getEnabled());
     SmartDashboard.putNumber("Units of voltage", UltrasonicSensor.GetVoltage());

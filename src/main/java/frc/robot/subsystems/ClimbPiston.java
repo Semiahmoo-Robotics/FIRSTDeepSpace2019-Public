@@ -22,13 +22,15 @@ public class ClimbPiston extends Subsystem {
   private final DoubleSolenoid m_frontClimb;
   private final DoubleSolenoid m_backClimb;
   private final DoubleSolenoid m_smlClimb;
+  private final DoubleSolenoid m_sideClimb;
 
-  public boolean frontExtended, backExtended, smallExtended = false;
+  public boolean frontExtended, backExtended, smallExtended, sideExtended = false;
 
   public ClimbPiston() {
     m_frontClimb = new DoubleSolenoid(RobotMap.PCM_MODULE, RobotMap.FRONT_CLIMB_FWD, RobotMap.FRONT_CLIMB_RVSE);
     m_backClimb = new DoubleSolenoid(RobotMap.PCM_MODULE, RobotMap.BACK_CLIMB_FWD, RobotMap.BACK_CLIMB_RVSE);
     m_smlClimb = new DoubleSolenoid(RobotMap.PCM_MODULE, RobotMap.SMALL_CLIMB_FWD, RobotMap.SMALL_CLIMB_RVSE);
+    m_sideClimb = new DoubleSolenoid(RobotMap.PCM_MODULE, RobotMap.SIDE_CLIMB_FWD, RobotMap.SIDE_CLIMB_RVSE);
   }
 
   /**
@@ -84,6 +86,22 @@ public class ClimbPiston extends Subsystem {
   public void retractSmall() {
     m_smlClimb.set(Value.kReverse);
     smallExtended = false;
+  }
+
+    /**
+   * Extend side solenoid.
+   */  
+  public void ExtendSide() {
+    m_sideClimb.set(Value.kForward);
+    sideExtended = true;
+  }
+
+  /**
+   * Retract side solenoid.
+   */  
+  public void retractSide() {
+    m_sideClimb.set(Value.kReverse);
+    sideExtended = false;
   }
 
 }
