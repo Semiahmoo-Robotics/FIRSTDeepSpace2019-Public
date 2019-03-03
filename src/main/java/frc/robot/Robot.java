@@ -66,8 +66,8 @@ public class Robot extends TimedRobot {
     SmartDashboard.putData(pneumatics);
     SmartDashboard.putData(climbPiston);
     
-
-    m_autoChooser = new SendableChooser<>();
+    //AutoChooser
+    m_autoChooser = new SendableChooser<String>();
     m_autoChooser.setDefaultOption("Default - Drive forward", "Blue1lv1-ShipHatchFrontLeft");
     SmartDashboard.putData("Auto mode", m_autoChooser);
 
@@ -77,8 +77,11 @@ public class Robot extends TimedRobot {
     m_driveChooser.addOption("Arcade Drive", false);
     SmartDashboard.putData("Drive Mode", m_driveChooser);
 
+    //Other initializations
     power.clearStickyFaults();
-    
+    climbPiston.retractFront();
+    climbPiston.retractBack();
+    climbPiston.retractSmall();
 
     //Cammera connected to RPi. If connected on RoboRIO, take off comment.
     //CameraSetup.setupDefaultCamera(); 
@@ -89,6 +92,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
+    drivetrain.arcadeEnabled = (Boolean) m_driveChooser.getSelected();
   }
 
   /**
@@ -113,7 +117,6 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     String autoCommand = (String) m_autoChooser.getSelected();
-
     drivetrain.startPathWeaverAuto(autoCommand);
   }
 
@@ -132,7 +135,7 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopInit() {
     //Causes error
-    //drivetrain.StopNotifyer();
+    drivetrain.StopNotifyer();
     drivetrain.stop();
   }
 
@@ -150,13 +153,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void testPeriodic() {
-    if (oi.getP1Xbox().getBackButton()) {
-      cargoIntake.SetIntake(0.5);
-    } else if (oi.getP1Xbox().getBButton()) {
-      cargoIntake.SetIntake(-0.2);
-    } else {
-      cargoIntake.SetIntake(0);
-    }
+
   }
 
   /**

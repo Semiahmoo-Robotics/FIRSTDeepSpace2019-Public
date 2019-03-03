@@ -59,6 +59,9 @@ public class Drivetrain extends Subsystem {
   public boolean precisionEngaged = false;
   //If boost & precision is false, then NORMAL_MULTIPLIER is applied.
 
+  //Arcade or Tank
+  public boolean arcadeEnabled = false;
+
   /**
    * Constructor - Create a new DriveTrain class.
    */
