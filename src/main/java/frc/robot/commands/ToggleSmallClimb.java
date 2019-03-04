@@ -12,17 +12,18 @@ import frc.robot.Robot;
 
 public class ToggleSmallClimb extends InstantCommand {
   public ToggleSmallClimb() {
+    super();
     requires(Robot.climbPiston);
   }
 
   @Override
   protected void initialize() {
-    if (Robot.climbPiston.smallExtended) {
-      Robot.climbPiston.retractSmall();
-      Robot.climbPiston.smallExtended = false;
+    if (Robot.climbPiston.smlExtended) {
+      Robot.climbPiston.retractMedium();
+      Robot.climbPiston.smlExtended = false;
     } else {
-      Robot.climbPiston.extendSmall();
-      Robot.climbPiston.smallExtended = true;
+      Robot.climbPiston.ExtendSmall();
+      Robot.climbPiston.smlExtended = true;
     }
   }
 

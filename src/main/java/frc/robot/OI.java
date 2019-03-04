@@ -102,10 +102,10 @@ public class OI {
 		p2_btn1.whenPressed(new ToggleBackClimb());
 
 		p2_btn2 = new JoystickButton(m_p2Keyboard, 2);
-		p2_btn2.whenPressed(new ToggleSmallClimb());
+		p2_btn2.whenPressed(new ToggleMediumClimb());
 
 		p2_btn4 = new JoystickButton(m_p2Keyboard, 4);
-		p2_btn4.whenPressed(new ToggleSideClimb());
+		p2_btn4.whenPressed(new ToggleSmallClimb());
 
 		//Other
 		SmartDashboard.putData("Start Or Stop Compressor", new StartStopCompressor());

@@ -37,14 +37,15 @@ public class RobotMap {
   //PCM ports
   public static final int PCM_MODULE = 0;
 
-  public static final int FRONT_CLIMB_RVSE = 4;
-  public static final int FRONT_CLIMB_FWD = 5;
   public static final int BACK_CLIMB_RVSE = 0;
   public static final int BACK_CLIMB_FWD = 1;
-  public static final int SMALL_CLIMB_RVSE = 6;
-  public static final int SMALL_CLIMB_FWD = 7;
-  public static final int SIDE_CLIMB_FWD = 2;
-  public static final int SIDE_CLIMB_RVSE = 3;
+  public static final int SMALL_CLIMB_RVSE = 2;
+  public static final int SMALL_CLIMB_FWD = 3;
+  public static final int FRONT_CLIMB_RVSE = 4;
+  public static final int FRONT_CLIMB_FWD = 5;
+  public static final int MEDIUM_CLIMB_RVSE = 6;
+  public static final int MEDIUM_CLIMB_FWD = 7;
+
 
 
   //Path Weaver Constants

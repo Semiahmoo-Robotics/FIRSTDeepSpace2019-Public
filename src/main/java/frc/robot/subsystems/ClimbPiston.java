@@ -15,22 +15,25 @@ import frc.robot.RobotMap;
 /**
  * This subsystem controls the Climb pneumatics piston.
  * It uses three double solenoid connected to the pcm.
- * The solenoids control 3 big pistons and 2 small pistons.
+ * m_frontClimb controls middle 18in piston
+ * m_backClimb controls 2 back 18in piston
+ * m_mediumClimb controls 2 side 10in piston
+ * m_smlClimb controls 2 small pistons
  */
 public class ClimbPiston extends Subsystem {
 
   private final DoubleSolenoid m_frontClimb;
   private final DoubleSolenoid m_backClimb;
+  private final DoubleSolenoid m_mediumClimb;
   private final DoubleSolenoid m_smlClimb;
-  private final DoubleSolenoid m_sideClimb;
 
-  public boolean frontExtended, backExtended, smallExtended, sideExtended = false;
+  public boolean frontExtended, backExtended, mediumExtended, smlExtended = false;
 
   public ClimbPiston() {
     m_frontClimb = new DoubleSolenoid(RobotMap.PCM_MODULE, RobotMap.FRONT_CLIMB_FWD, RobotMap.FRONT_CLIMB_RVSE);
     m_backClimb = new DoubleSolenoid(RobotMap.PCM_MODULE, RobotMap.BACK_CLIMB_FWD, RobotMap.BACK_CLIMB_RVSE);
+    m_mediumClimb = new DoubleSolenoid(RobotMap.PCM_MODULE, RobotMap.MEDIUM_CLIMB_FWD, RobotMap.MEDIUM_CLIMB_RVSE);
     m_smlClimb = new DoubleSolenoid(RobotMap.PCM_MODULE, RobotMap.SMALL_CLIMB_FWD, RobotMap.SMALL_CLIMB_RVSE);
-    m_sideClimb = new DoubleSolenoid(RobotMap.PCM_MODULE, RobotMap.SIDE_CLIMB_FWD, RobotMap.SIDE_CLIMB_RVSE);
   }
 
   /**
@@ -57,11 +60,19 @@ public class ClimbPiston extends Subsystem {
   }
 
   /**
-   * Extend small solenoid.
+   * Extend medium solenoid.
    */  
-  public void extendSmall() {
+  public void extendMedium() {
+    m_mediumClimb.set(Value.kForward);
+    mediumExtended = true;
+  }
+
+  /**
+   * Extend side solenoid.
+   */  
+  public void ExtendSmall() {
     m_smlClimb.set(Value.kForward);
-    smallExtended = true;
+    smlExtended = true;
   }
 
   /**
@@ -81,27 +92,19 @@ public class ClimbPiston extends Subsystem {
   }
 
   /**
+   * Retract medium solenoid.
+   */  
+  public void retractMedium() {
+    m_mediumClimb.set(Value.kReverse);
+    mediumExtended = false;
+  }
+
+  /**
    * Retract small solenoid.
    */  
   public void retractSmall() {
     m_smlClimb.set(Value.kReverse);
-    smallExtended = false;
-  }
-
-    /**
-   * Extend side solenoid.
-   */  
-  public void ExtendSide() {
-    m_sideClimb.set(Value.kForward);
-    sideExtended = true;
-  }
-
-  /**
-   * Retract side solenoid.
-   */  
-  public void retractSide() {
-    m_sideClimb.set(Value.kReverse);
-    sideExtended = false;
+    smlExtended = false;
   }
 
 }

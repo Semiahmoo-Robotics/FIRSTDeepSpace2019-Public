@@ -77,7 +77,7 @@ public class Robot extends TimedRobot {
     //Other initializations
     climbPiston.retractFront();
     climbPiston.retractBack();
-    climbPiston.retractSmall();
+    climbPiston.retractMedium();
 
     //Cammera connected to RPi. If connected on RoboRIO, take off comment.
     //CameraSetup.setupDefaultCamera(); 
