@@ -10,8 +10,11 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class PIDDeltaElevator extends Command {
-  public PIDDeltaElevator() {
+public class ChangeHeight extends Command {
+
+  private double set;
+
+  public ChangeHeight() {
     requires(Robot.elevator);
   }
 
@@ -23,13 +26,10 @@ public class PIDDeltaElevator extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    double set;
 
-    //deadband & apply multiplyer
-    if (Math.abs(Robot.oi.getSupportStick().getY()) < 0.1) set = 0;
-    else set = Robot.oi.getSupportStick().getY() * Robot.elevator.MULTIPLYER * -1;
-
-    Robot.elevator.DeltaSetPoint(set);
+    if (Robot.oi.getSupportStick().getY() < 0.1) set = 0;
+    else set = -Robot.oi.getSupportStick().getY();
+    Robot.elevator.Set(set);
   }
 
   // Make this return true when this Command no longer needs to run execute()

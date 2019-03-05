@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.Drivetrain;
-import frc.robot.subsystems.PIDElevator;
+import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.HatchHolder;
 import frc.robot.subsystems.CargoIntake;
 import frc.robot.subsystems.Pneumatics;
@@ -36,7 +36,7 @@ public class Robot extends TimedRobot {
   public static Pneumatics pneumatics;
   public static SensorAlign sensorAlign;
   public static HatchHolder hatchHolder;
-  public static PIDElevator elevator;
+  public static Elevator elevator;
 
   public SendableChooser<String> m_autoChooser;
   public SendableChooser<Boolean> m_driveChooser;
@@ -54,7 +54,7 @@ public class Robot extends TimedRobot {
     climbPiston = new ClimbPiston();
     sensorAlign = new SensorAlign();
     hatchHolder = new HatchHolder();
-    elevator = new PIDElevator();
+    elevator = new Elevator();
     
     oi = new OI();
     
@@ -173,9 +173,6 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("Blue", sensorAlign.getBlue());
     SmartDashboard.putNumber("Green", sensorAlign.getGreen());
 
-    //PID Elevator
-    SmartDashboard.putNumber("Setpoint (Rotations)", elevator.m_heightController.getSetpoint());
-    SmartDashboard.putNumber("Current Height (Rotations)", elevator.getCurrentCount());
   }
   
 
