@@ -19,7 +19,7 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 import frc.robot.Robot;
 import frc.robot.RobotMap;
-import frc.robot.commands.TankDrive;
+import frc.robot.commands.TankOrArcade;
 import frc.robot.utils.EncoderInitialization;
 import frc.robot.utils.Utils;
 
@@ -95,7 +95,7 @@ public class Drivetrain extends Subsystem {
    */
   @Override
   public void initDefaultCommand() {
-      setDefaultCommand(new TankDrive());
+      setDefaultCommand(new TankOrArcade());
   }
 
   /**

@@ -28,7 +28,7 @@ public class PIDElevator extends Subsystem implements PIDOutput {
   public final PIDController m_heightController;
 
   public final double MULTIPLYER = 0.1;
-  public final double KP = 0;
+  public final double KP = 0.5;
   public final double KI = 0;
   public final double KD = 0;
   public final double KF = 0;  
@@ -88,5 +88,9 @@ public class PIDElevator extends Subsystem implements PIDOutput {
   @Override
   public void pidWrite(double output) {
     Set(output);
+  }
+
+  public double getCurrentCount() {
+    return m_liftcoder.getDistance();
   }
 }

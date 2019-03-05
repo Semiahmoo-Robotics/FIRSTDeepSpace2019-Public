@@ -58,11 +58,6 @@ public class Robot extends TimedRobot {
     
     oi = new OI();
     
-    //put data to smartdashboard
-    SmartDashboard.putData(drivetrain);
-    SmartDashboard.putData(pneumatics);
-    SmartDashboard.putData(climbPiston);
-    
     //AutoChooser
     m_autoChooser = new SendableChooser<String>();
     m_autoChooser.setDefaultOption("Default - Drive forward", "Blue1lv1-ShipHatchFrontLeft");
@@ -70,8 +65,8 @@ public class Robot extends TimedRobot {
 
     //Tank or Arcade chooser
     m_driveChooser = new SendableChooser<Boolean>();
-    m_driveChooser.setDefaultOption("Default - Tank Drive", true);
-    m_driveChooser.addOption("Arcade Drive", false);
+    m_driveChooser.setDefaultOption("Default - Tank Drive", false);
+    m_driveChooser.addOption("Arcade Drive", true);
     SmartDashboard.putData("Drive Mode", m_driveChooser);
 
     //Other initializations
@@ -156,6 +151,7 @@ public class Robot extends TimedRobot {
    * Log interesting values to SmartDashboard / Shuffleboard
    */
   public void log() {
+    //Drivetrain
     SmartDashboard.putNumber("Gyro value", drivetrain.getGyroAngle());
     SmartDashboard.putNumber("Left Encoder", drivetrain.getLEncoder().getDistance());
     SmartDashboard.putNumber("Right Encoder", drivetrain.getREncoder().getDistance());
@@ -163,13 +159,23 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("Right Motor", drivetrain.getRSpark().getSpeed());
     SmartDashboard.putBoolean("Boost Engaged", drivetrain.getBoostEngaged());
     SmartDashboard.putBoolean("Precision Engaged", drivetrain.getPrecisionEngaged());
-    SmartDashboard.putBoolean("Pressure Switch Value", pneumatics.getPressureSwitchValue());
+
+    //Pneumatics
+    SmartDashboard.putBoolean("Pressure Switch", pneumatics.getPressureSwitchValue());
     SmartDashboard.putBoolean("Enabled?", pneumatics.getEnabled());
-    SmartDashboard.putNumber("Units of voltage", UltrasonicSensor.GetVoltage());
-    SmartDashboard.putNumber("Units of some real world distance", UltrasonicSensor.getDistance());
+
+    //Ultrasonic Proximity
+    SmartDashboard.putNumber("Voltage", UltrasonicSensor.GetVoltage());
+    SmartDashboard.putNumber("Engineering Units", UltrasonicSensor.getDistance());
+    
+    //Color Sensor
     SmartDashboard.putNumber("Red", sensorAlign.getRed());
     SmartDashboard.putNumber("Blue", sensorAlign.getBlue());
     SmartDashboard.putNumber("Green", sensorAlign.getGreen());
+
+    //PID Elevator
+    SmartDashboard.putNumber("Setpoint (Rotations)", elevator.m_heightController.getSetpoint());
+    SmartDashboard.putNumber("Current Height (Rotations)", elevator.getCurrentCount());
   }
   
 

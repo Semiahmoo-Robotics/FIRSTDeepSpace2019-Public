@@ -90,19 +90,21 @@ public class OI {
 		p1_bbtn.whenPressed(new ChangeHatchFormation());
 
 		/*
-		Climb Piston: Controlled in OI
-		P2 Btn 0. Retract or Extend Front Climb
-		P2 Btn 1. Retract or Extend Back Climb
-		P2 Btn 2. Retract or Extend Small Climb
+		Climb Piston: Controlled in OI2
+		P2 Btn 1. Retract or Extend 18in Front Climb
+		P2 Btn 2. Retract or Extend 18in Back Climb
+		P2 Btn 3. Retract or Extend 10in pistons
+		P2 Btn 4. Retract or Extend Small Climb
 		*/
-		p2_btn3 = new JoystickButton(m_p2Keyboard, 3);
-		p2_btn3.whenPressed(new ToggleFrontClimb());
 
 		p2_btn1 = new JoystickButton(m_p2Keyboard, 1);
-		p2_btn1.whenPressed(new ToggleBackClimb());
+		p2_btn1.whenPressed(new ToggleFrontClimb());
 
 		p2_btn2 = new JoystickButton(m_p2Keyboard, 2);
-		p2_btn2.whenPressed(new ToggleMediumClimb());
+		p2_btn2.whenPressed(new ToggleBackClimb());
+
+		p2_btn3 = new JoystickButton(m_p2Keyboard, 3);
+		p2_btn3.whenPressed(new ToggleMediumClimb());
 
 		p2_btn4 = new JoystickButton(m_p2Keyboard, 4);
 		p2_btn4.whenPressed(new ToggleSmallClimb());
