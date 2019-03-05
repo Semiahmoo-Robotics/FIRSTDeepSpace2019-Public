@@ -18,12 +18,12 @@ package frc.robot;
 public class RobotMap {
 
   //PWM ports on ROBOrio
-  public static final int L_DRIVE = 0;
-  public static final int R_DRIVE = 1;
-  public static final int ELEVATOR = 3;
+  public static final int L_DRIVE = 0;  //confirmed
+  public static final int R_DRIVE = 1;  //confirmed
+  public static final int ELEVATOR = 3; //confirmed
   public static final int HATCHHOLDER = 2;
   public static final int L_INTAKE = 9;
-  public static final int R_INTAKE = 2;
+  public static final int R_INTAKE = 8;
 
   //DIO ports on ROBOrio
   public static final int L_ENCODER_CHA = 0;
