@@ -27,7 +27,7 @@ public class ChangeHeight extends Command {
   @Override
   protected void execute() {
 
-    if (Robot.oi.getSupportStick().getY() < 0.1) set = 0;
+    if (Math.abs(Robot.oi.getSupportStick().getY()) < 0.1) set = 0;
     else set = -Robot.oi.getSupportStick().getY();
     Robot.elevator.Set(set);
   }
